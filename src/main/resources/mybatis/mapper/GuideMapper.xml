@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.mall.server.mapper.GuideMapper">
+
+    <resultMap id="guide" type="com.bc.mall.server.entity.Guide">
+        <id column="guide_id" property="guideId" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="guide_image" property="guideImage" jdbcType="VARCHAR"/>
+        <result column="guide_source" property="guideSource" jdbcType="VARCHAR"/>
+        <result column="guide_type" property="guideType" jdbcType="VARCHAR"/>
+        <result column="guide_sort" property="guideSort" jdbcType="BIGINT"/>
+        <result column="guide_create_time" property="createTime" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getGuideList" parameterType="map" resultMap="guide">
+        select
+        *
+        from t_guide
+        where store_id = #{storeId}
+        and guide_type = #{storeType}
+    </select>
+</mapper>
