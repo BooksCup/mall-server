@@ -15,6 +15,7 @@ public enum ResponseMsg {
     PASSWORD_NOT_CORRECT("PASSWORD_NOT_CORRECT", "密码错误!"),
 
     LOGIN_SUCCESS("LOGIN_SUCCESS", "登录成功!"),
+    LOGIN_ERROR("LOGIN_ERROR", "网络繁忙!"),
     ;
 
     ResponseMsg(String responseCode, String responseMessage) {
