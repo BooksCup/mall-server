@@ -17,7 +17,7 @@ public interface UserService {
      * @param paramMap 参数map
      * @return true:存在 false:不存在
      */
-    boolean checkUserNameExist(Map<String, String> paramMap);
+    boolean checkUserNameExist(Map<String, Object> paramMap);
 
     /**
      * 检查手机号是否存在
@@ -25,7 +25,7 @@ public interface UserService {
      * @param paramMap 参数map
      * @return true:存在 false:不存在
      */
-    boolean checkPhoneExist(Map<String, String> paramMap);
+    boolean checkPhoneExist(Map<String, Object> paramMap);
 
     /**
      * 通过账号(用户名/手机号)获取用户列表

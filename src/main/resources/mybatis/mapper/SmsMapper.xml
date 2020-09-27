@@ -22,6 +22,15 @@
         <result column="create_time" property="createTime"/>
     </resultMap>
 
+    <resultMap id="verifyCode" type="com.bc.mall.server.entity.VerifyCode">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="category" property="category" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
+        <result column="expire_time" property="expireTime" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <select id="getSmsConfig" parameterType="String" resultMap="smsConfig">
         select
         *
@@ -58,4 +67,16 @@
         #{expireTime}
         )
     </insert>
+
+    <select id="getVerifyCodeListByParam" parameterType="map" resultMap="verifyCode">
+        <![CDATA[
+        select
+        *
+        from t_verify_code
+        where phone = #{phone}
+        and category = #{category}
+        and expire_time > now()
+        order by create_time desc
+        ]]>
+    </select>
 </mapper>

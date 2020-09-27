@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
      * @return true:存在 false:不存在
      */
     @Override
-    public boolean checkUserNameExist(Map<String, String> paramMap) {
+    public boolean checkUserNameExist(Map<String, Object> paramMap) {
         List<User> userList = userMapper.getUserListByUserName(paramMap);
         if (!CollectionUtils.isEmpty(userList)) {
             return true;
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
      * @return true:存在 false:不存在
      */
     @Override
-    public boolean checkPhoneExist(Map<String, String> paramMap) {
+    public boolean checkPhoneExist(Map<String, Object> paramMap) {
         List<User> userList = userMapper.getUserListByPhone(paramMap);
         if (!CollectionUtils.isEmpty(userList)) {
             return true;

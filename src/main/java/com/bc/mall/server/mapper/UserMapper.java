@@ -17,7 +17,7 @@ public interface UserMapper {
      * @param paramMap 参数map
      * @return 用户列表
      */
-    List<User> getUserListByUserName(Map<String, String> paramMap);
+    List<User> getUserListByUserName(Map<String, Object> paramMap);
 
     /**
      * 根据手机号获取用户列表
@@ -25,7 +25,7 @@ public interface UserMapper {
      * @param paramMap 参数map
      * @return 用户列表
      */
-    List<User> getUserListByPhone(Map<String, String> paramMap);
+    List<User> getUserListByPhone(Map<String, Object> paramMap);
 
     /**
      * 通过账号(用户名/手机号)获取用户列表

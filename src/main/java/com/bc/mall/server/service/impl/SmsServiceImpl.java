@@ -57,4 +57,19 @@ public class SmsServiceImpl implements SmsService {
     public void addVerifyCode(VerifyCode verifyCode) {
         smsMapper.addVerifyCode(verifyCode);
     }
+
+    /**
+     * 获取验证码
+     *
+     * @param paramMap 参数map,包含手机号(phone)和验证码类别(category)
+     * @return 验证码
+     */
+    @Override
+    public VerifyCode getVerifyCodeByParam(Map<String, Object> paramMap) {
+        List<VerifyCode> verifyCodeList = smsMapper.getVerifyCodeListByParam(paramMap);
+        if (!CollectionUtils.isEmpty(verifyCodeList)) {
+            return verifyCodeList.get(0);
+        }
+        return null;
+    }
 }

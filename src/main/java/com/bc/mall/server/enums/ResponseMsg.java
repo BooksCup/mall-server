@@ -13,6 +13,7 @@ public enum ResponseMsg {
     USER_PHONE_EXISTS("USER_PHONE_EXISTS", "该手机号码已注册,请登录!"),
     USER_NOT_REGISTER("USER_NOT_REGISTER", "该号码未注册,请注册!"),
     PASSWORD_NOT_CORRECT("PASSWORD_NOT_CORRECT", "密码错误!"),
+    VERIFY_CODE_NOT_CORRECT("VERIFY_CODE_NOT_CORRECT", "验证码错误!"),
 
     LOGIN_SUCCESS("LOGIN_SUCCESS", "登录成功!"),
     LOGIN_ERROR("LOGIN_ERROR", "网络繁忙!"),

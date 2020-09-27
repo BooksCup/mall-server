@@ -35,4 +35,12 @@ public interface SmsMapper {
      * @param verifyCode 验证码
      */
     void addVerifyCode(VerifyCode verifyCode);
+
+    /**
+     * 获取验证码列表
+     *
+     * @param paramMap 参数map,包含手机号(phone)和验证码类别(category)
+     * @return 验证码列表
+     */
+    List<VerifyCode> getVerifyCodeListByParam(Map<String, Object> paramMap);
 }

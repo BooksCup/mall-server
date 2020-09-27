@@ -3,7 +3,9 @@ package com.bc.mall.server.controller;
 import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.entity.StoreConfig;
 import com.bc.mall.server.entity.User;
+import com.bc.mall.server.entity.VerifyCode;
 import com.bc.mall.server.enums.ResponseMsg;
+import com.bc.mall.server.service.SmsService;
 import com.bc.mall.server.service.StoreConfigService;
 import com.bc.mall.server.service.TokenService;
 import com.bc.mall.server.service.UserService;
@@ -41,6 +43,9 @@ public class UserController {
     @Resource
     private TokenService tokenService;
 
+    @Resource
+    private SmsService smsService;
+
     @ApiOperation(value = "注册", notes = "注册")
     @PostMapping(value = "")
     public ResponseEntity<User> register(
@@ -55,14 +60,14 @@ public class UserController {
         ResponseEntity<User> responseEntity;
         try {
             // 账号已被注册
-            Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
+            Map<String, Object> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
             paramMap.put("userName", userName);
             paramMap.put("storeId", storeId);
             if (userService.checkUserNameExist(paramMap)) {
-                User user = new User();
-                user.setResponseCode(ResponseMsg.USER_NAME_EXISTS.getResponseCode());
-                user.setResponseMessage(ResponseMsg.USER_NAME_EXISTS.getResponseMessage());
-                return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(
+                        new User(ResponseMsg.USER_NAME_EXISTS.getResponseCode(),
+                                ResponseMsg.USER_NAME_EXISTS.getResponseMessage()),
+                        HttpStatus.BAD_REQUEST);
             }
 
             // 手机号已被注册
@@ -70,13 +75,23 @@ public class UserController {
             paramMap.put("phone", phone);
             paramMap.put("storeId", storeId);
             if (userService.checkPhoneExist(paramMap)) {
-                User user = new User();
-                user.setResponseCode(ResponseMsg.USER_PHONE_EXISTS.getResponseCode());
-                user.setResponseMessage(ResponseMsg.USER_PHONE_EXISTS.getResponseMessage());
-                return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(
+                        new User(ResponseMsg.USER_PHONE_EXISTS.getResponseCode(),
+                                ResponseMsg.USER_PHONE_EXISTS.getResponseMessage()),
+                        HttpStatus.BAD_REQUEST);
             }
 
             // 验证验证码
+            paramMap.clear();
+            paramMap.put("phone", phone);
+            paramMap.put("category", Constant.SMS_TEMPLATE_CATEGORY_REGISTER);
+            VerifyCode code = smsService.getVerifyCodeByParam(paramMap);
+            if (null == code ||  !code.getCode().equals(verifyCode)){
+                return new ResponseEntity<>(
+                        new User(ResponseMsg.VERIFY_CODE_NOT_CORRECT.getResponseCode(),
+                                ResponseMsg.VERIFY_CODE_NOT_CORRECT.getResponseMessage()),
+                        HttpStatus.BAD_REQUEST);
+            }
 
             // 获取默认用户名和用户头像(店铺)
             StoreConfig storeConfig = storeConfigService.getStoreConfigByStoreId(storeId);

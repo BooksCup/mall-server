@@ -34,4 +34,12 @@ public interface SmsService {
      * @param verifyCode 验证码
      */
     void addVerifyCode(VerifyCode verifyCode);
+
+    /**
+     * 获取验证码
+     *
+     * @param paramMap 参数map,包含手机号(phone)和验证码类别(category)
+     * @return 验证码
+     */
+    VerifyCode getVerifyCodeByParam(Map<String, Object> paramMap);
 }
