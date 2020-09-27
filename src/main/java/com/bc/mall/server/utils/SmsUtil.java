@@ -21,6 +21,14 @@ import com.bc.mall.server.entity.TemplateParam;
  * @author zhou
  */
 public class SmsUtil {
+    /**
+     * 发送短信
+     *
+     * @param smsConfig     短信配置
+     * @param smsTemplate   短信模板
+     * @param templateParam 模板参数
+     * @param phoneNumbers  手机号
+     */
     public static void sendSms(SmsConfig smsConfig, SmsTemplate smsTemplate, TemplateParam templateParam, String phoneNumbers) {
         DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", smsConfig.getAccessKeyId(), smsConfig.getAccessSecret());
         IAcsClient client = new DefaultAcsClient(profile);
@@ -45,11 +53,20 @@ public class SmsUtil {
         }
     }
 
+    /**
+     * 生成模板参数
+     *
+     * @param templateCategory 模板类别
+     * @param code             验证码
+     * @return 模板参数
+     */
     public static TemplateParam getTemplateParam(int templateCategory, String code) {
         TemplateParam templateParam = new TemplateParam();
         switch (templateCategory) {
-            // 登录
+            case Constant.SMS_TEMPLATE_CATEGORY_REGISTER:
+                // 注册
             case Constant.SMS_TEMPLATE_CATEGORY_LOGIN:
+                // 登录
                 templateParam.setCode(code);
                 break;
             default:

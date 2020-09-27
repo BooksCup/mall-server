@@ -25,6 +25,11 @@ public class Constant {
 
     // 短信模板类别
     /**
+     * 注册
+     */
+    public static final int SMS_TEMPLATE_CATEGORY_REGISTER = 0;
+
+    /**
      * 登录
      */
     public static final int SMS_TEMPLATE_CATEGORY_LOGIN = 1;

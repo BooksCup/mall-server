@@ -49,9 +49,9 @@ public class UserController {
             @RequestParam String userName,
             @RequestParam String phone,
             @RequestParam String password,
-            @RequestParam String verificationCode) {
+            @RequestParam String verifyCode) {
         logger.info("[register] storeId: " + storeId + ", storeType: " + storeType + ", userName: " + userName
-                + ", phone: " + phone + ", verificationCode: " + verificationCode);
+                + ", phone: " + phone + ", verifyCode: " + verifyCode);
         ResponseEntity<User> responseEntity;
         try {
             // 账号已被注册
