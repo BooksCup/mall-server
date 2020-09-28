@@ -21,6 +21,11 @@ public class Plugin {
      */
     private String integralPluginState;
 
+    /**
+     * 砍价插件状态
+     */
+    private String bargainPluginState;
+
     public String getAuctionPluginState() {
         return auctionPluginState;
     }
@@ -43,5 +48,13 @@ public class Plugin {
 
     public void setIntegralPluginState(String integralPluginState) {
         this.integralPluginState = integralPluginState;
+    }
+
+    public String getBargainPluginState() {
+        return bargainPluginState;
+    }
+
+    public void setBargainPluginState(String bargainPluginState) {
+        this.bargainPluginState = bargainPluginState;
     }
 }

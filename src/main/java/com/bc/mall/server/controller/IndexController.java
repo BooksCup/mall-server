@@ -1,12 +1,13 @@
 package com.bc.mall.server.controller;
 
-
 import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.entity.*;
 import com.bc.mall.server.entity.auction.AuctionConfig;
+import com.bc.mall.server.entity.bargain.BargainConfig;
 import com.bc.mall.server.entity.distributor.DistributorConfig;
 import com.bc.mall.server.entity.integral.IntegralConfig;
 import com.bc.mall.server.service.AuctionService;
+import com.bc.mall.server.service.BargainService;
 import com.bc.mall.server.service.DistributorService;
 import com.bc.mall.server.service.IntegralService;
 import io.swagger.annotations.ApiOperation;
@@ -40,6 +41,9 @@ public class IndexController {
 
     @Resource
     private IntegralService integralService;
+
+    @Resource
+    private BargainService bargainService;
 
     @ApiOperation(value = "获取个人信息", notes = "获取个人信息")
     @GetMapping(value = "/me")
@@ -99,6 +103,14 @@ public class IndexController {
             plugin.setIntegralPluginState(Constant.PLUGIN_ENABLED);
         } else {
             plugin.setIntegralPluginState(Constant.PLUGIN_DISABLED);
+        }
+
+        // 砍价
+        BargainConfig bargainConfig = bargainService.getBargainConfigByStoreId(storeId);
+        if (null != bargainConfig && Constant.PLUGIN_ENABLED.equals(bargainConfig.getState())) {
+            plugin.setBargainPluginState(Constant.PLUGIN_ENABLED);
+        } else {
+            plugin.setBargainPluginState(Constant.PLUGIN_DISABLED);
         }
         return plugin;
     }

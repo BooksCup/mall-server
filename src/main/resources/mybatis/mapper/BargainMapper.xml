@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.mall.server.mapper.BargainMapper">
+
+    <resultMap id="bargainConfig" type="com.bc.mall.server.entity.bargain.BargainConfig">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getBargainConfigListByStoreId" parameterType="String" resultMap="bargainConfig">
+        select
+        *
+        from t_bargain_config
+        where store_id = #{storeId}
+    </select>
+</mapper>
