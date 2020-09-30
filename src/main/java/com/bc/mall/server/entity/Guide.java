@@ -2,23 +2,24 @@ package com.bc.mall.server.entity;
 
 /**
  * 引导图
+ *
  * @author zhou
  */
 public class Guide {
-    private String guideId;
+
+    private String id;
     private String storeId;
-    private String guideImage;
-    private String guideSource;
-    private String guideType;
-    private Integer guideSort;
+    private String storeType;
+    private String image;
+    private Integer sort;
     private String createTime;
 
-    public String getGuideId() {
-        return guideId;
+    public String getId() {
+        return id;
     }
 
-    public void setGuideId(String guideId) {
-        this.guideId = guideId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getStoreId() {
@@ -29,36 +30,28 @@ public class Guide {
         this.storeId = storeId;
     }
 
-    public String getGuideImage() {
-        return guideImage;
+    public String getStoreType() {
+        return storeType;
     }
 
-    public void setGuideImage(String guideImage) {
-        this.guideImage = guideImage;
+    public void setStoreType(String storeType) {
+        this.storeType = storeType;
     }
 
-    public String getGuideSource() {
-        return guideSource;
+    public String getImage() {
+        return image;
     }
 
-    public void setGuideSource(String guideSource) {
-        this.guideSource = guideSource;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getGuideType() {
-        return guideType;
+    public Integer getSort() {
+        return sort;
     }
 
-    public void setGuideType(String guideType) {
-        this.guideType = guideType;
-    }
-
-    public Integer getGuideSort() {
-        return guideSort;
-    }
-
-    public void setGuideSort(Integer guideSort) {
-        this.guideSort = guideSort;
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public String getCreateTime() {

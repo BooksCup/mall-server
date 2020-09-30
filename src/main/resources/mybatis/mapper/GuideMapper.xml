@@ -3,13 +3,12 @@
 <mapper namespace="com.bc.mall.server.mapper.GuideMapper">
 
     <resultMap id="guide" type="com.bc.mall.server.entity.Guide">
-        <id column="guide_id" property="guideId" jdbcType="VARCHAR"/>
+        <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
-        <result column="guide_image" property="guideImage" jdbcType="VARCHAR"/>
-        <result column="guide_source" property="guideSource" jdbcType="VARCHAR"/>
-        <result column="guide_type" property="guideType" jdbcType="VARCHAR"/>
-        <result column="guide_sort" property="guideSort" jdbcType="BIGINT"/>
-        <result column="guide_create_time" property="createTime" jdbcType="VARCHAR"/>
+        <result column="store_type" property="storeType" jdbcType="VARCHAR"/>
+        <result column="image" property="image" jdbcType="VARCHAR"/>
+        <result column="sort" property="sort" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="getGuideList" parameterType="map" resultMap="guide">
@@ -17,6 +16,6 @@
         *
         from t_guide
         where store_id = #{storeId}
-        and guide_type = #{storeType}
+        and store_type = #{storeType}
     </select>
 </mapper>
