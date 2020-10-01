@@ -7,6 +7,7 @@ import com.bc.mall.server.entity.bargain.BargainConfig;
 import com.bc.mall.server.entity.distributor.DistributorConfig;
 import com.bc.mall.server.entity.group.GroupConfig;
 import com.bc.mall.server.entity.integral.IntegralConfig;
+import com.bc.mall.server.entity.seckill.SeckillConfig;
 import com.bc.mall.server.service.*;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -45,6 +46,9 @@ public class IndexController {
 
     @Resource
     private GroupService groupService;
+
+    @Resource
+    private SeckillService seckillService;
 
     @ApiOperation(value = "获取个人信息", notes = "获取个人信息")
     @GetMapping(value = "/me")
@@ -120,6 +124,14 @@ public class IndexController {
             plugin.setGroupPluginState(Constant.PLUGIN_ENABLED);
         } else {
             plugin.setGroupPluginState(Constant.PLUGIN_DISABLED);
+        }
+
+        // 秒杀
+        SeckillConfig seckillConfig = seckillService.getSeckillConfigByStoreId(storeId);
+        if (null != seckillConfig && Constant.PLUGIN_ENABLED.equals(seckillConfig.getState())) {
+            plugin.setSeckillPluginState(Constant.PLUGIN_ENABLED);
+        } else {
+            plugin.setSeckillPluginState(Constant.PLUGIN_DISABLED);
         }
 
         return plugin;

@@ -31,6 +31,11 @@ public class Plugin {
      */
     private String groupPluginState;
 
+    /**
+     * 秒杀插件状态
+     */
+    private String seckillPluginState;
+
     public String getAuctionPluginState() {
         return auctionPluginState;
     }
@@ -69,5 +74,13 @@ public class Plugin {
 
     public void setGroupPluginState(String groupPluginState) {
         this.groupPluginState = groupPluginState;
+    }
+
+    public String getSeckillPluginState() {
+        return seckillPluginState;
+    }
+
+    public void setSeckillPluginState(String seckillPluginState) {
+        this.seckillPluginState = seckillPluginState;
     }
 }
