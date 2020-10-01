@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.mall.server.mapper.GroupMapper">
+
+    <resultMap id="groupConfig" type="com.bc.mall.server.entity.group.GroupConfig">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getGroupConfigListByStoreId" parameterType="String" resultMap="groupConfig">
+        select
+        *
+        from t_group_config
+        where store_id = #{storeId}
+    </select>
+</mapper>

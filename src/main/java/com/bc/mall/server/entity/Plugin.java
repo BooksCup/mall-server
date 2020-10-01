@@ -26,6 +26,11 @@ public class Plugin {
      */
     private String bargainPluginState;
 
+    /**
+     * 拼团插件状态
+     */
+    private String groupPluginState;
+
     public String getAuctionPluginState() {
         return auctionPluginState;
     }
@@ -56,5 +61,13 @@ public class Plugin {
 
     public void setBargainPluginState(String bargainPluginState) {
         this.bargainPluginState = bargainPluginState;
+    }
+
+    public String getGroupPluginState() {
+        return groupPluginState;
+    }
+
+    public void setGroupPluginState(String groupPluginState) {
+        this.groupPluginState = groupPluginState;
     }
 }

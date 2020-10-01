@@ -5,11 +5,9 @@ import com.bc.mall.server.entity.*;
 import com.bc.mall.server.entity.auction.AuctionConfig;
 import com.bc.mall.server.entity.bargain.BargainConfig;
 import com.bc.mall.server.entity.distributor.DistributorConfig;
+import com.bc.mall.server.entity.group.GroupConfig;
 import com.bc.mall.server.entity.integral.IntegralConfig;
-import com.bc.mall.server.service.AuctionService;
-import com.bc.mall.server.service.BargainService;
-import com.bc.mall.server.service.DistributorService;
-import com.bc.mall.server.service.IntegralService;
+import com.bc.mall.server.service.*;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +42,9 @@ public class IndexController {
 
     @Resource
     private BargainService bargainService;
+
+    @Resource
+    private GroupService groupService;
 
     @ApiOperation(value = "获取个人信息", notes = "获取个人信息")
     @GetMapping(value = "/me")
@@ -112,6 +113,15 @@ public class IndexController {
         } else {
             plugin.setBargainPluginState(Constant.PLUGIN_DISABLED);
         }
+
+        // 拼团
+        GroupConfig groupConfig = groupService.getGroupConfigByStoreId(storeId);
+        if (null != groupConfig && Constant.PLUGIN_ENABLED.equals(groupConfig.getState())) {
+            plugin.setGroupPluginState(Constant.PLUGIN_ENABLED);
+        } else {
+            plugin.setGroupPluginState(Constant.PLUGIN_DISABLED);
+        }
+
         return plugin;
     }
 }
