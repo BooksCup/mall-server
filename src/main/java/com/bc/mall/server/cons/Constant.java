@@ -55,6 +55,11 @@ public class Constant {
     public static final String PLUGIN_ENABLED = "1";
 
     /**
+     * 插件显示在首页
+     */
+    public static final String PLUGIN_SHOW = "1";
+
+    /**
      * 插件编码-"竞拍"
      */
     public static final String PLUGIN_CODE_AUCTION = "auction";

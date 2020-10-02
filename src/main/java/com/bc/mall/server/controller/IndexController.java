@@ -58,7 +58,7 @@ public class IndexController {
     public ResponseEntity<HomeProfile> getHomeProfile(@RequestParam String storeId,
                                                       @RequestParam String storeType,
                                                       @RequestParam(required = false) String token) {
-        logger.info("[HomeProfile] storeId: " + storeId + ", storeType: " + storeType +
+        logger.info("[getHomeProfile] storeId: " + storeId + ", storeType: " + storeType +
                 ", token: " + token);
         ResponseEntity<HomeProfile> responseEntity;
         HomeProfile homeProfile = new HomeProfile();
@@ -69,10 +69,17 @@ public class IndexController {
             List<Banner> bannerList = bannerService.getBannerList(paramMap);
             homeProfile.setBannerList(bannerList);
 
+            paramMap.clear();
+            paramMap.put("storeId", storeId);
+            paramMap.put("state", Constant.PLUGIN_ENABLED);
+            paramMap.put("isShow", Constant.PLUGIN_SHOW);
+            List<Plugin> pluginList = pluginService.getPluginList(paramMap);
+            homeProfile.setPluginList(pluginList);
+
             responseEntity = new ResponseEntity<>(homeProfile, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error("[HomeProfile] error: " + e.getMessage());
+            logger.error("[getHomeProfile] error: " + e.getMessage());
             responseEntity = new ResponseEntity<>(new HomeProfile(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
