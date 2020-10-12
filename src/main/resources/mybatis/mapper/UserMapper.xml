@@ -13,6 +13,7 @@
         *
         from t_user
         where user_name = #{userName}
+        and store_id = #{storeId}
     </select>
 
     <select id="getUserListByPhone" parameterType="String" resultMap="user">
@@ -20,5 +21,29 @@
         *
         from t_user
         where phone = #{phone}
+        and store_id = #{storeId}
     </select>
+
+    <insert id="addUser" parameterType="com.bc.mall.server.entity.User">
+        insert into t_user
+        (
+        id,
+        store_id,
+        user_name,
+        phone,
+        avatar,
+        password,
+        source
+        )
+        values
+        (
+        #{id},
+        #{storeId},
+        #{userName},
+        #{phone},
+        #{avatar},
+        #{password},
+        #{source}
+        )
+    </insert>
 </mapper>

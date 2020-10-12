@@ -2,11 +2,13 @@ package com.bc.mall.server.service.impl;
 
 import com.bc.mall.server.entity.User;
 import com.bc.mall.server.mapper.UserMapper;
+import com.bc.mall.server.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户
@@ -14,23 +16,47 @@ import java.util.List;
  * @author zhou
  */
 @Service("userService")
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
     @Resource
     UserMapper userMapper;
 
-    public boolean checkUserNameExist(String userName) {
-        List<User> userList = userMapper.getUserListByUserName(userName);
+    /**
+     * 检查用户名是否存在
+     *
+     * @param paramMap 参数map
+     * @return true:存在 false:不存在
+     */
+    @Override
+    public boolean checkUserNameExist(Map<String, String> paramMap) {
+        List<User> userList = userMapper.getUserListByUserName(paramMap);
         if (!CollectionUtils.isEmpty(userList)) {
             return true;
         }
         return false;
     }
 
-    public boolean checkPhoneExist(String phone) {
-        List<User> userList = userMapper.getUserListByPhone(phone);
+    /**
+     * 检查手机号是否存在
+     *
+     * @param paramMap 参数map
+     * @return true:存在 false:不存在
+     */
+    @Override
+    public boolean checkPhoneExist(Map<String, String> paramMap) {
+        List<User> userList = userMapper.getUserListByPhone(paramMap);
         if (!CollectionUtils.isEmpty(userList)) {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 保存用户
+     *
+     * @param user 用户
+     */
+    @Override
+    public void addUser(User user) {
+        userMapper.addUser(user);
     }
 }
