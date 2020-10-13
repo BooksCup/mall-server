@@ -14,6 +14,7 @@ public class User extends BaseEntity {
     private String phone;
     private String avatar;
     private String password;
+    private String token;
     private String source;
 
     public User() {
@@ -80,6 +81,14 @@ public class User extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getSource() {

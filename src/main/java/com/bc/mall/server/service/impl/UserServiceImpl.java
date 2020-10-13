@@ -57,8 +57,12 @@ public class UserServiceImpl implements UserService {
      * @return 用户列表
      */
     @Override
-    public List<User> getUserListByAccount(Map<String, String> paramMap){
+    public List<User> getUserListByAccount(Map<String, String> paramMap) {
         return userMapper.getUserListByAccount(paramMap);
+    }
+
+    public void updateUserByLogin(User user) {
+        userMapper.updateUserByLogin(user);
     }
 
     /**

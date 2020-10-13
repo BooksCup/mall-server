@@ -24,7 +24,7 @@
         and store_id = #{storeId}
     </select>
 
-    <select id="getUserListByAccountAndPassword" parameterType="String" resultMap="user">
+    <select id="getUserListByAccount" parameterType="String" resultMap="user">
         select
         *
         from t_user
@@ -32,6 +32,14 @@
         (user_name = #{account} or phone = #{account})
         and store_id = #{storeId}
     </select>
+
+    <update id="updateUserByLogin" parameterType="com.bc.mall.server.entity.User">
+        update t_user
+        set token = #{token},
+        login_times = login_times + 1,
+        last_login_time = now()
+        where id = #{id}
+    </update>
 
     <insert id="addUser" parameterType="com.bc.mall.server.entity.User">
         insert into t_user

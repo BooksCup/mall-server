@@ -35,6 +35,8 @@ public interface UserMapper {
      */
     List<User> getUserListByAccount(Map<String, String> paramMap);
 
+    void updateUserByLogin(User user);
+
     /**
      * 保存用户
      *

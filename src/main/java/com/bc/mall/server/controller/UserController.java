@@ -5,6 +5,7 @@ import com.bc.mall.server.entity.StoreConfig;
 import com.bc.mall.server.entity.User;
 import com.bc.mall.server.enums.ResponseMsg;
 import com.bc.mall.server.service.StoreConfigService;
+import com.bc.mall.server.service.TokenService;
 import com.bc.mall.server.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -12,9 +13,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.xml.ws.Response;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +38,9 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private TokenService tokenService;
 
     @ApiOperation(value = "注册", notes = "注册")
     @PostMapping(value = "")
@@ -91,16 +97,26 @@ public class UserController {
         return responseEntity;
     }
 
+    /**
+     * 通过账号密码登录
+     *
+     * @param storeId  店铺ID
+     * @param account  账户
+     * @param password 密码
+     * @param token    token
+     * @param clientId 客户端ID,推送用
+     * @return ResponseEntity<User>
+     */
     @ApiOperation(value = "通过账号密码登录", notes = "通过账号密码登录")
     @GetMapping(value = "/loginByPwd")
     public ResponseEntity<User> loginByPwd(
             @RequestParam String storeId,
             @RequestParam String account,
             @RequestParam String password,
-            @RequestParam(required = false) String accessId,
+            @RequestParam(required = false) String token,
             @RequestParam(required = false) String clientId) {
         logger.info("[loginByPwd] storeId: " + storeId + ", account: "
-                + account + ", accessId: " + accessId + ", clientId: " + clientId);
+                + account + ", token: " + token + ", clientId: " + clientId);
         ResponseEntity<User> responseEntity;
         User user;
         try {
@@ -121,9 +137,25 @@ public class UserController {
                                     ResponseMsg.PASSWORD_NOT_CORRECT.getResponseMessage()),
                             HttpStatus.BAD_REQUEST);
                 }
+
+                if (StringUtils.isEmpty(token)) {
+                    token = tokenService.getToken();
+                } else {
+                    if (!tokenService.verifyToken(token)) {
+                        // token过期，验证token失败
+                        token = tokenService.getToken();
+                    }
+                }
+
+                // 更新用户token和最后一次登录时间
+                user.setToken(token);
+                userService.updateUserByLogin(user);
             }
+            user.setResponseCode(ResponseMsg.LOGIN_SUCCESS.getResponseCode());
+            user.setResponseMessage(ResponseMsg.LOGIN_SUCCESS.getResponseMessage());
             responseEntity = new ResponseEntity<>(user, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             responseEntity = new ResponseEntity<>(new User(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
