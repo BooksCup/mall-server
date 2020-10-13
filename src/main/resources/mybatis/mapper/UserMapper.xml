@@ -24,6 +24,15 @@
         and store_id = #{storeId}
     </select>
 
+    <select id="getUserListByAccountAndPassword" parameterType="String" resultMap="user">
+        select
+        *
+        from t_user
+        where
+        (user_name = #{account} or phone = #{account})
+        and store_id = #{storeId}
+    </select>
+
     <insert id="addUser" parameterType="com.bc.mall.server.entity.User">
         insert into t_user
         (

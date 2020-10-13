@@ -2,6 +2,7 @@ package com.bc.mall.server.service;
 
 import com.bc.mall.server.entity.User;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,6 +26,14 @@ public interface UserService {
      * @return true:存在 false:不存在
      */
     boolean checkPhoneExist(Map<String, String> paramMap);
+
+    /**
+     * 通过账号(用户名/手机号)获取用户列表
+     *
+     * @param paramMap 参数map
+     * @return 用户列表
+     */
+    List<User> getUserListByAccount(Map<String, String> paramMap);
 
     /**
      * 保存用户

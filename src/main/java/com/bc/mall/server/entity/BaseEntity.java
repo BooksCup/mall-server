@@ -9,6 +9,15 @@ public class BaseEntity {
     private String responseCode;
     private String responseMessage;
 
+    public BaseEntity(){
+
+    }
+
+    public BaseEntity(String responseCode, String responseMessage) {
+        this.responseCode = responseCode;
+        this.responseMessage = responseMessage;
+    }
+
     public String getResponseCode() {
         return responseCode;
     }

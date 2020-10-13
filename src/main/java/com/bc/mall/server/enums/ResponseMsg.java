@@ -11,6 +11,8 @@ public enum ResponseMsg {
      */
     USER_NAME_EXISTS("USER_NAME_EXISTS", "该账号已存在!"),
     USER_PHONE_EXISTS("USER_PHONE_EXISTS", "该手机号码已注册,请登录!"),
+    USER_NOT_REGISTER("USER_NOT_REGISTER", "该号码未注册,请注册!"),
+    PASSWORD_NOT_CORRECT("PASSWORD_NOT_CORRECT", "密码错误!"),
     ;
 
     ResponseMsg(String responseCode, String responseMessage) {

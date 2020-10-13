@@ -20,6 +20,10 @@ public class User extends BaseEntity {
 
     }
 
+    public User(String responseCode, String responseMessage) {
+        super(responseCode, responseMessage);
+    }
+
     public User(String storeId, String userName, String phone, String avatar, String password, String source) {
         this.id = CommonUtil.generateId();
         this.storeId = storeId;

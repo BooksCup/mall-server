@@ -28,6 +28,14 @@ public interface UserMapper {
     List<User> getUserListByPhone(Map<String, String> paramMap);
 
     /**
+     * 通过账号(用户名/手机号)获取用户列表
+     *
+     * @param paramMap 参数map
+     * @return 用户列表
+     */
+    List<User> getUserListByAccount(Map<String, String> paramMap);
+
+    /**
      * 保存用户
      *
      * @param user 用户

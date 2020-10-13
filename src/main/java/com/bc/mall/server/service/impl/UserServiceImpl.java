@@ -51,6 +51,17 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 通过账号(用户名/手机号)获取用户列表
+     *
+     * @param paramMap 参数map
+     * @return 用户列表
+     */
+    @Override
+    public List<User> getUserListByAccount(Map<String, String> paramMap){
+        return userMapper.getUserListByAccount(paramMap);
+    }
+
+    /**
      * 保存用户
      *
      * @param user 用户
