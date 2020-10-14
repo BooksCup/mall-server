@@ -35,6 +35,11 @@ public interface UserMapper {
      */
     List<User> getUserListByAccount(Map<String, String> paramMap);
 
+    /**
+     * 修改用户token和最后一次登录时间
+     *
+     * @param user 用户
+     */
     void updateUserByLogin(User user);
 
     /**

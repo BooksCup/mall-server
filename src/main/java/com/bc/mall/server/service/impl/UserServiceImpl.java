@@ -61,6 +61,12 @@ public class UserServiceImpl implements UserService {
         return userMapper.getUserListByAccount(paramMap);
     }
 
+    /**
+     * 修改用户token和最后一次登录时间
+     *
+     * @param user 用户
+     */
+    @Override
     public void updateUserByLogin(User user) {
         userMapper.updateUserByLogin(user);
     }

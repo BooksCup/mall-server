@@ -52,6 +52,8 @@ public class SmsUtil {
             case Constant.SMS_TEMPLATE_CATEGORY_LOGIN:
                 templateParam.setCode(code);
                 break;
+            default:
+                break;
         }
         return templateParam;
     }

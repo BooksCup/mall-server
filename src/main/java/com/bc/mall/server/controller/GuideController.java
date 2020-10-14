@@ -1,5 +1,6 @@
 package com.bc.mall.server.controller;
 
+import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.entity.Guide;
 import com.bc.mall.server.service.GuideService;
 import io.swagger.annotations.ApiOperation;
@@ -45,7 +46,7 @@ public class GuideController {
         logger.info("[getGuideList] storeId: " + storeId + ", storeType: " + storeType);
         ResponseEntity<List<Guide>> responseEntity;
         try {
-            Map<String, String> paramMap = new HashMap<>();
+            Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
             paramMap.put("storeId", storeId);
             paramMap.put("storeType", storeType);
             List<Guide> guideList = guideService.getGuideList(paramMap);

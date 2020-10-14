@@ -21,10 +21,24 @@ public class SmsServiceImpl implements SmsService {
     @Resource
     private SmsMapper smsMapper;
 
+    /**
+     * 获取短信配置
+     *
+     * @param storeId 店铺ID
+     * @return 短信配置
+     */
+    @Override
     public SmsConfig getSmsConfig(String storeId) {
         return smsMapper.getSmsConfig(storeId);
     }
 
+    /**
+     * 获取短信模板
+     *
+     * @param paramMap 参数map
+     * @return 短信模板
+     */
+    @Override
     public SmsTemplate getSmsTemplateByParam(Map<String, Object> paramMap) {
         List<SmsTemplate> smsTemplateList = smsMapper.getSmsTemplateListByParam(paramMap);
         if (!CollectionUtils.isEmpty(smsTemplateList)) {

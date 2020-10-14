@@ -12,7 +12,19 @@ import java.util.Map;
  * @author zhou
  */
 public interface SmsMapper {
+    /**
+     * 获取短信配置
+     *
+     * @param storeId 店铺ID
+     * @return 短信配置
+     */
     SmsConfig getSmsConfig(String storeId);
 
+    /**
+     * 获取短信模板
+     *
+     * @param paramMap 参数map
+     * @return 短信模板
+     */
     List<SmsTemplate> getSmsTemplateListByParam(Map<String,Object> paramMap);
 }

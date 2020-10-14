@@ -119,7 +119,7 @@ public class UserController {
         ResponseEntity<User> responseEntity;
         User user;
         try {
-            Map<String, String> paramMap = new HashMap<>();
+            Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
             paramMap.put("storeId", storeId);
             paramMap.put("account", account);
             List<User> userList = userService.getUserListByAccount(paramMap);

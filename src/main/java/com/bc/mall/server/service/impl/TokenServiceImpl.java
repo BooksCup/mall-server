@@ -3,6 +3,7 @@ package com.bc.mall.server.service.impl;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.service.TokenService;
 import com.bc.mall.server.utils.Md5Util;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class TokenServiceImpl implements TokenService {
     /**
      * 使用HMAC生成信息摘要时所使用的密钥
      */
-    private static final String secret = "www.hirra.com";
+    private static final String SECRET = "www.hirra.com";
 
     /**
      * 生成token
@@ -37,11 +38,11 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public String getToken() {
         // 头部信息
-        Map<String, Object> header = new HashMap<>();
+        Map<String, Object> header = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
         header.put("alg", "HS256");
         header.put("typ", "JWT");
 
-        Algorithm algorithm = Algorithm.HMAC256(secret);
+        Algorithm algorithm = Algorithm.HMAC256(SECRET);
 
         Date now = new Date();
         Date expireDate = new Date(System.currentTimeMillis() + EXPIRE_TIME);
@@ -68,7 +69,7 @@ public class TokenServiceImpl implements TokenService {
     public boolean verifyToken(String token) {
         boolean verifyResult;
         try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
+            Algorithm algorithm = Algorithm.HMAC256(SECRET);
             JWTVerifier verifier = JWT.require(algorithm).build();
             verifier.verify(token);
             verifyResult = true;
