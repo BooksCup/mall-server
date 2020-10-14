@@ -55,18 +55,4 @@ public class SmsUtil {
         }
         return templateParam;
     }
-
-    public static void main(String[] args) {
-        SmsConfig smsConfig = new SmsConfig();
-        smsConfig.setAccessKeyId("LTAI4GGtvjoHRsdCCwjduHhX");
-        smsConfig.setAccessSecret("v0YGMvdnW6kaAmza49ebdyvczKWxYh");
-
-        SmsTemplate smsTemplate = new SmsTemplate();
-        smsTemplate.setSignName("HIRRA");
-        smsTemplate.setTemplateCode("SMS_202990385");
-
-        TemplateParam templateParam = getTemplateParam(1, "123987");
-        sendSms(smsConfig, smsTemplate, templateParam, "13770519290");
-
-    }
 }
