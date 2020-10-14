@@ -22,4 +22,10 @@ public class Constant {
      * 第一级父ID
      */
     public static final String FIRST_CLASS_PARENT_ID = "0";
+
+    // 短信模板类别
+    /**
+     * 登录
+     */
+    public static final int SMS_TEMPLATE_CATEGORY_LOGIN = 1;
 }

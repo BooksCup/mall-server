@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.mall.server.mapper.SmsMapper">
+
+    <resultMap id="smsConfig" type="com.bc.mall.server.entity.SmsConfig">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="access_key_id" property="accessKeyId" jdbcType="VARCHAR"/>
+        <result column="access_secret" property="accessSecret" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <resultMap id="smsTemplate" type="com.bc.mall.server.entity.SmsTemplate">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="template_name" property="templateName" jdbcType="VARCHAR"/>
+        <result column="template_code" property="templateCode" jdbcType="VARCHAR"/>
+        <result column="template_type" property="templateType" jdbcType="INTEGER"/>
+        <result column="template_category" property="templateCategory" jdbcType="INTEGER"/>
+        <result column="sign_name" property="signName" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <select id="getSmsConfig" parameterType="String" resultMap="smsConfig">
+        select
+        *
+        from t_sms_config
+        where store_id = #{storeId}
+    </select>
+
+    <select id="getSmsTemplateListByParam" parameterType="map" resultMap="smsTemplate">
+        select
+        *
+        from t_sms_template
+        where store_id = #{storeId}
+        and template_type = #{templateType}
+        and template_category = #{templateCategory}
+    </select>
+</mapper>
