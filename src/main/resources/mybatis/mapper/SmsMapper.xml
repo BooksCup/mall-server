@@ -37,4 +37,25 @@
         and template_type = #{templateType}
         and template_category = #{templateCategory}
     </select>
+
+    <insert id="addVerifyCode" parameterType="com.bc.mall.server.entity.VerifyCode">
+        insert into t_verify_code
+        (
+        id,
+        phone,
+        code,
+        category,
+        create_time,
+        expire_time
+        )
+        values
+        (
+        #{id},
+        #{phone},
+        #{code},
+        #{category},
+        #{createTime},
+        #{expireTime}
+        )
+    </insert>
 </mapper>

@@ -2,6 +2,7 @@ package com.bc.mall.server.service.impl;
 
 import com.bc.mall.server.entity.SmsConfig;
 import com.bc.mall.server.entity.SmsTemplate;
+import com.bc.mall.server.entity.VerifyCode;
 import com.bc.mall.server.mapper.SmsMapper;
 import com.bc.mall.server.service.SmsService;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,15 @@ public class SmsServiceImpl implements SmsService {
             return smsTemplateList.get(0);
         }
         return null;
+    }
+
+    /**
+     * 保存验证码
+     *
+     * @param verifyCode 验证码
+     */
+    @Override
+    public void addVerifyCode(VerifyCode verifyCode) {
+        smsMapper.addVerifyCode(verifyCode);
     }
 }

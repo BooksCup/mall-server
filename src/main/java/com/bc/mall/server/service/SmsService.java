@@ -2,6 +2,7 @@ package com.bc.mall.server.service;
 
 import com.bc.mall.server.entity.SmsConfig;
 import com.bc.mall.server.entity.SmsTemplate;
+import com.bc.mall.server.entity.VerifyCode;
 
 import java.util.Map;
 
@@ -26,4 +27,11 @@ public interface SmsService {
      * @return 短信模板
      */
     SmsTemplate getSmsTemplateByParam(Map<String, Object> paramMap);
+
+    /**
+     * 保存验证码
+     *
+     * @param verifyCode 验证码
+     */
+    void addVerifyCode(VerifyCode verifyCode);
 }

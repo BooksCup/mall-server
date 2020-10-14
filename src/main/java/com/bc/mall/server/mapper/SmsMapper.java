@@ -2,6 +2,7 @@ package com.bc.mall.server.mapper;
 
 import com.bc.mall.server.entity.SmsConfig;
 import com.bc.mall.server.entity.SmsTemplate;
+import com.bc.mall.server.entity.VerifyCode;
 
 import java.util.List;
 import java.util.Map;
@@ -26,5 +27,12 @@ public interface SmsMapper {
      * @param paramMap 参数map
      * @return 短信模板
      */
-    List<SmsTemplate> getSmsTemplateListByParam(Map<String,Object> paramMap);
+    List<SmsTemplate> getSmsTemplateListByParam(Map<String, Object> paramMap);
+
+    /**
+     * 保存验证码
+     *
+     * @param verifyCode 验证码
+     */
+    void addVerifyCode(VerifyCode verifyCode);
 }

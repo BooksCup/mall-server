@@ -16,6 +16,9 @@ public enum ResponseMsg {
 
     LOGIN_SUCCESS("LOGIN_SUCCESS", "登录成功!"),
     LOGIN_ERROR("LOGIN_ERROR", "网络繁忙!"),
+
+    GET_VERIFY_CODE_SUCCESS("GET_VERIFY_CODE_SUCCESS", "获取验证码成功"),
+    GET_VERIFY_CODE_ERROR("GET_VERIFY_CODE_ERROR", "获取验证码失败"),
     ;
 
     ResponseMsg(String responseCode, String responseMessage) {
