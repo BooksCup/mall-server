@@ -17,6 +17,7 @@ import java.util.Map;
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
+
     @Resource
     UserMapper userMapper;
 
@@ -59,6 +60,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getUserListByAccount(Map<String, String> paramMap) {
         return userMapper.getUserListByAccount(paramMap);
+    }
+
+    /**
+     * 根据手机号获取用户列表
+     *
+     * @param paramMap 参数map
+     * @return 用户列表
+     */
+    @Override
+    public List<User> getUserListByPhone(Map<String, Object> paramMap) {
+        return userMapper.getUserListByPhone(paramMap);
     }
 
     /**

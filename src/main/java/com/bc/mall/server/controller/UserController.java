@@ -86,7 +86,7 @@ public class UserController {
             paramMap.put("phone", phone);
             paramMap.put("category", Constant.SMS_TEMPLATE_CATEGORY_REGISTER);
             VerifyCode code = smsService.getVerifyCodeByParam(paramMap);
-            if (null == code ||  !code.getCode().equals(verifyCode)){
+            if (null == code || !code.getCode().equals(verifyCode)) {
                 return new ResponseEntity<>(
                         new User(ResponseMsg.VERIFY_CODE_NOT_CORRECT.getResponseCode(),
                                 ResponseMsg.VERIFY_CODE_NOT_CORRECT.getResponseMessage()),
@@ -176,5 +176,96 @@ public class UserController {
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
+    }
+
+    /**
+     * 通过验证码登录
+     *
+     * @param storeId    店铺ID
+     * @param storeType  店铺类型
+     * @param phone      手机号
+     * @param verifyCode 验证码
+     * @param token      token
+     * @param clientId   客户端ID,推送用
+     * @return ResponseEntity<User>
+     */
+    @ApiOperation(value = "通过验证码登录", notes = "通过验证码登录")
+    @GetMapping(value = "/loginByCode")
+    public ResponseEntity<User> loginByCode(
+            @RequestParam String storeId,
+            @RequestParam String storeType,
+            @RequestParam String phone,
+            @RequestParam String verifyCode,
+            @RequestParam(required = false) String token,
+            @RequestParam(required = false) String clientId) {
+        logger.info("[loginByCode] storeId: " + storeId + ", phone: "
+                + phone + ", verifyCode: " + verifyCode + ", token: " + token + ", clientId: " + clientId);
+        ResponseEntity<User> responseEntity;
+        User user;
+        try {
+            Map<String, Object> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
+            // 校验验证码
+            paramMap.put("phone", phone);
+            paramMap.put("category", Constant.SMS_TEMPLATE_CATEGORY_LOGIN);
+            VerifyCode code = smsService.getVerifyCodeByParam(paramMap);
+            if (null == code || !code.getCode().equals(verifyCode)) {
+                return new ResponseEntity<>(
+                        new User(ResponseMsg.VERIFY_CODE_NOT_CORRECT.getResponseCode(),
+                                ResponseMsg.VERIFY_CODE_NOT_CORRECT.getResponseMessage()),
+                        HttpStatus.BAD_REQUEST);
+            }
+
+            // 获取token
+            token = getToken(token);
+
+            paramMap.clear();
+            paramMap.put("storeId", storeId);
+            paramMap.put("phone", phone);
+            List<User> userList = userService.getUserListByPhone(paramMap);
+            if (CollectionUtils.isEmpty(userList)) {
+                // 用户不存在
+                // 获取默认用户名和用户头像(店铺)
+                StoreConfig storeConfig = storeConfigService.getStoreConfigByStoreId(storeId);
+
+                // 注册
+                user = new User(storeId, storeConfig.getWxDefaultName(), phone, storeConfig.getWxDefaultAvatar(), "", storeType);
+                user.setToken(token);
+                userService.addUser(user);
+            } else {
+                //用户存在
+                user = userList.get(0);
+                if (StringUtils.isEmpty(user.getPassword())) {
+                    user.setHasPassword(Constant.HAS_PASSWORD_NO);
+                } else {
+                    user.setHasPassword(Constant.HAS_PASSWORD_YES);
+                }
+
+                // 更新用户token和最后一次登录时间
+                user.setToken(token);
+                userService.updateUserByLogin(user);
+            }
+            user.setResponseCode(ResponseMsg.LOGIN_SUCCESS.getResponseCode());
+            user.setResponseMessage(ResponseMsg.LOGIN_SUCCESS.getResponseMessage());
+            responseEntity = new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            responseEntity = new ResponseEntity<>(
+                    new User(ResponseMsg.LOGIN_ERROR.getResponseCode(),
+                            ResponseMsg.LOGIN_ERROR.getResponseMessage()),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return responseEntity;
+    }
+
+    private String getToken(String token) {
+        if (StringUtils.isEmpty(token)) {
+            token = tokenService.getToken();
+        } else {
+            if (!tokenService.verifyToken(token)) {
+                // token过期，验证token失败
+                token = tokenService.getToken();
+            }
+        }
+        return token;
     }
 }

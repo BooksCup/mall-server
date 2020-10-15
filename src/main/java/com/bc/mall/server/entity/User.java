@@ -14,6 +14,11 @@ public class User extends BaseEntity {
     private String phone;
     private String avatar;
     private String password;
+    /**
+     * 是否有密码
+     * 0: 没有 1:有
+     */
+    private String hasPassword;
     private String token;
     private String source;
 
@@ -81,6 +86,14 @@ public class User extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getHasPassword() {
+        return hasPassword;
+    }
+
+    public void setHasPassword(String hasPassword) {
+        this.hasPassword = hasPassword;
     }
 
     public String getToken() {

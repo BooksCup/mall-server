@@ -50,6 +50,7 @@
         phone,
         avatar,
         password,
+        token,
         source
         )
         values
@@ -60,6 +61,7 @@
         #{phone},
         #{avatar},
         #{password},
+        #{token},
         #{source}
         )
     </insert>

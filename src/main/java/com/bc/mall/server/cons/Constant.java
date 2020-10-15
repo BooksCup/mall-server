@@ -14,6 +14,16 @@ public class Constant {
     public static final int DEFAULT_HASH_MAP_CAPACITY = 16;
 
     /**
+     * 无密码
+     */
+    public static final String HAS_PASSWORD_NO = "0";
+
+    /**
+     * 有密码
+     */
+    public static final String HAS_PASSWORD_YES = "1";
+
+    /**
      * 删除状态 - “未删除”
      */
     public static final String DELETE_STATUS_NOT = "0";

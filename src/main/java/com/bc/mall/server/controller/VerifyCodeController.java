@@ -42,6 +42,15 @@ public class VerifyCodeController {
     @Resource
     private SmsService smsService;
 
+    /**
+     * 发送验证码
+     *
+     * @param storeId          店铺ID
+     * @param phone            手机号
+     * @param templateType     短信模板类型
+     * @param templateCategory 短信模板类别
+     * @return ResponseEntity<String>
+     */
     @ApiOperation(value = "发送验证码", notes = "发送验证码")
     @GetMapping(value = "")
     public ResponseEntity<String> getVerifyCode(@RequestParam String storeId,

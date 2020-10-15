@@ -36,6 +36,14 @@ public interface UserService {
     List<User> getUserListByAccount(Map<String, String> paramMap);
 
     /**
+     * 根据手机号获取用户列表
+     *
+     * @param paramMap 参数map
+     * @return 用户列表
+     */
+    List<User> getUserListByPhone(Map<String, Object> paramMap);
+
+    /**
      * 修改用户token和最后一次登录时间
      *
      * @param user 用户
