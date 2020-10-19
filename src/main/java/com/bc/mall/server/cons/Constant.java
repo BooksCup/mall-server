@@ -43,4 +43,14 @@ public class Constant {
      * 登录
      */
     public static final int SMS_TEMPLATE_CATEGORY_LOGIN = 1;
+
+    /**
+     * 插件关闭
+     */
+    public static final String PLUGIN_DISABLED = "0";
+
+    /**
+     * 插件开启
+     */
+    public static final String PLUGIN_ENABLED = "1";
 }

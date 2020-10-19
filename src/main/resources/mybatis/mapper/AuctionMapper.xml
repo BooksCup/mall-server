@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.mall.server.mapper.AuctionMapper">
+
+    <resultMap id="auctionConfig" type="com.bc.mall.server.entity.auction.AuctionConfig">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="min_bidder_num" property="minBidderNum" jdbcType="INTEGER"/>
+        <result column="wait_time" property="waitTime" jdbcType="INTEGER"/>
+        <result column="days" property="days" jdbcType="INTEGER"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getAuctionConfigListByStoreId" parameterType="String" resultMap="auctionConfig">
+        select
+        *
+        from t_auction_config
+        where store_id = #{storeId}
+    </select>
+</mapper>
