@@ -4,7 +4,9 @@ package com.bc.mall.server.controller;
 import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.entity.*;
 import com.bc.mall.server.entity.auction.AuctionConfig;
+import com.bc.mall.server.entity.distributor.DistributorConfig;
 import com.bc.mall.server.service.AuctionService;
+import com.bc.mall.server.service.DistributorService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +33,9 @@ public class IndexController {
     @Resource
     private AuctionService auctionService;
 
+    @Resource
+    private DistributorService distributorService;
+
     @ApiOperation(value = "获取个人信息", notes = "获取个人信息")
     @GetMapping(value = "/me")
     public ResponseEntity<MyProfile> getMyProfile(@RequestParam String storeId,
@@ -41,11 +46,20 @@ public class IndexController {
         ResponseEntity<MyProfile> responseEntity;
         Plugin plugin = new Plugin();
         // 插件
+        // 竞拍
         AuctionConfig auctionConfig = auctionService.getAuctionConfigByStoreId(storeId);
         if (null != auctionConfig && Constant.PLUGIN_ENABLED.equals(auctionConfig.getState())) {
             plugin.setAuctionPluginState(Constant.PLUGIN_ENABLED);
         } else {
             plugin.setAuctionPluginState(Constant.PLUGIN_DISABLED);
+        }
+
+        // 分销
+        DistributorConfig distributorConfig = distributorService.getDistributorConfigByStoreId(storeId);
+        if (null != distributorConfig && Constant.PLUGIN_ENABLED.equals(distributorConfig.getState())) {
+            plugin.setDistributorPluginState(Constant.PLUGIN_ENABLED);
+        } else {
+            plugin.setDistributorPluginState(Constant.PLUGIN_DISABLED);
         }
 
         try {
