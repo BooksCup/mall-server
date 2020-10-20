@@ -16,6 +16,11 @@ public class Plugin {
      */
     private String distributorPluginState;
 
+    /**
+     * 积分商城插件状态
+     */
+    private String integralPluginState;
+
     public String getAuctionPluginState() {
         return auctionPluginState;
     }
@@ -30,5 +35,13 @@ public class Plugin {
 
     public void setDistributorPluginState(String distributorPluginState) {
         this.distributorPluginState = distributorPluginState;
+    }
+
+    public String getIntegralPluginState() {
+        return integralPluginState;
+    }
+
+    public void setIntegralPluginState(String integralPluginState) {
+        this.integralPluginState = integralPluginState;
     }
 }

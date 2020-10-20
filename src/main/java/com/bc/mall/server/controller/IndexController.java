@@ -5,8 +5,10 @@ import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.entity.*;
 import com.bc.mall.server.entity.auction.AuctionConfig;
 import com.bc.mall.server.entity.distributor.DistributorConfig;
+import com.bc.mall.server.entity.integral.IntegralConfig;
 import com.bc.mall.server.service.AuctionService;
 import com.bc.mall.server.service.DistributorService;
+import com.bc.mall.server.service.IntegralService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +37,9 @@ public class IndexController {
 
     @Resource
     private DistributorService distributorService;
+
+    @Resource
+    private IntegralService integralService;
 
     @ApiOperation(value = "获取个人信息", notes = "获取个人信息")
     @GetMapping(value = "/me")
@@ -86,6 +91,14 @@ public class IndexController {
             plugin.setDistributorPluginState(Constant.PLUGIN_ENABLED);
         } else {
             plugin.setDistributorPluginState(Constant.PLUGIN_DISABLED);
+        }
+
+        // 积分商城
+        IntegralConfig integralConfig = integralService.getIntegralConfigByStoreId(storeId);
+        if (null != integralConfig && Constant.PLUGIN_ENABLED.equals(integralConfig.getState())) {
+            plugin.setIntegralPluginState(Constant.PLUGIN_ENABLED);
+        } else {
+            plugin.setIntegralPluginState(Constant.PLUGIN_DISABLED);
         }
         return plugin;
     }

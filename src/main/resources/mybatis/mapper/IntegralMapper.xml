@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.mall.server.mapper.IntegralMapper">
+
+    <resultMap id="integralConfig" type="com.bc.mall.server.entity.integral.IntegralConfig">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getIntegralConfigListByStoreId" parameterType="String" resultMap="integralConfig">
+        select
+        *
+        from t_integral_config
+        where store_id = #{storeId}
+    </select>
+</mapper>
