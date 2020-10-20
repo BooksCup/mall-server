@@ -44,6 +44,32 @@ public class IndexController {
         logger.info("[getMyProfile] storeId: " + storeId + ", storeType: " + storeType +
                 ", token: " + token);
         ResponseEntity<MyProfile> responseEntity;
+
+        Plugin plugin = getStorePlugin(storeId);
+        try {
+//            if (StringUtils.isEmpty(token)) {
+//                return new ResponseEntity<>(
+//                        new MyProfile(ResponseMsg.NOT_LOGIN.getResponseCode(), ResponseMsg.NOT_LOGIN.getResponseMessage(), plugin),
+//                        HttpStatus.BAD_REQUEST);
+//            } else {
+//
+//            }
+            responseEntity = new ResponseEntity<>(new MyProfile(plugin), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("[getMyProfile] error: " + e.getMessage());
+            responseEntity = new ResponseEntity<>(new MyProfile(plugin), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return responseEntity;
+    }
+
+    /**
+     * 获取店铺插件
+     *
+     * @param storeId 店铺ID
+     * @return 店铺插件
+     */
+    private Plugin getStorePlugin(String storeId) {
         Plugin plugin = new Plugin();
         // 插件
         // 竞拍
@@ -61,21 +87,6 @@ public class IndexController {
         } else {
             plugin.setDistributorPluginState(Constant.PLUGIN_DISABLED);
         }
-
-        try {
-//            if (StringUtils.isEmpty(token)) {
-//                return new ResponseEntity<>(
-//                        new MyProfile(ResponseMsg.NOT_LOGIN.getResponseCode(), ResponseMsg.NOT_LOGIN.getResponseMessage(), plugin),
-//                        HttpStatus.BAD_REQUEST);
-//            } else {
-//
-//            }
-            responseEntity = new ResponseEntity<>(new MyProfile(plugin), HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error("[getMyProfile] error: " + e.getMessage());
-            responseEntity = new ResponseEntity<>(new MyProfile(plugin), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return responseEntity;
+        return plugin;
     }
 }
