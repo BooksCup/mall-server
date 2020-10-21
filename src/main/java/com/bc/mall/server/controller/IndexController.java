@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 导航
@@ -31,6 +34,9 @@ import javax.annotation.Resource;
 public class IndexController {
 
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+
+    @Resource
+    private BannerService bannerService;
 
     @Resource
     private AuctionService auctionService;
@@ -73,6 +79,31 @@ public class IndexController {
             e.printStackTrace();
             logger.error("[getMyProfile] error: " + e.getMessage());
             responseEntity = new ResponseEntity<>(new MyProfile(plugin), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return responseEntity;
+    }
+
+    @ApiOperation(value = "获取首页信息", notes = "获取首页信息")
+    @GetMapping(value = "/home")
+    public ResponseEntity<HomeProfile> getHomeProfile(@RequestParam String storeId,
+                                                  @RequestParam String storeType,
+                                                  @RequestParam(required = false) String token) {
+        logger.info("[HomeProfile] storeId: " + storeId + ", storeType: " + storeType +
+                ", token: " + token);
+        ResponseEntity<HomeProfile> responseEntity;
+        HomeProfile homeProfile = new HomeProfile();
+        try {
+            Map<String, String> paramMap = new HashMap<>();
+            paramMap.put("storeId", storeId);
+            paramMap.put("storeType", storeType);
+            List<Banner> bannerList = bannerService.getBannerList(paramMap);
+            homeProfile.setBannerList(bannerList);
+
+            responseEntity = new ResponseEntity<>(homeProfile, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("[HomeProfile] error: " + e.getMessage());
+            responseEntity = new ResponseEntity<>(new HomeProfile(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
     }
