@@ -6,26 +6,26 @@ package com.bc.mall.server.entity;
  * @author zhou
  */
 public class MyProfile extends BaseEntity {
-    private Plugin plugin;
+    private PluginState pluginState;
 
     public MyProfile() {
 
     }
 
-    public MyProfile(String responseCode, String responseMessage, Plugin plugin) {
+    public MyProfile(String responseCode, String responseMessage, PluginState pluginState) {
         super(responseCode, responseMessage);
-        this.plugin = plugin;
+        this.pluginState = pluginState;
     }
 
-    public MyProfile(Plugin plugin) {
-        this.plugin = plugin;
+    public MyProfile(PluginState pluginState) {
+        this.pluginState = pluginState;
     }
 
-    public Plugin getPlugin() {
-        return plugin;
+    public PluginState getPluginState() {
+        return pluginState;
     }
 
-    public void setPlugin(Plugin plugin) {
-        this.plugin = plugin;
+    public void setPluginState(PluginState pluginState) {
+        this.pluginState = pluginState;
     }
 }

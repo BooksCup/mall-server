@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.mall.server.mapper.PluginMapper">
+
+    <resultMap id="plugin" type="com.bc.mall.server.entity.Plugin">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="INTEGER"/>
+        <result column="icon" property="icon" jdbcType="INTEGER"/>
+        <result column="url" property="url" jdbcType="INTEGER"/>
+        <result column="state" property="state" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getPluginList" parameterType="map" resultMap="plugin">
+        select
+        sp.*, p.url
+        from t_store_plugin sp
+        left join t_plugin p on sp.code = p.code
+        where sp.store_id = #{storeId}
+        <if test="isShow != null and isShow != ''">
+            and sp.is_show = #{isShow}
+        </if>
+        <if test="state != null and state!=''">
+            and sp.state = #{state}
+        </if>
+    </select>
+</mapper>

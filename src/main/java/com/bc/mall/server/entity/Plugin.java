@@ -6,81 +6,58 @@ package com.bc.mall.server.entity;
  * @author zhou
  */
 public class Plugin {
-    /**
-     * 竞拍插件状态
-     */
-    private String auctionPluginState;
+    private String id;
+    private String name;
+    private String code;
+    private String icon;
+    private String url;
+    private String state;
 
-    /**
-     * 分销插件状态
-     */
-    private String distributorPluginState;
-
-    /**
-     * 积分商城插件状态
-     */
-    private String integralPluginState;
-
-    /**
-     * 砍价插件状态
-     */
-    private String bargainPluginState;
-
-    /**
-     * 拼团插件状态
-     */
-    private String groupPluginState;
-
-    /**
-     * 秒杀插件状态
-     */
-    private String seckillPluginState;
-
-    public String getAuctionPluginState() {
-        return auctionPluginState;
+    public String getId() {
+        return id;
     }
 
-    public void setAuctionPluginState(String auctionPluginState) {
-        this.auctionPluginState = auctionPluginState;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getDistributorPluginState() {
-        return distributorPluginState;
+    public String getName() {
+        return name;
     }
 
-    public void setDistributorPluginState(String distributorPluginState) {
-        this.distributorPluginState = distributorPluginState;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getIntegralPluginState() {
-        return integralPluginState;
+    public String getCode() {
+        return code;
     }
 
-    public void setIntegralPluginState(String integralPluginState) {
-        this.integralPluginState = integralPluginState;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getBargainPluginState() {
-        return bargainPluginState;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setBargainPluginState(String bargainPluginState) {
-        this.bargainPluginState = bargainPluginState;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
-    public String getGroupPluginState() {
-        return groupPluginState;
+    public String getUrl() {
+        return url;
     }
 
-    public void setGroupPluginState(String groupPluginState) {
-        this.groupPluginState = groupPluginState;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getSeckillPluginState() {
-        return seckillPluginState;
+    public String getState() {
+        return state;
     }
 
-    public void setSeckillPluginState(String seckillPluginState) {
-        this.seckillPluginState = seckillPluginState;
+    public void setState(String state) {
+        this.state = state;
     }
 }

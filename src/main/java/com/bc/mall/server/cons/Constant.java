@@ -53,4 +53,34 @@ public class Constant {
      * 插件开启
      */
     public static final String PLUGIN_ENABLED = "1";
+
+    /**
+     * 插件编码-"竞拍"
+     */
+    public static final String PLUGIN_CODE_AUCTION = "auction";
+
+    /**
+     * 插件编码-"分销"
+     */
+    public static final String PLUGIN_CODE_DISTRIBUTOR = "distributor";
+
+    /**
+     * 插件编码-"积分商城"
+     */
+    public static final String PLUGIN_CODE_INTEGRAL = "integral";
+
+    /**
+     * 插件编码-"砍价"
+     */
+    public static final String PLUGIN_CODE_BARGAIN = "bargain";
+
+    /**
+     * 插件编码-"拼团"
+     */
+    public static final String PLUGIN_CODE_GROUP = "group";
+
+    /**
+     * 插件编码-"秒杀"
+     */
+    public static final String PLUGIN_CODE_SECKILL = "seckill";
 }

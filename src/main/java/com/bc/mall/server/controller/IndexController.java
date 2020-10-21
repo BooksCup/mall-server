@@ -2,12 +2,6 @@ package com.bc.mall.server.controller;
 
 import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.entity.*;
-import com.bc.mall.server.entity.auction.AuctionConfig;
-import com.bc.mall.server.entity.bargain.BargainConfig;
-import com.bc.mall.server.entity.distributor.DistributorConfig;
-import com.bc.mall.server.entity.group.GroupConfig;
-import com.bc.mall.server.entity.integral.IntegralConfig;
-import com.bc.mall.server.entity.seckill.SeckillConfig;
 import com.bc.mall.server.service.*;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -56,38 +50,14 @@ public class IndexController {
     @Resource
     private SeckillService seckillService;
 
-    @ApiOperation(value = "获取个人信息", notes = "获取个人信息")
-    @GetMapping(value = "/me")
-    public ResponseEntity<MyProfile> getMyProfile(@RequestParam String storeId,
-                                                  @RequestParam String storeType,
-                                                  @RequestParam(required = false) String token) {
-        logger.info("[getMyProfile] storeId: " + storeId + ", storeType: " + storeType +
-                ", token: " + token);
-        ResponseEntity<MyProfile> responseEntity;
-
-        Plugin plugin = getStorePlugin(storeId);
-        try {
-//            if (StringUtils.isEmpty(token)) {
-//                return new ResponseEntity<>(
-//                        new MyProfile(ResponseMsg.NOT_LOGIN.getResponseCode(), ResponseMsg.NOT_LOGIN.getResponseMessage(), plugin),
-//                        HttpStatus.BAD_REQUEST);
-//            } else {
-//
-//            }
-            responseEntity = new ResponseEntity<>(new MyProfile(plugin), HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error("[getMyProfile] error: " + e.getMessage());
-            responseEntity = new ResponseEntity<>(new MyProfile(plugin), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return responseEntity;
-    }
+    @Resource
+    private PluginService pluginService;
 
     @ApiOperation(value = "获取首页信息", notes = "获取首页信息")
     @GetMapping(value = "/home")
     public ResponseEntity<HomeProfile> getHomeProfile(@RequestParam String storeId,
-                                                  @RequestParam String storeType,
-                                                  @RequestParam(required = false) String token) {
+                                                      @RequestParam String storeType,
+                                                      @RequestParam(required = false) String token) {
         logger.info("[HomeProfile] storeId: " + storeId + ", storeType: " + storeType +
                 ", token: " + token);
         ResponseEntity<HomeProfile> responseEntity;
@@ -108,63 +78,71 @@ public class IndexController {
         return responseEntity;
     }
 
+    @ApiOperation(value = "获取个人信息", notes = "获取个人信息")
+    @GetMapping(value = "/me")
+    public ResponseEntity<MyProfile> getMyProfile(@RequestParam String storeId,
+                                                  @RequestParam String storeType,
+                                                  @RequestParam(required = false) String token) {
+        logger.info("[getMyProfile] storeId: " + storeId + ", storeType: " + storeType +
+                ", token: " + token);
+        ResponseEntity<MyProfile> responseEntity;
+
+        PluginState pluginState = getPluginState(storeId);
+        try {
+            responseEntity = new ResponseEntity<>(new MyProfile(pluginState), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("[getMyProfile] error: " + e.getMessage());
+            responseEntity = new ResponseEntity<>(new MyProfile(pluginState), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return responseEntity;
+    }
+
     /**
-     * 获取店铺插件
+     * 获取店铺插件状态
      *
      * @param storeId 店铺ID
-     * @return 店铺插件
+     * @return 店铺插件状态
      */
-    private Plugin getStorePlugin(String storeId) {
-        Plugin plugin = new Plugin();
-        // 插件
-        // 竞拍
-        AuctionConfig auctionConfig = auctionService.getAuctionConfigByStoreId(storeId);
-        if (null != auctionConfig && Constant.PLUGIN_ENABLED.equals(auctionConfig.getState())) {
-            plugin.setAuctionPluginState(Constant.PLUGIN_ENABLED);
-        } else {
-            plugin.setAuctionPluginState(Constant.PLUGIN_DISABLED);
+    private PluginState getPluginState(String storeId) {
+        PluginState pluginState = new PluginState();
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("storeId", storeId);
+        paramMap.put("state", Constant.PLUGIN_ENABLED);
+
+        List<Plugin> pluginList = pluginService.getPluginList(paramMap);
+        for (Plugin plugin : pluginList) {
+            // 竞拍
+            if (Constant.PLUGIN_CODE_AUCTION.equals(plugin.getCode())) {
+                pluginState.setAuctionPluginState(Constant.PLUGIN_ENABLED);
+            }
+
+            // 分销
+            if (Constant.PLUGIN_CODE_DISTRIBUTOR.equals(plugin.getCode())) {
+                pluginState.setDistributorPluginState(Constant.PLUGIN_ENABLED);
+            }
+
+            // 积分商城
+            if (Constant.PLUGIN_CODE_INTEGRAL.equals(plugin.getCode())) {
+                pluginState.setIntegralPluginState(Constant.PLUGIN_ENABLED);
+            }
+
+            // 砍价
+            if (Constant.PLUGIN_CODE_BARGAIN.equals(plugin.getCode())) {
+                pluginState.setBargainPluginState(Constant.PLUGIN_ENABLED);
+            }
+
+            // 拼团
+            if (Constant.PLUGIN_CODE_GROUP.equals(plugin.getCode())) {
+                pluginState.setGroupPluginState(Constant.PLUGIN_ENABLED);
+            }
+
+            // 秒杀
+            if (Constant.PLUGIN_CODE_SECKILL.equals(plugin.getCode())) {
+                pluginState.setSeckillPluginState(Constant.PLUGIN_ENABLED);
+            }
         }
 
-        // 分销
-        DistributorConfig distributorConfig = distributorService.getDistributorConfigByStoreId(storeId);
-        if (null != distributorConfig && Constant.PLUGIN_ENABLED.equals(distributorConfig.getState())) {
-            plugin.setDistributorPluginState(Constant.PLUGIN_ENABLED);
-        } else {
-            plugin.setDistributorPluginState(Constant.PLUGIN_DISABLED);
-        }
-
-        // 积分商城
-        IntegralConfig integralConfig = integralService.getIntegralConfigByStoreId(storeId);
-        if (null != integralConfig && Constant.PLUGIN_ENABLED.equals(integralConfig.getState())) {
-            plugin.setIntegralPluginState(Constant.PLUGIN_ENABLED);
-        } else {
-            plugin.setIntegralPluginState(Constant.PLUGIN_DISABLED);
-        }
-
-        // 砍价
-        BargainConfig bargainConfig = bargainService.getBargainConfigByStoreId(storeId);
-        if (null != bargainConfig && Constant.PLUGIN_ENABLED.equals(bargainConfig.getState())) {
-            plugin.setBargainPluginState(Constant.PLUGIN_ENABLED);
-        } else {
-            plugin.setBargainPluginState(Constant.PLUGIN_DISABLED);
-        }
-
-        // 拼团
-        GroupConfig groupConfig = groupService.getGroupConfigByStoreId(storeId);
-        if (null != groupConfig && Constant.PLUGIN_ENABLED.equals(groupConfig.getState())) {
-            plugin.setGroupPluginState(Constant.PLUGIN_ENABLED);
-        } else {
-            plugin.setGroupPluginState(Constant.PLUGIN_DISABLED);
-        }
-
-        // 秒杀
-        SeckillConfig seckillConfig = seckillService.getSeckillConfigByStoreId(storeId);
-        if (null != seckillConfig && Constant.PLUGIN_ENABLED.equals(seckillConfig.getState())) {
-            plugin.setSeckillPluginState(Constant.PLUGIN_ENABLED);
-        } else {
-            plugin.setSeckillPluginState(Constant.PLUGIN_DISABLED);
-        }
-
-        return plugin;
+        return pluginState;
     }
 }
