@@ -53,7 +53,6 @@
         and g.show_address like '%1%'
         group by c.goods_id
         order by g.create_time, g.sort desc
-        limit 10
     </select>
 
 </mapper>

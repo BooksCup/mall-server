@@ -101,7 +101,7 @@ public class IndexController {
             // 猜你喜欢商品
             paramMap.clear();
             paramMap.put("storeId", storeId);
-            List<Goods> likeGoodsList = goodsService.getLikeGoodsList(paramMap);
+            List<Goods> likeGoodsList = goodsService.getLikeGoodsList(1, 10, paramMap);
             homeProfile.setLikeGoodsList(likeGoodsList);
 
             responseEntity = new ResponseEntity<>(homeProfile, HttpStatus.OK);

@@ -3,6 +3,7 @@ package com.bc.mall.server.service.impl;
 import com.bc.mall.server.entity.Goods;
 import com.bc.mall.server.mapper.GoodsMapper;
 import com.bc.mall.server.service.GoodsService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,11 +35,14 @@ public class GoodsServiceImpl implements GoodsService {
     /**
      * 获取猜你喜欢商品列表
      *
+     * @param pageNum  当前分页数
+     * @param pageSize 分页大小
      * @param paramMap 参数map
      * @return 猜你喜欢商品列表
      */
     @Override
-    public List<Goods> getLikeGoodsList(Map<String, String> paramMap) {
+    public List<Goods> getLikeGoodsList(int pageNum, int pageSize, Map<String, String> paramMap) {
+        PageHelper.startPage(pageNum, pageSize);
         return goodsMapper.getLikeGoodsList(paramMap);
     }
 }
