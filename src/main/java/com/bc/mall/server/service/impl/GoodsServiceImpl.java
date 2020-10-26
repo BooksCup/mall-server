@@ -31,4 +31,14 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsMapper.getGoodsListByGoodsClass(paramMap);
     }
 
+    /**
+     * 获取猜你喜欢商品列表
+     *
+     * @param paramMap 参数map
+     * @return 猜你喜欢商品列表
+     */
+    @Override
+    public List<Goods> getLikeGoodsList(Map<String, String> paramMap) {
+        return goodsMapper.getLikeGoodsList(paramMap);
+    }
 }

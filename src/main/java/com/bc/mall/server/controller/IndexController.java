@@ -82,6 +82,7 @@ public class IndexController {
             List<Plugin> pluginList = pluginService.getPluginList(paramMap);
             homeProfile.setPluginList(pluginList);
 
+            // 分类商品
             // 获取一级目录
             paramMap.clear();
             paramMap.put("storeId", storeId);
@@ -96,6 +97,12 @@ public class IndexController {
                 goodsClass.setGoodsList(goodsList);
             }
             homeProfile.setGoodsClassList(goodsClassList);
+
+            // 猜你喜欢商品
+            paramMap.clear();
+            paramMap.put("storeId", storeId);
+            List<Goods> likeGoodsList = goodsService.getLikeGoodsList(paramMap);
+            homeProfile.setLikeGoodsList(likeGoodsList);
 
             responseEntity = new ResponseEntity<>(homeProfile, HttpStatus.OK);
         } catch (Exception e) {

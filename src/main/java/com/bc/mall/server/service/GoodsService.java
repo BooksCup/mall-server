@@ -19,4 +19,12 @@ public interface GoodsService {
      * @return 商品列表
      */
     List<Goods> getGoodsListByGoodsClass(Map<String, String> paramMap);
+
+    /**
+     * 获取猜你喜欢商品列表
+     *
+     * @param paramMap 参数map
+     * @return 猜你喜欢商品列表
+     */
+    List<Goods> getLikeGoodsList(Map<String, String> paramMap);
 }

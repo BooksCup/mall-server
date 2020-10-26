@@ -34,4 +34,26 @@
         order by g.create_time, g.sort desc
         limit 10
     </select>
+
+    <select id="getLikeGoodsList" parameterType="map" resultMap="goods">
+        select
+        g.*,
+        min(c.sell_price) as sell_price,
+        c.original_price
+        from
+        t_goods g
+        right join t_configure c on g.id = c.goods_id
+        left join t_shop s on g.shop_id = s.id
+        where g.store_id = #{storeId}
+        and g.status = '2'
+        and g.shop_status = '2'
+        and g.delete_status = '0'
+        and g.active = '1'
+        and s.is_open = '1'
+        and g.show_address like '%1%'
+        group by c.goods_id
+        order by g.create_time, g.sort desc
+        limit 10
+    </select>
+
 </mapper>
