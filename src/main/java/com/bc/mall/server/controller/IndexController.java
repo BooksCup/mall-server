@@ -53,6 +53,12 @@ public class IndexController {
     @Resource
     private PluginService pluginService;
 
+    @Resource
+    private GoodsClassService goodsClassService;
+
+    @Resource
+    private GoodsService goodsService;
+
     @ApiOperation(value = "获取首页信息", notes = "获取首页信息")
     @GetMapping(value = "/home")
     public ResponseEntity<HomeProfile> getHomeProfile(@RequestParam String storeId,
@@ -63,7 +69,7 @@ public class IndexController {
         ResponseEntity<HomeProfile> responseEntity;
         HomeProfile homeProfile = new HomeProfile();
         try {
-            Map<String, String> paramMap = new HashMap<>();
+            Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
             paramMap.put("storeId", storeId);
             paramMap.put("storeType", storeType);
             List<Banner> bannerList = bannerService.getBannerList(paramMap);
@@ -75,6 +81,21 @@ public class IndexController {
             paramMap.put("isShow", Constant.PLUGIN_SHOW);
             List<Plugin> pluginList = pluginService.getPluginList(paramMap);
             homeProfile.setPluginList(pluginList);
+
+            // 获取一级目录
+            paramMap.clear();
+            paramMap.put("storeId", storeId);
+            paramMap.put("parentId", Constant.FIRST_CLASS_PARENT_ID);
+            paramMap.put("deleteStatus", Constant.DELETE_STATUS_NOT);
+            List<GoodsClass> goodsClassList = goodsClassService.getGoodsClassList(paramMap);
+            for (GoodsClass goodsClass : goodsClassList) {
+                paramMap.clear();
+                paramMap.put("storeId", storeId);
+                paramMap.put("goodsClassId", goodsClass.getId());
+                List<Goods> goodsList = goodsService.getGoodsListByGoodsClass(paramMap);
+                goodsClass.setGoodsList(goodsList);
+            }
+            homeProfile.setGoodsClassList(goodsClassList);
 
             responseEntity = new ResponseEntity<>(homeProfile, HttpStatus.OK);
         } catch (Exception e) {
@@ -113,7 +134,7 @@ public class IndexController {
      */
     private PluginState getPluginState(String storeId) {
         PluginState pluginState = new PluginState();
-        Map<String, String> paramMap = new HashMap<>();
+        Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
         paramMap.put("storeId", storeId);
         paramMap.put("state", Constant.PLUGIN_ENABLED);
 

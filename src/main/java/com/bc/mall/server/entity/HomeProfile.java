@@ -19,6 +19,11 @@ public class HomeProfile {
      */
     private List<Plugin> pluginList;
 
+    /**
+     * 商品分类
+     */
+    private List<GoodsClass> goodsClassList;
+
     public List<Banner> getBannerList() {
         return bannerList;
     }
@@ -33,5 +38,13 @@ public class HomeProfile {
 
     public void setPluginList(List<Plugin> pluginList) {
         this.pluginList = pluginList;
+    }
+
+    public List<GoodsClass> getGoodsClassList() {
+        return goodsClassList;
+    }
+
+    public void setGoodsClassList(List<GoodsClass> goodsClassList) {
+        this.goodsClassList = goodsClassList;
     }
 }

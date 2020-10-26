@@ -8,6 +8,7 @@ import java.util.List;
  * @author zhou
  */
 public class GoodsClass {
+
     private String id;
     private String storeId;
     private String parentId;
@@ -20,6 +21,7 @@ public class GoodsClass {
     private String createTime;
     private String deleteStatus;
     private List<GoodsClass> subGoodsClassList;
+    private List<Goods> goodsList;
 
     public String getId() {
         return id;
@@ -115,5 +117,13 @@ public class GoodsClass {
 
     public void setSubGoodsClassList(List<GoodsClass> subGoodsClassList) {
         this.subGoodsClassList = subGoodsClassList;
+    }
+
+    public List<Goods> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<Goods> goodsList) {
+        this.goodsList = goodsList;
     }
 }
