@@ -5,6 +5,7 @@ import com.bc.mall.server.mapper.GoodsMapper;
 import com.bc.mall.server.service.GoodsService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -44,5 +45,20 @@ public class GoodsServiceImpl implements GoodsService {
     public List<Goods> getLikeGoodsList(int pageNum, int pageSize, Map<String, String> paramMap) {
         PageHelper.startPage(pageNum, pageSize);
         return goodsMapper.getLikeGoodsList(paramMap);
+    }
+
+    /**
+     * 通过商品ID获取商品
+     *
+     * @param paramMap 参数map
+     * @return 商品
+     */
+    @Override
+    public Goods getGoodsByGoodsId(Map<String, String> paramMap) {
+        List<Goods> goodsList = goodsMapper.getGoodsListByGoodsId(paramMap);
+        if (!CollectionUtils.isEmpty(goodsList)) {
+            return goodsList.get(0);
+        }
+        return null;
     }
 }

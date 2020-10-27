@@ -55,4 +55,13 @@
         order by g.create_time, g.sort desc
     </select>
 
+    <select id="getGoodsListByGoodsId" parameterType="map" resultMap="goods">
+        select
+        g.*
+        from
+        t_goods g
+        where g.store_id = #{storeId}
+        and g.id = #{goodsId}
+    </select>
+
 </mapper>
