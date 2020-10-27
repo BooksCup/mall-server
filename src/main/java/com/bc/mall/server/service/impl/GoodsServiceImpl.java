@@ -1,6 +1,7 @@
 package com.bc.mall.server.service.impl;
 
 import com.bc.mall.server.entity.Goods;
+import com.bc.mall.server.entity.GoodsAlbum;
 import com.bc.mall.server.mapper.GoodsMapper;
 import com.bc.mall.server.service.GoodsService;
 import com.github.pagehelper.PageHelper;
@@ -60,5 +61,16 @@ public class GoodsServiceImpl implements GoodsService {
             return goodsList.get(0);
         }
         return null;
+    }
+
+    /**
+     * 通过商品ID获取商品图片列表
+     *
+     * @param goodsId 商品ID
+     * @return 商品图片列表
+     */
+    @Override
+    public List<GoodsAlbum> getGoodsAlbumListByGoodsId(String goodsId){
+        return goodsMapper.getGoodsAlbumListByGoodsId(goodsId);
     }
 }

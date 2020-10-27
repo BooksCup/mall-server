@@ -14,14 +14,21 @@
         <result column="original_price" property="originalPrice" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="goodsAlbum" type="com.bc.mall.server.entity.GoodsAlbum">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="goods_id" property="goodsId" jdbcType="VARCHAR"/>
+        <result column="image" property="image" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <select id="getGoodsListByGoodsClass" parameterType="map" resultMap="goods">
         select
         g.*,
-        min(c.sell_price) as sell_price,
-        c.original_price
+        min(sku.sell_price) as sell_price,
+        sku.original_price
         from
         t_goods g
-        right join t_configure c on g.id = c.goods_id
+        right join t_goods_sku sku on g.id = sku.goods_id
         left join t_shop s on g.shop_id = s.id
         where g.store_id = #{storeId}
         and g.goods_class_id like concat('%', #{goodsClassId}, '%')
@@ -30,7 +37,7 @@
         and g.delete_status = '0'
         and g.active = '1'
         and s.is_open = '1'
-        group by c.goods_id
+        group by sku.goods_id
         order by g.create_time, g.sort desc
         limit 10
     </select>
@@ -38,11 +45,11 @@
     <select id="getLikeGoodsList" parameterType="map" resultMap="goods">
         select
         g.*,
-        min(c.sell_price) as sell_price,
-        c.original_price
+        min(sku.sell_price) as sell_price,
+        sku.original_price
         from
         t_goods g
-        right join t_configure c on g.id = c.goods_id
+        right join t_goods_sku sku on g.id = sku.goods_id
         left join t_shop s on g.shop_id = s.id
         where g.store_id = #{storeId}
         and g.status = '2'
@@ -51,7 +58,7 @@
         and g.active = '1'
         and s.is_open = '1'
         and g.show_address like '%1%'
-        group by c.goods_id
+        group by sku.goods_id
         order by g.create_time, g.sort desc
     </select>
 
@@ -62,6 +69,14 @@
         t_goods g
         where g.store_id = #{storeId}
         and g.id = #{goodsId}
+    </select>
+
+    <select id="getGoodsAlbumListByGoodsId" parameterType="String" resultMap="goodsAlbum">
+        select
+        *
+        from
+        t_goods_album
+        where goods_id = #{goodsId}
     </select>
 
 </mapper>

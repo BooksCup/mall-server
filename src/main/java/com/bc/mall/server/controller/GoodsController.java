@@ -2,6 +2,7 @@ package com.bc.mall.server.controller;
 
 import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.entity.Goods;
+import com.bc.mall.server.entity.GoodsAlbum;
 import com.bc.mall.server.service.GoodsService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -80,6 +81,11 @@ public class GoodsController {
             paramMap.put("storeId", storeId);
             paramMap.put("goodsId", goodsId);
             Goods goods = goodsService.getGoodsByGoodsId(paramMap);
+
+            // 获取商品图片
+            List<GoodsAlbum> goodsAlbumList = goodsService.getGoodsAlbumListByGoodsId(goodsId);
+            goods.setGoodsAlbumList(goodsAlbumList);
+
             responseEntity = new ResponseEntity<>(goods, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,6 +1,7 @@
 package com.bc.mall.server.service;
 
 import com.bc.mall.server.entity.Goods;
+import com.bc.mall.server.entity.GoodsAlbum;
 
 import java.util.List;
 import java.util.Map;
@@ -37,4 +38,12 @@ public interface GoodsService {
      * @return 商品
      */
     Goods getGoodsByGoodsId(Map<String, String> paramMap);
+
+    /**
+     * 通过商品ID获取商品图片列表
+     *
+     * @param goodsId 商品ID
+     * @return 商品图片列表
+     */
+    List<GoodsAlbum> getGoodsAlbumListByGoodsId(String goodsId);
 }
