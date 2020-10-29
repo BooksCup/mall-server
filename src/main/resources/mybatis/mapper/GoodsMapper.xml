@@ -21,6 +21,13 @@
         <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="goodsPrice" type="com.bc.mall.server.entity.GoodsSku">
+        <result column="minSellPrice" property="minSellPrice" jdbcType="VARCHAR"/>
+        <result column="maxSellPrice" property="maxSellPrice" jdbcType="VARCHAR"/>
+        <result column="minOriginalPrice" property="minOriginalPrice" jdbcType="VARCHAR"/>
+        <result column="maxOriginalPrice" property="maxOriginalPrice" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <select id="getGoodsListByGoodsClass" parameterType="map" resultMap="goods">
         select
         g.*,
@@ -74,8 +81,17 @@
     <select id="getGoodsAlbumListByGoodsId" parameterType="String" resultMap="goodsAlbum">
         select
         *
-        from
-        t_goods_album
+        from t_goods_album
+        where goods_id = #{goodsId}
+    </select>
+
+    <select id="getGoodsPrice" parameterType="String" resultMap="goodsPrice">
+        select
+        min(cast(sell_price as decimal(12,2))) as minSellPrice,
+        max(cast(sell_price as decimal(12,2))) as maxSellPrice,
+        min(cast(original_price as decimal(12,2))) as minOriginalPrice,
+        max(cast(original_price as decimal(12,2))) as maxOriginalPrice
+        from t_goods_sku
         where goods_id = #{goodsId}
     </select>
 

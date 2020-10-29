@@ -2,6 +2,7 @@ package com.bc.mall.server.service.impl;
 
 import com.bc.mall.server.entity.Goods;
 import com.bc.mall.server.entity.GoodsAlbum;
+import com.bc.mall.server.entity.GoodsSku;
 import com.bc.mall.server.mapper.GoodsMapper;
 import com.bc.mall.server.service.GoodsService;
 import com.github.pagehelper.PageHelper;
@@ -72,5 +73,9 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public List<GoodsAlbum> getGoodsAlbumListByGoodsId(String goodsId){
         return goodsMapper.getGoodsAlbumListByGoodsId(goodsId);
+    }
+
+    public GoodsSku getGoodsPrice(String goodsId){
+        return goodsMapper.getGoodsPrice(goodsId);
     }
 }

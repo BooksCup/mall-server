@@ -2,6 +2,7 @@ package com.bc.mall.server.mapper;
 
 import com.bc.mall.server.entity.Goods;
 import com.bc.mall.server.entity.GoodsAlbum;
+import com.bc.mall.server.entity.GoodsSku;
 
 import java.util.List;
 import java.util.Map;
@@ -44,4 +45,6 @@ public interface GoodsMapper {
      * @return 商品图片列表
      */
     List<GoodsAlbum> getGoodsAlbumListByGoodsId(String goodsId);
+
+    GoodsSku getGoodsPrice(String goodsId);
 }

@@ -3,6 +3,7 @@ package com.bc.mall.server.controller;
 import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.entity.Goods;
 import com.bc.mall.server.entity.GoodsAlbum;
+import com.bc.mall.server.entity.GoodsSku;
 import com.bc.mall.server.service.GoodsService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -85,6 +86,15 @@ public class GoodsController {
             // 获取商品图片
             List<GoodsAlbum> goodsAlbumList = goodsService.getGoodsAlbumListByGoodsId(goodsId);
             goods.setGoodsAlbumList(goodsAlbumList);
+
+            // 获取商品价格
+            GoodsSku goodsPrice = goodsService.getGoodsPrice(goodsId);
+            if (null != goodsPrice.getMaxSellPrice() &&
+                    goodsPrice.getMaxSellPrice().equals(goodsPrice.getMinSellPrice())) {
+                goods.setSellPrice(goodsPrice.getMaxSellPrice());
+            } else {
+                goods.setSellPrice(goodsPrice.getMinSellPrice() + "-" + goodsPrice.getMaxSellPrice());
+            }
 
             responseEntity = new ResponseEntity<>(goods, HttpStatus.OK);
         } catch (Exception e) {

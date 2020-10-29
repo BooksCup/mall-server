@@ -17,8 +17,12 @@ public class Goods {
     private String image;
     private Integer salesVolume;
     private Integer status;
-    private BigDecimal sellPrice;
-    private BigDecimal originalPrice;
+
+    /**
+     * 销售价格
+     */
+    private String sellPrice;
+    private String originalPrice;
 
     private List<GoodsAlbum> goodsAlbumList;
 
@@ -78,19 +82,19 @@ public class Goods {
         this.status = status;
     }
 
-    public BigDecimal getSellPrice() {
+    public String getSellPrice() {
         return sellPrice;
     }
 
-    public void setSellPrice(BigDecimal sellPrice) {
+    public void setSellPrice(String sellPrice) {
         this.sellPrice = sellPrice;
     }
 
-    public BigDecimal getOriginalPrice() {
+    public String getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(BigDecimal originalPrice) {
+    public void setOriginalPrice(String originalPrice) {
         this.originalPrice = originalPrice;
     }
 
