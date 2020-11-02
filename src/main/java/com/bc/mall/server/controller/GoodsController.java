@@ -1,9 +1,11 @@
 package com.bc.mall.server.controller;
 
 import com.bc.mall.server.cons.Constant;
+import com.bc.mall.server.entity.Comment;
 import com.bc.mall.server.entity.Goods;
 import com.bc.mall.server.entity.GoodsAlbum;
 import com.bc.mall.server.entity.GoodsSku;
+import com.bc.mall.server.service.CommentService;
 import com.bc.mall.server.service.GoodsService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -31,6 +33,9 @@ public class GoodsController {
 
     @Resource
     private GoodsService goodsService;
+
+    @Resource
+    private CommentService commentService;
 
     /**
      * 获取猜你喜欢商品列表
@@ -95,6 +100,10 @@ public class GoodsController {
             } else {
                 goods.setSellPrice(goodsPrice.getMinSellPrice() + "-" + goodsPrice.getMaxSellPrice());
             }
+
+            // 获取商品评论
+            List<Comment> commentList = commentService.getCommentListByGoodsId(paramMap);
+            goods.setCommentList(commentList);
 
             responseEntity = new ResponseEntity<>(goods, HttpStatus.OK);
         } catch (Exception e) {

@@ -10,6 +10,7 @@
         <result column="image" property="image" jdbcType="VARCHAR"/>
         <result column="sales_volume" property="salesVolume" jdbcType="INTEGER"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
         <result column="sell_price" property="sellPrice" jdbcType="VARCHAR"/>
         <result column="original_price" property="originalPrice" jdbcType="VARCHAR"/>
     </resultMap>

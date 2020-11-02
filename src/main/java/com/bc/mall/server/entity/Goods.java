@@ -1,6 +1,5 @@
 package com.bc.mall.server.entity;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -24,7 +23,17 @@ public class Goods {
     private String sellPrice;
     private String originalPrice;
 
+    /**
+     * 商品详情(html标签)
+     */
+    private String content;
+
     private List<GoodsAlbum> goodsAlbumList;
+
+    /**
+     * 商品评论
+     */
+    private List<Comment> commentList;
 
     public String getId() {
         return id;
@@ -98,11 +107,27 @@ public class Goods {
         this.originalPrice = originalPrice;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public List<GoodsAlbum> getGoodsAlbumList() {
         return goodsAlbumList;
     }
 
     public void setGoodsAlbumList(List<GoodsAlbum> goodsAlbumList) {
         this.goodsAlbumList = goodsAlbumList;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
 }
