@@ -1,18 +1,18 @@
 package com.bc.mall.server.controller;
 
 import com.bc.mall.server.cons.Constant;
-import com.bc.mall.server.entity.Comment;
-import com.bc.mall.server.entity.Goods;
-import com.bc.mall.server.entity.GoodsAlbum;
-import com.bc.mall.server.entity.GoodsSku;
+import com.bc.mall.server.entity.*;
 import com.bc.mall.server.service.CommentService;
 import com.bc.mall.server.service.GoodsService;
+import com.bc.mall.server.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -36,6 +36,9 @@ public class GoodsController {
 
     @Resource
     private CommentService commentService;
+
+    @Resource
+    private UserService userService;
 
     /**
      * 获取猜你喜欢商品列表
@@ -77,6 +80,7 @@ public class GoodsController {
     @ApiOperation(value = "获取商品详情", notes = "获取商品详情")
     @GetMapping(value = "/{goodsId}")
     public ResponseEntity<Goods> getGoodsDetail(
+            @RequestParam(required = false) String token,
             @RequestParam String storeId,
             @PathVariable String goodsId) {
         logger.info("[getGoodsDetail] storeId: " +
@@ -104,6 +108,29 @@ public class GoodsController {
             // 获取商品评论
             List<Comment> commentList = commentService.getCommentListByGoodsId(paramMap);
             goods.setCommentList(commentList);
+
+            if (StringUtils.isEmpty(token)) {
+                // 未登录
+                goods.setIsCollected(Constant.IS_COLLECTED_NO);
+            } else {
+                paramMap.clear();
+                paramMap.put("storeId", storeId);
+                paramMap.put("token", token);
+                List<User> userList = userService.getUserListByToken(paramMap);
+                if (CollectionUtils.isEmpty(userList)) {
+                    // 未登录
+                    goods.setIsCollected(Constant.IS_COLLECTED_NO);
+                } else {
+                    paramMap.clear();
+                    paramMap.put("userId", userList.get(0).getId());
+                    paramMap.put("goodsId", goodsId);
+                    if (userService.checkUserGoodsCollectionExists(paramMap)) {
+                        goods.setIsCollected(Constant.IS_COLLECTED_YES);
+                    } else {
+                        goods.setIsCollected(Constant.IS_COLLECTED_NO);
+                    }
+                }
+            }
 
             responseEntity = new ResponseEntity<>(goods, HttpStatus.OK);
         } catch (Exception e) {

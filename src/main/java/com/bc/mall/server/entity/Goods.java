@@ -35,6 +35,11 @@ public class Goods {
      */
     private List<Comment> commentList;
 
+    /**
+     * 是否被收藏
+     */
+    private String isCollected;
+
     public String getId() {
         return id;
     }
@@ -129,5 +134,13 @@ public class Goods {
 
     public void setCommentList(List<Comment> commentList) {
         this.commentList = commentList;
+    }
+
+    public String getIsCollected() {
+        return isCollected;
+    }
+
+    public void setIsCollected(String isCollected) {
+        this.isCollected = isCollected;
     }
 }

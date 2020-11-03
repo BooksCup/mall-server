@@ -1,6 +1,7 @@
 package com.bc.mall.server.service.impl;
 
 import com.bc.mall.server.entity.User;
+import com.bc.mall.server.entity.UserCollection;
 import com.bc.mall.server.mapper.UserMapper;
 import com.bc.mall.server.service.UserService;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,17 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 根据token获取用户列表
+     *
+     * @param paramMap 参数map
+     * @return 用户列表
+     */
+    @Override
+    public List<User> getUserListByToken(Map<String, String> paramMap) {
+        return userMapper.getUserListByToken(paramMap);
+    }
+
+    /**
      * 通过账号(用户名/手机号)获取用户列表
      *
      * @param paramMap 参数map
@@ -91,5 +103,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addUser(User user) {
         userMapper.addUser(user);
+    }
+
+    /**
+     * 检查用户是否收藏某件商品
+     *
+     * @param paramMap 参数map
+     * @return true: 已收藏 false: 未收藏
+     */
+    @Override
+    public boolean checkUserGoodsCollectionExists(Map<String, String> paramMap) {
+        List<UserCollection> userCollectionList = userMapper.getUserGoodsCollectionListForCheck(paramMap);
+        if (!CollectionUtils.isEmpty(userCollectionList)) {
+            return true;
+        }
+        return false;
     }
 }

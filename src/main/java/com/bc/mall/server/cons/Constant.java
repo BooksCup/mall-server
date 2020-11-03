@@ -88,4 +88,14 @@ public class Constant {
      * 插件编码-"秒杀"
      */
     public static final String PLUGIN_CODE_SECKILL = "seckill";
+
+    /**
+     * 是否被收藏-"是"
+     */
+    public static final String IS_COLLECTED_YES = "1";
+
+    /**
+     * 是否被收藏-"否"
+     */
+    public static final String IS_COLLECTED_NO = "0";
 }

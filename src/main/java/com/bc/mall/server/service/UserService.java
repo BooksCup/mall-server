@@ -28,6 +28,14 @@ public interface UserService {
     boolean checkPhoneExist(Map<String, Object> paramMap);
 
     /**
+     * 根据token获取用户列表
+     *
+     * @param paramMap 参数map
+     * @return 用户列表
+     */
+    List<User> getUserListByToken(Map<String, String> paramMap);
+
+    /**
      * 通过账号(用户名/手机号)获取用户列表
      *
      * @param paramMap 参数map
@@ -56,4 +64,12 @@ public interface UserService {
      * @param user 用户
      */
     void addUser(User user);
+
+    /**
+     * 检查用户是否收藏某件商品
+     *
+     * @param paramMap 参数map
+     * @return true: 已收藏 false: 未收藏
+     */
+    boolean checkUserGoodsCollectionExists(Map<String, String> paramMap);
 }
