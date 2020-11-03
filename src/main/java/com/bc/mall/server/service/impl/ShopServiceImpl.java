@@ -35,4 +35,26 @@ public class ShopServiceImpl implements ShopService {
         }
         return null;
     }
+
+    /**
+     * 获取店铺在售商品数量
+     *
+     * @param shopId 店铺ID
+     * @return 在售商品数量
+     */
+    @Override
+    public Integer getShopOnSaleGoodsNum(String shopId) {
+        return shopMapper.getShopOnSaleGoodsNum(shopId);
+    }
+
+    /**
+     * 获取店铺总销量
+     *
+     * @param shopId 店铺ID
+     * @return 总销量
+     */
+    @Override
+    public Integer getShopTotalSalesVolume(String shopId) {
+        return shopMapper.getShopTotalSalesVolume(shopId);
+    }
 }

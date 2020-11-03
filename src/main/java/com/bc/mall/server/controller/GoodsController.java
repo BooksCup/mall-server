@@ -138,12 +138,16 @@ public class GoodsController {
             }
 
             // 店铺信息
-            if (!StringUtils.isEmpty(goods.getShopId())){
+            if (!StringUtils.isEmpty(goods.getShopId())) {
                 paramMap.clear();
                 paramMap.put("storeId", storeId);
                 paramMap.put("shopId", goods.getShopId());
                 Shop shop = shopService.getShopByShopId(paramMap);
-                goods.setShop(shop);
+                if (null != shop) {
+                    shop.setOnSaleGoodsNum(shopService.getShopOnSaleGoodsNum(shop.getId()));
+                    shop.setTotalSalesVolume(shopService.getShopTotalSalesVolume(shop.getId()));
+                    goods.setShop(shop);
+                }
             }
 
             responseEntity = new ResponseEntity<>(goods, HttpStatus.OK);

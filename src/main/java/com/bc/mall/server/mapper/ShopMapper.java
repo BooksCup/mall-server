@@ -19,4 +19,20 @@ public interface ShopMapper {
      * @return 店铺
      */
     List<Shop> getShopListByShopId(Map<String, String> paramMap);
+
+    /**
+     * 获取店铺在售商品数量
+     *
+     * @param shopId 店铺ID
+     * @return 在售商品数量
+     */
+    Integer getShopOnSaleGoodsNum(String shopId);
+
+    /**
+     * 获取店铺总销量
+     *
+     * @param shopId 店铺ID
+     * @return 总销量
+     */
+    Integer getShopTotalSalesVolume(String shopId);
 }
