@@ -5,6 +5,7 @@
     <resultMap id="goods" type="com.bc.mall.server.entity.Goods">
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="shop_id" property="shopId" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="short_name" property="shortName" jdbcType="VARCHAR"/>
         <result column="image" property="image" jdbcType="VARCHAR"/>

@@ -4,6 +4,7 @@ import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.entity.*;
 import com.bc.mall.server.service.CommentService;
 import com.bc.mall.server.service.GoodsService;
+import com.bc.mall.server.service.ShopService;
 import com.bc.mall.server.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -11,8 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -33,6 +34,9 @@ public class GoodsController {
 
     @Resource
     private GoodsService goodsService;
+
+    @Resource
+    private ShopService shopService;
 
     @Resource
     private CommentService commentService;
@@ -109,6 +113,7 @@ public class GoodsController {
             List<Comment> commentList = commentService.getCommentListByGoodsId(paramMap);
             goods.setCommentList(commentList);
 
+            // 商品收藏
             if (StringUtils.isEmpty(token)) {
                 // 未登录
                 goods.setIsCollected(Constant.IS_COLLECTED_NO);
@@ -130,6 +135,15 @@ public class GoodsController {
                         goods.setIsCollected(Constant.IS_COLLECTED_NO);
                     }
                 }
+            }
+
+            // 店铺信息
+            if (!StringUtils.isEmpty(goods.getShopId())){
+                paramMap.clear();
+                paramMap.put("storeId", storeId);
+                paramMap.put("shopId", goods.getShopId());
+                Shop shop = shopService.getShopByShopId(paramMap);
+                goods.setShop(shop);
             }
 
             responseEntity = new ResponseEntity<>(goods, HttpStatus.OK);

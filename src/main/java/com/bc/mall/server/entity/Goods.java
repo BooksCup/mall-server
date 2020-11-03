@@ -11,6 +11,11 @@ public class Goods {
 
     private String id;
     private String storeId;
+
+    /**
+     * 店铺ID
+     */
+    private String shopId;
     private String name;
     private String shortName;
     private String image;
@@ -40,6 +45,8 @@ public class Goods {
      */
     private String isCollected;
 
+    private Shop shop;
+
     public String getId() {
         return id;
     }
@@ -54,6 +61,14 @@ public class Goods {
 
     public void setStoreId(String storeId) {
         this.storeId = storeId;
+    }
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
     }
 
     public String getName() {
@@ -142,5 +157,13 @@ public class Goods {
 
     public void setIsCollected(String isCollected) {
         this.isCollected = isCollected;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 }
