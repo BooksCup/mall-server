@@ -115,4 +115,22 @@
         order by g.sales_volume desc
     </select>
 
+    <select id="getAllGoodsListByShopId" parameterType="map" resultMap="goods">
+        select
+        g.*,
+        min(sku.sell_price) as sell_price,
+        sku.original_price
+        from
+        t_goods g
+        right join t_goods_sku sku on g.id = sku.goods_id
+        left join t_shop s on g.shop_id = s.id
+        where g.store_id = #{storeId}
+        and g.shop_id = #{shopId}
+        and g.delete_status = '0'
+        and g.active = '1'
+        and s.is_open = '1'
+        group by sku.goods_id
+        order by g.create_time, g.sort desc
+    </select>
+
 </mapper>

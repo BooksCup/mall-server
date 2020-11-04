@@ -59,4 +59,14 @@ public interface GoodsService {
      * @return 店铺下推荐商品列表
      */
     List<Goods> getRecommendGoodsListByShopId(int pageNum, int pageSize, Map<String, String> paramMap);
+
+    /**
+     * 获取店铺下所有商品列表
+     *
+     * @param pageNum  当前分页数
+     * @param pageSize 分页大小
+     * @param paramMap 参数map
+     * @return 店铺下所有商品列表
+     */
+    List<Goods> getAllGoodsListByShopId(int pageNum, int pageSize, Map<String, String> paramMap);
 }

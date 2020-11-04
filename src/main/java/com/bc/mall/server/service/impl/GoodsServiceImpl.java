@@ -93,4 +93,18 @@ public class GoodsServiceImpl implements GoodsService {
         PageHelper.startPage(pageNum, pageSize);
         return goodsMapper.getRecommendGoodsListByShopId(paramMap);
     }
+
+    /**
+     * 获取店铺下所有商品列表
+     *
+     * @param pageNum  当前分页数
+     * @param pageSize 分页大小
+     * @param paramMap 参数map
+     * @return 店铺下所有商品列表
+     */
+    @Override
+    public List<Goods> getAllGoodsListByShopId(int pageNum, int pageSize, Map<String, String> paramMap) {
+        PageHelper.startPage(pageNum, pageSize);
+        return goodsMapper.getRecommendGoodsListByShopId(paramMap);
+    }
 }

@@ -30,6 +30,8 @@ public class Shop {
 
     private List<Goods> goodsList;
 
+    private List<GoodsClass> goodsClassList;
+
     public String getId() {
         return id;
     }
@@ -100,5 +102,13 @@ public class Shop {
 
     public void setGoodsList(List<Goods> goodsList) {
         this.goodsList = goodsList;
+    }
+
+    public List<GoodsClass> getGoodsClassList() {
+        return goodsClassList;
+    }
+
+    public void setGoodsClassList(List<GoodsClass> goodsClassList) {
+        this.goodsClassList = goodsClassList;
     }
 }

@@ -55,4 +55,12 @@ public interface GoodsMapper {
      * @return 店铺下推荐商品列表
      */
     List<Goods> getRecommendGoodsListByShopId(Map<String, String> paramMap);
+
+    /**
+     * 获取店铺下所有商品列表
+     *
+     * @param paramMap 参数map
+     * @return 店铺下所有商品列表
+     */
+    List<Goods> getAllGoodsListByShopId(Map<String, String> paramMap);
 }

@@ -2,7 +2,9 @@ package com.bc.mall.server.controller;
 
 import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.entity.Goods;
+import com.bc.mall.server.entity.GoodsClass;
 import com.bc.mall.server.entity.Shop;
+import com.bc.mall.server.service.GoodsClassService;
 import com.bc.mall.server.service.GoodsService;
 import com.bc.mall.server.service.ShopService;
 import io.swagger.annotations.ApiOperation;
@@ -34,6 +36,9 @@ public class ShopController {
     @Resource
     private GoodsService goodsService;
 
+    @Resource
+    private GoodsClassService goodsClassService;
+
     /**
      * 获取店铺详情
      *
@@ -49,7 +54,7 @@ public class ShopController {
             @RequestParam(required = false, defaultValue = Constant.SHOP_TAB_RECOMMEND) String tab,
             @PathVariable String shopId) {
         logger.info("[getShopDetail] storeId: " +
-                storeId + ", shopId: " + shopId);
+                storeId + ", shopId: " + shopId + ", tab: " + tab);
         ResponseEntity<Shop> responseEntity;
         try {
             Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
@@ -63,8 +68,18 @@ public class ShopController {
                 if (Constant.SHOP_TAB_RECOMMEND.equals(tab)) {
                     List<Goods> goodsList = goodsService.getRecommendGoodsListByShopId(1, 10, paramMap);
                     shop.setGoodsList(goodsList);
+                } else if (Constant.SHOP_TAB_ALL_GOODS.equals(tab)) {
+                    List<Goods> goodsList = goodsService.getAllGoodsListByShopId(1, 10, paramMap);
+                    shop.setGoodsList(goodsList);
+                } else if (Constant.SHOP_TAB_GOODS_CLASS.equals(tab)) {
+                    // 获取一级目录
+                    paramMap.clear();
+                    paramMap.put("storeId", storeId);
+                    paramMap.put("parentId", Constant.FIRST_CLASS_PARENT_ID);
+                    paramMap.put("deleteStatus", Constant.DELETE_STATUS_NOT);
+                    List<GoodsClass> goodsClassList = goodsClassService.getGoodsClassList(paramMap);
+                    shop.setGoodsClassList(goodsClassList);
                 }
-
             }
             responseEntity = new ResponseEntity<>(shop, HttpStatus.OK);
         } catch (Exception e) {
