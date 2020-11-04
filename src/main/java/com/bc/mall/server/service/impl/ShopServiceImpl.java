@@ -1,5 +1,6 @@
 package com.bc.mall.server.service.impl;
 
+import com.bc.mall.server.entity.EntityStore;
 import com.bc.mall.server.entity.Shop;
 import com.bc.mall.server.mapper.ShopMapper;
 import com.bc.mall.server.service.ShopService;
@@ -56,5 +57,16 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public Integer getShopTotalSalesVolume(String shopId) {
         return shopMapper.getShopTotalSalesVolume(shopId);
+    }
+
+    /**
+     * 根据店铺ID获取线下门店列表
+     *
+     * @param paramMap 参数map
+     * @return 线下门店列表
+     */
+    @Override
+    public List<EntityStore> getEntityStoreListByShopId(Map<String, String> paramMap){
+        return shopMapper.getEntityStoreListByShopId(paramMap);
     }
 }

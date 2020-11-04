@@ -1,6 +1,7 @@
 package com.bc.mall.server.controller;
 
 import com.bc.mall.server.cons.Constant;
+import com.bc.mall.server.entity.EntityStore;
 import com.bc.mall.server.entity.Goods;
 import com.bc.mall.server.entity.GoodsClass;
 import com.bc.mall.server.entity.Shop;
@@ -64,6 +65,9 @@ public class ShopController {
             if (null != shop) {
                 shop.setOnSaleGoodsNum(shopService.getShopOnSaleGoodsNum(shopId));
                 shop.setTotalSalesVolume(shopService.getShopTotalSalesVolume(shopId));
+
+                List<EntityStore> entityStoreList = shopService.getEntityStoreListByShopId(paramMap);
+                shop.setEntityStoreList(entityStoreList);
 
                 if (Constant.SHOP_TAB_RECOMMEND.equals(tab)) {
                     List<Goods> goodsList = goodsService.getRecommendGoodsListByShopId(1, 10, paramMap);

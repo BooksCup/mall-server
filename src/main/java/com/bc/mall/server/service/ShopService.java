@@ -1,7 +1,9 @@
 package com.bc.mall.server.service;
 
+import com.bc.mall.server.entity.EntityStore;
 import com.bc.mall.server.entity.Shop;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,4 +36,12 @@ public interface ShopService {
      * @return 总销量
      */
     Integer getShopTotalSalesVolume(String shopId);
+
+    /**
+     * 根据店铺ID获取线下门店列表
+     *
+     * @param paramMap 参数map
+     * @return 线下门店列表
+     */
+    List<EntityStore> getEntityStoreListByShopId(Map<String, String> paramMap);
 }

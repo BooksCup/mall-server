@@ -28,6 +28,8 @@ public class Shop {
      */
     private Integer followNum;
 
+    private List<EntityStore> entityStoreList;
+
     private List<Goods> goodsList;
 
     private List<GoodsClass> goodsClassList;
@@ -94,6 +96,14 @@ public class Shop {
 
     public void setFollowNum(Integer followNum) {
         this.followNum = followNum;
+    }
+
+    public List<EntityStore> getEntityStoreList() {
+        return entityStoreList;
+    }
+
+    public void setEntityStoreList(List<EntityStore> entityStoreList) {
+        this.entityStoreList = entityStoreList;
     }
 
     public List<Goods> getGoodsList() {
