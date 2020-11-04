@@ -1,5 +1,7 @@
 package com.bc.mall.server.entity;
 
+import java.util.List;
+
 /**
  * 店铺
  *
@@ -25,6 +27,8 @@ public class Shop {
      * 店铺关注人数
      */
     private Integer followNum;
+
+    private List<Goods> goodsList;
 
     public String getId() {
         return id;
@@ -88,5 +92,13 @@ public class Shop {
 
     public void setFollowNum(Integer followNum) {
         this.followNum = followNum;
+    }
+
+    public List<Goods> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<Goods> goodsList) {
+        this.goodsList = goodsList;
     }
 }

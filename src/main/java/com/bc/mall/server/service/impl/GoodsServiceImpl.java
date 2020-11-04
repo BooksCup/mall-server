@@ -71,11 +71,26 @@ public class GoodsServiceImpl implements GoodsService {
      * @return 商品图片列表
      */
     @Override
-    public List<GoodsAlbum> getGoodsAlbumListByGoodsId(String goodsId){
+    public List<GoodsAlbum> getGoodsAlbumListByGoodsId(String goodsId) {
         return goodsMapper.getGoodsAlbumListByGoodsId(goodsId);
     }
 
-    public GoodsSku getGoodsPrice(String goodsId){
+    @Override
+    public GoodsSku getGoodsPrice(String goodsId) {
         return goodsMapper.getGoodsPrice(goodsId);
+    }
+
+    /**
+     * 获取店铺下推荐商品列表
+     *
+     * @param pageNum  当前分页数
+     * @param pageSize 分页大小
+     * @param paramMap 参数map
+     * @return 店铺下推荐商品列表
+     */
+    @Override
+    public List<Goods> getRecommendGoodsListByShopId(int pageNum, int pageSize, Map<String, String> paramMap) {
+        PageHelper.startPage(pageNum, pageSize);
+        return goodsMapper.getRecommendGoodsListByShopId(paramMap);
     }
 }

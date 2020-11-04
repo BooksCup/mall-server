@@ -1,7 +1,9 @@
 package com.bc.mall.server.controller;
 
 import com.bc.mall.server.cons.Constant;
+import com.bc.mall.server.entity.Goods;
 import com.bc.mall.server.entity.Shop;
+import com.bc.mall.server.service.GoodsService;
 import com.bc.mall.server.service.ShopService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +31,9 @@ public class ShopController {
     @Resource
     private ShopService shopService;
 
+    @Resource
+    private GoodsService goodsService;
+
     /**
      * 获取店铺详情
      *
@@ -40,6 +46,7 @@ public class ShopController {
     public ResponseEntity<Shop> getShopDetail(
             @RequestParam(required = false) String token,
             @RequestParam String storeId,
+            @RequestParam(required = false, defaultValue = Constant.SHOP_TAB_RECOMMEND) String tab,
             @PathVariable String shopId) {
         logger.info("[getShopDetail] storeId: " +
                 storeId + ", shopId: " + shopId);
@@ -52,6 +59,12 @@ public class ShopController {
             if (null != shop) {
                 shop.setOnSaleGoodsNum(shopService.getShopOnSaleGoodsNum(shopId));
                 shop.setTotalSalesVolume(shopService.getShopTotalSalesVolume(shopId));
+
+                if (Constant.SHOP_TAB_RECOMMEND.equals(tab)) {
+                    List<Goods> goodsList = goodsService.getRecommendGoodsListByShopId(1, 10, paramMap);
+                    shop.setGoodsList(goodsList);
+                }
+
             }
             responseEntity = new ResponseEntity<>(shop, HttpStatus.OK);
         } catch (Exception e) {

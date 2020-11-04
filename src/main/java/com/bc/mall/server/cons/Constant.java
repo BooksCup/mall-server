@@ -98,4 +98,19 @@ public class Constant {
      * 是否被收藏-"否"
      */
     public static final String IS_COLLECTED_NO = "0";
+
+    /**
+     * 店铺tab-"推荐"
+     */
+    public static final String SHOP_TAB_RECOMMEND = "1";
+
+    /**
+     * 店铺tab-"所有商品"
+     */
+    public static final String SHOP_TAB_ALL_GOODS = "2";
+
+    /**
+     * 店铺tab-"商品分类"
+     */
+    public static final String SHOP_TAB_GOODS_CLASS = "3";
 }
