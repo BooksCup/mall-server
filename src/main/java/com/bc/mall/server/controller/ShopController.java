@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,6 +91,47 @@ public class ShopController {
             e.printStackTrace();
             logger.error("[getShopDetail] error: " + e.getMessage());
             responseEntity = new ResponseEntity<>(new Shop(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return responseEntity;
+    }
+
+    /**
+     * 获取店铺商品列表
+     *
+     * @param tab     店铺详情页tab
+     * @param storeId 商城ID
+     * @param shopId  店铺ID
+     * @param page    当前分页数
+     * @param limit   分页大小
+     * @return ResponseEntity
+     */
+    @ApiOperation(value = "获取店铺商品列表", notes = "获取店铺商品列表")
+    @GetMapping(value = "/{shopId}/goods")
+    public ResponseEntity<List<Goods>> getShopGoodsList(
+            @RequestParam(required = false, defaultValue = Constant.SHOP_TAB_RECOMMEND) String tab,
+            @RequestParam String storeId,
+            @PathVariable String shopId,
+            @RequestParam(required = false, defaultValue = "1") Integer page,
+            @RequestParam(required = false, defaultValue = "10") Integer limit) {
+        logger.info("[getShopGoodsList] storeId: " +
+                storeId + ", shopId: " + shopId + ", page: " + page + ", limit: " + limit);
+        ResponseEntity<List<Goods>> responseEntity;
+        List<Goods> goodsList = new ArrayList<>();
+        try {
+            Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
+            paramMap.put("storeId", storeId);
+            paramMap.put("shopId", shopId);
+
+            if (Constant.SHOP_TAB_RECOMMEND.equals(tab)) {
+                goodsList = goodsService.getRecommendGoodsListByShopId(page, limit, paramMap);
+            } else if (Constant.SHOP_TAB_ALL_GOODS.equals(tab)) {
+                goodsList = goodsService.getAllGoodsListByShopId(page, limit, paramMap);
+            }
+            responseEntity = new ResponseEntity<>(goodsList, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("[getShopGoodsList] error: " + e.getMessage());
+            responseEntity = new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
     }
