@@ -23,6 +23,7 @@ public enum ResponseMsg {
 
     LOGIN_SUCCESS("LOGIN_SUCCESS", "登录成功!"),
     SERVER_ERROR("SERVER_ERROR", "网络繁忙!"),
+    PARAM_ILLEGAL("PARAM_ILLEGAL", "参数错误!"),
     NOT_LOGIN("NOT_LOGIN", "请登录!"),
 
     GET_VERIFY_CODE_SUCCESS("GET_VERIFY_CODE_SUCCESS", "获取验证码成功"),
