@@ -10,7 +10,9 @@
         <result column="short_name" property="shortName" jdbcType="VARCHAR"/>
         <result column="image" property="image" jdbcType="VARCHAR"/>
         <result column="sales_volume" property="salesVolume" jdbcType="INTEGER"/>
-        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="is_distribution" property="isDistribution" jdbcType="VARCHAR"/>
+        <result column="activity" property="activity" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="LONGVARCHAR"/>
         <result column="sell_price" property="sellPrice" jdbcType="VARCHAR"/>
         <result column="original_price" property="originalPrice" jdbcType="VARCHAR"/>
@@ -44,7 +46,7 @@
         and g.status = '2'
         and g.shop_status = '2'
         and g.delete_status = '0'
-        and g.active = '1'
+        and g.activity = '1'
         and s.is_open = '1'
         group by sku.goods_id
         order by g.create_time, g.sort desc
@@ -64,7 +66,7 @@
         and g.status = '2'
         and g.shop_status = '2'
         and g.delete_status = '0'
-        and g.active = '1'
+        and g.activity = '1'
         and s.is_open = '1'
         and g.show_address like '%1%'
         group by sku.goods_id
@@ -109,7 +111,7 @@
         where g.store_id = #{storeId}
         and g.shop_id = #{shopId}
         and g.delete_status = '0'
-        and g.active = '1'
+        and g.activity = '1'
         and s.is_open = '1'
         group by sku.goods_id
         order by g.sales_volume desc
@@ -127,7 +129,7 @@
         where g.store_id = #{storeId}
         and g.shop_id = #{shopId}
         and g.delete_status = '0'
-        and g.active = '1'
+        and g.activity = '1'
         and s.is_open = '1'
         group by sku.goods_id
         order by g.create_time, g.sort desc

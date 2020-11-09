@@ -20,7 +20,12 @@ public class Goods {
     private String shortName;
     private String image;
     private Integer salesVolume;
-    private Integer status;
+    private String status;
+    private String isDistribution;
+    /**
+     * 支持活动
+     */
+    private String activity;
 
     /**
      * 销售价格
@@ -103,12 +108,28 @@ public class Goods {
         this.salesVolume = salesVolume;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getIsDistribution() {
+        return isDistribution;
+    }
+
+    public void setIsDistribution(String isDistribution) {
+        this.isDistribution = isDistribution;
+    }
+
+    public String getActivity() {
+        return activity;
+    }
+
+    public void setActivity(String activity) {
+        this.activity = activity;
     }
 
     public String getSellPrice() {
