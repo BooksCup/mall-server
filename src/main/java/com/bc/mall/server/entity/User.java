@@ -22,6 +22,9 @@ public class User extends BaseEntity {
     private String token;
     private String source;
 
+    private String wxOpenid;
+    private String wxSessionKey;
+
     public User() {
 
     }
@@ -110,5 +113,21 @@ public class User extends BaseEntity {
 
     public void setSource(String source) {
         this.source = source;
+    }
+
+    public String getWxOpenid() {
+        return wxOpenid;
+    }
+
+    public void setWxOpenid(String wxOpenid) {
+        this.wxOpenid = wxOpenid;
+    }
+
+    public String getWxSessionKey() {
+        return wxSessionKey;
+    }
+
+    public void setWxSessionKey(String wxSessionKey) {
+        this.wxSessionKey = wxSessionKey;
     }
 }

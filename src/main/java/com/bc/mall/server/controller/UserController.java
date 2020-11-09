@@ -268,4 +268,27 @@ public class UserController {
         }
         return token;
     }
+
+    @ApiOperation(value = "绑定微信用户", notes = "绑定微信用户")
+    @PostMapping(value = "/bindWechatUser")
+    public ResponseEntity<User> bindWechatUser(
+            @RequestParam String storeId,
+            @RequestParam String storeType,
+            @RequestParam String code,
+            @RequestParam String nickName,
+            @RequestParam String avatar,
+            @RequestParam String sex) {
+        logger.info("[bindWechatUser] storeId: " + storeId + ", storeType: " + storeType + ", code: " + code
+                + ", nickName: " + nickName + ", avatar: " + avatar + ", sex: " + sex);
+        ResponseEntity<User> responseEntity;
+        try {
+
+            responseEntity = new ResponseEntity<>(new User(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("[bindWechatUser] error: " + e.getMessage());
+            responseEntity = new ResponseEntity<>(new User(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return responseEntity;
+    }
 }
