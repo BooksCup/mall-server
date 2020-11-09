@@ -28,6 +28,11 @@ public class Goods {
     private String activity;
 
     /**
+     * 是否允许购买
+     */
+    private String isAllowBuy;
+
+    /**
      * 销售价格
      */
     private String sellPrice;
@@ -130,6 +135,14 @@ public class Goods {
 
     public void setActivity(String activity) {
         this.activity = activity;
+    }
+
+    public String getIsAllowBuy() {
+        return isAllowBuy;
+    }
+
+    public void setIsAllowBuy(String isAllowBuy) {
+        this.isAllowBuy = isAllowBuy;
     }
 
     public String getSellPrice() {

@@ -113,4 +113,14 @@ public class Constant {
      * 店铺tab-"商品分类"
      */
     public static final String SHOP_TAB_GOODS_CLASS = "3";
+
+    /**
+     * 不允许购买
+     */
+    public static final String NOT_ALLOW_TO_BUY = "0";
+
+    /**
+     * 允许购买
+     */
+    public static final String ALLOW_TO_BUY = "1";
 }

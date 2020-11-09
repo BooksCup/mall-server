@@ -150,6 +150,8 @@ public class GoodsController {
                 }
             }
 
+            goods.setIsAllowBuy(Constant.ALLOW_TO_BUY);
+
             responseEntity = new ResponseEntity<>(goods, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
