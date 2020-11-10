@@ -324,7 +324,7 @@ public class UserController {
                 user.setSex(sex);
                 userService.updateUserByWechatAuth(user);
             }
-
+            user.setResponseCode(ResponseMsg.BIND_WECHAT_USER_SUCCESS.getResponseCode());
             responseEntity = new ResponseEntity<>(user, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

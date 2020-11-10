@@ -11,6 +11,7 @@ public enum ResponseMsg {
      */
     STORE_CONFIG_EMPTY("STORE_CONFIG_ERROR", "请商城管理员填写基础配置!"),
     STORE_CONFIG_NOT_CORRECT("STORE_CONFIG_NOT_CORRECT", "授权配置错误!"),
+    BIND_WECHAT_USER_SUCCESS("BIND_WECHAT_USER_SUCCESS", "微信用户绑定成功!"),
 
     USER_NAME_EXISTS("USER_NAME_EXISTS", "该账号已存在!"),
     USER_PHONE_EXISTS("USER_PHONE_EXISTS", "该手机号码已注册,请登录!"),
