@@ -9,6 +9,7 @@ import com.bc.mall.server.service.SmsService;
 import com.bc.mall.server.service.StoreConfigService;
 import com.bc.mall.server.service.TokenService;
 import com.bc.mall.server.service.UserService;
+import com.bc.mall.server.utils.WechatUtil;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -269,6 +270,17 @@ public class UserController {
         return token;
     }
 
+    /**
+     * 绑定微信用户
+     *
+     * @param storeId   店铺ID
+     * @param storeType 店铺类型
+     * @param code      登录凭证
+     * @param nickName  昵称
+     * @param avatar    头像
+     * @param sex       性别
+     * @return ResponseEntity
+     */
     @ApiOperation(value = "绑定微信用户", notes = "绑定微信用户")
     @PostMapping(value = "/bindWechatUser")
     public ResponseEntity<User> bindWechatUser(
@@ -282,8 +294,38 @@ public class UserController {
                 + ", nickName: " + nickName + ", avatar: " + avatar + ", sex: " + sex);
         ResponseEntity<User> responseEntity;
         try {
+            StoreConfig storeConfig = storeConfigService.getStoreConfigByStoreId(storeId);
+            if (null == storeConfig) {
+                return new ResponseEntity<>(
+                        new User(ResponseMsg.STORE_CONFIG_EMPTY.getResponseCode(),
+                                ResponseMsg.STORE_CONFIG_EMPTY.getResponseMessage()),
+                        HttpStatus.BAD_REQUEST);
+            }
+            User wxUserInfo = WechatUtil.getWechatUserInfo(storeConfig.getAppId(), storeConfig.getAppSecret(), code);
+            if (null == wxUserInfo) {
+                return new ResponseEntity<>(
+                        new User(ResponseMsg.STORE_CONFIG_NOT_CORRECT.getResponseCode(),
+                                ResponseMsg.STORE_CONFIG_NOT_CORRECT.getResponseMessage()),
+                        HttpStatus.BAD_REQUEST);
+            }
+            Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
+            paramMap.put("storeId", storeId);
+            paramMap.put("openid", wxUserInfo.getWxOpenid());
+            User user = userService.getUserByOpenId(paramMap);
+            if (null == user) {
+                // 不存在,插入
+                user = new User(storeId, nickName, avatar, sex, storeType);
+                user.setWxOpenid(wxUserInfo.getWxOpenid());
+                userService.addUserByWechatAuth(user);
+            } else {
+                // 存在,修改
+                user.setUserName(nickName);
+                user.setAvatar(avatar);
+                user.setSex(sex);
+                userService.updateUserByWechatAuth(user);
+            }
 
-            responseEntity = new ResponseEntity<>(new User(), HttpStatus.OK);
+            responseEntity = new ResponseEntity<>(user, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("[bindWechatUser] error: " + e.getMessage());

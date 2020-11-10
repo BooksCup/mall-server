@@ -36,6 +36,14 @@ public interface UserService {
     List<User> getUserListByToken(Map<String, String> paramMap);
 
     /**
+     * 根据openid获取用户
+     *
+     * @param paramMap 参数map
+     * @return 用户
+     */
+    User getUserByOpenId(Map<String, String> paramMap);
+
+    /**
      * 通过账号(用户名/手机号)获取用户列表
      *
      * @param paramMap 参数map
@@ -64,6 +72,20 @@ public interface UserService {
      * @param user 用户
      */
     void addUser(User user);
+
+    /**
+     * 微信授权时保存用户
+     *
+     * @param user 用户
+     */
+    void addUserByWechatAuth(User user);
+
+    /**
+     * 微信授权时修改用户
+     *
+     * @param user 用户
+     */
+    void updateUserByWechatAuth(User user);
 
     /**
      * 检查用户是否收藏某件商品

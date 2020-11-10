@@ -14,6 +14,7 @@ public class User extends BaseEntity {
     private String phone;
     private String avatar;
     private String password;
+    private String sex;
     /**
      * 是否有密码
      * 0: 没有 1:有
@@ -40,6 +41,15 @@ public class User extends BaseEntity {
         this.phone = phone;
         this.avatar = avatar;
         this.password = password;
+        this.source = source;
+    }
+
+    public User(String storeId, String userName, String avatar, String sex, String source) {
+        this.id = CommonUtil.generateId();
+        this.storeId = storeId;
+        this.userName = userName;
+        this.avatar = avatar;
+        this.sex = sex;
         this.source = source;
     }
 
@@ -89,6 +99,14 @@ public class User extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public String getHasPassword() {

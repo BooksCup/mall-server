@@ -5,6 +5,8 @@
     <resultMap id="storeConfig" type="com.bc.mall.server.entity.StoreConfig">
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="app_id" property="appId" jdbcType="VARCHAR"/>
+        <result column="app_secret" property="appSecret" jdbcType="VARCHAR"/>
         <result column="wx_default_name" property="wxDefaultName" jdbcType="VARCHAR"/>
         <result column="wx_default_avatar" property="wxDefaultAvatar" jdbcType="VARCHAR"/>
     </resultMap>

@@ -64,6 +64,21 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 根据openid获取用户
+     *
+     * @param paramMap 参数map
+     * @return 用户
+     */
+    @Override
+    public User getUserByOpenId(Map<String, String> paramMap) {
+        List<User> userList = userMapper.getUserListByOpenId(paramMap);
+        if (!CollectionUtils.isEmpty(userList)) {
+            return userList.get(0);
+        }
+        return null;
+    }
+
+    /**
      * 通过账号(用户名/手机号)获取用户列表
      *
      * @param paramMap 参数map
@@ -103,6 +118,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addUser(User user) {
         userMapper.addUser(user);
+    }
+
+    /**
+     * 微信授权时保存用户
+     *
+     * @param user 用户
+     */
+    @Override
+    public void addUserByWechatAuth(User user) {
+        userMapper.addUserByWechatAuth(user);
+    }
+
+    /**
+     * 微信授权时修改用户
+     *
+     * @param user 用户
+     */
+    @Override
+    public void updateUserByWechatAuth(User user) {
+        userMapper.updateUserByWechatAuth(user);
     }
 
     /**

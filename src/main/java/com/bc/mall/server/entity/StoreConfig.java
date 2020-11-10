@@ -8,6 +8,8 @@ package com.bc.mall.server.entity;
 public class StoreConfig {
     private String id;
     private String storeId;
+    private String appId;
+    private String appSecret;
     private String wxDefaultName;
     private String wxDefaultAvatar;
 
@@ -25,6 +27,22 @@ public class StoreConfig {
 
     public void setStoreId(String storeId) {
         this.storeId = storeId;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    public String getAppSecret() {
+        return appSecret;
+    }
+
+    public void setAppSecret(String appSecret) {
+        this.appSecret = appSecret;
     }
 
     public String getWxDefaultName() {

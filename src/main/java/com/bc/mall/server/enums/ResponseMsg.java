@@ -9,6 +9,9 @@ public enum ResponseMsg {
     /**
      * mall-server接口返回信息
      */
+    STORE_CONFIG_EMPTY("STORE_CONFIG_ERROR", "请商城管理员填写基础配置!"),
+    STORE_CONFIG_NOT_CORRECT("STORE_CONFIG_NOT_CORRECT", "授权配置错误!"),
+
     USER_NAME_EXISTS("USER_NAME_EXISTS", "该账号已存在!"),
     USER_PHONE_EXISTS("USER_PHONE_EXISTS", "该手机号码已注册,请登录!"),
     USER_NOT_REGISTER("USER_NOT_REGISTER", "该号码未注册,请注册!"),
