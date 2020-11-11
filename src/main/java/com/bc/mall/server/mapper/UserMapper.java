@@ -60,6 +60,13 @@ public interface UserMapper {
     void updateUserByLogin(User user);
 
     /**
+     * 修改用户token
+     *
+     * @param user 用户
+     */
+    void updateUserToken(User user);
+
+    /**
      * 保存用户
      *
      * @param user 用户

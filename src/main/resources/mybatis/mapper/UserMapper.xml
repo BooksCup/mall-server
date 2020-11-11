@@ -6,6 +6,8 @@
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="user_name" property="userName" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="token" property="token" jdbcType="VARCHAR"/>
+        <result column="wx_openid" property="wxOpenid" jdbcType="VARCHAR"/>
     </resultMap>
 
     <resultMap id="userCollection" type="com.bc.mall.server.entity.UserCollection">
@@ -66,6 +68,12 @@
         where id = #{id}
     </update>
 
+    <update id="updateUserToken" parameterType="com.bc.mall.server.entity.User">
+        update t_user
+        set token = #{token}
+        where id = #{id}
+    </update>
+
     <insert id="addUser" parameterType="com.bc.mall.server.entity.User">
         insert into t_user
         (
@@ -101,6 +109,7 @@
         user_name,
         avatar,
         sex,
+        token,
         source
         )
         values
@@ -111,6 +120,7 @@
         #{userName},
         #{avatar},
         #{sex},
+        #{token},
         #{source}
         )
     </insert>
@@ -120,7 +130,8 @@
         set
         user_name = #{userName},
         avatar = #{avatar},
-        sex = #{sex}
+        sex = #{sex},
+        token = #{token}
         where id = #{id}
     </update>
 

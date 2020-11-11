@@ -13,6 +13,8 @@ public enum ResponseMsg {
     STORE_CONFIG_NOT_CORRECT("STORE_CONFIG_NOT_CORRECT", "授权配置错误!"),
     BIND_WECHAT_USER_SUCCESS("BIND_WECHAT_USER_SUCCESS", "微信用户绑定成功!"),
 
+    OPEN_ID_EMPTY("OPEN_ID_EMPTY", "微信openid异常!"),
+
     USER_NAME_EXISTS("USER_NAME_EXISTS", "该账号已存在!"),
     USER_PHONE_EXISTS("USER_PHONE_EXISTS", "该手机号码已注册,请登录!"),
     USER_NOT_REGISTER("USER_NOT_REGISTER", "该号码未注册,请注册!"),
@@ -20,11 +22,13 @@ public enum ResponseMsg {
     VERIFY_CODE_NOT_CORRECT("VERIFY_CODE_NOT_CORRECT", "验证码错误!"),
 
     LOGIN_SUCCESS("LOGIN_SUCCESS", "登录成功!"),
-    LOGIN_ERROR("LOGIN_ERROR", "网络繁忙!"),
+    SERVER_ERROR("SERVER_ERROR", "网络繁忙!"),
     NOT_LOGIN("NOT_LOGIN", "请登录!"),
 
     GET_VERIFY_CODE_SUCCESS("GET_VERIFY_CODE_SUCCESS", "获取验证码成功"),
     GET_VERIFY_CODE_ERROR("GET_VERIFY_CODE_ERROR", "获取验证码失败"),
+
+    CHECK_TOKEN_SUCCESS("CHECK_TOKEN_SUCCESS", "检查token成功"),
     ;
 
     ResponseMsg(String responseCode, String responseMessage) {

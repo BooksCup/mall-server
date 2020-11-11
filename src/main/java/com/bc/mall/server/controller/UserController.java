@@ -172,8 +172,8 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
             responseEntity = new ResponseEntity<>(
-                    new User(ResponseMsg.LOGIN_ERROR.getResponseCode(),
-                            ResponseMsg.LOGIN_ERROR.getResponseMessage()),
+                    new User(ResponseMsg.SERVER_ERROR.getResponseCode(),
+                            ResponseMsg.SERVER_ERROR.getResponseMessage()),
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
@@ -251,8 +251,8 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
             responseEntity = new ResponseEntity<>(
-                    new User(ResponseMsg.LOGIN_ERROR.getResponseCode(),
-                            ResponseMsg.LOGIN_ERROR.getResponseMessage()),
+                    new User(ResponseMsg.SERVER_ERROR.getResponseCode(),
+                            ResponseMsg.SERVER_ERROR.getResponseMessage()),
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
@@ -289,7 +289,8 @@ public class UserController {
             @RequestParam String code,
             @RequestParam String nickName,
             @RequestParam String avatar,
-            @RequestParam String sex) {
+            @RequestParam String sex,
+            @RequestParam(required = false) String token) {
         logger.info("[bindWechatUser] storeId: " + storeId + ", storeType: " + storeType + ", code: " + code
                 + ", nickName: " + nickName + ", avatar: " + avatar + ", sex: " + sex);
         ResponseEntity<User> responseEntity;
@@ -308,6 +309,16 @@ public class UserController {
                                 ResponseMsg.STORE_CONFIG_NOT_CORRECT.getResponseMessage()),
                         HttpStatus.BAD_REQUEST);
             }
+
+            if (StringUtils.isEmpty(token)) {
+                token = tokenService.getToken();
+            } else {
+                if (!tokenService.verifyToken(token)) {
+                    // token过期，验证token失败
+                    token = tokenService.getToken();
+                }
+            }
+
             Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
             paramMap.put("storeId", storeId);
             paramMap.put("openid", wxUserInfo.getWxOpenid());
@@ -316,12 +327,14 @@ public class UserController {
                 // 不存在,插入
                 user = new User(storeId, nickName, avatar, sex, storeType);
                 user.setWxOpenid(wxUserInfo.getWxOpenid());
+                user.setToken(token);
                 userService.addUserByWechatAuth(user);
             } else {
                 // 存在,修改
                 user.setUserName(nickName);
                 user.setAvatar(avatar);
                 user.setSex(sex);
+                user.setToken(token);
                 userService.updateUserByWechatAuth(user);
             }
             user.setResponseCode(ResponseMsg.BIND_WECHAT_USER_SUCCESS.getResponseCode());

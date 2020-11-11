@@ -25,10 +25,10 @@ public class WechatUtil {
      */
     public static User getWechatUserInfo(String appId, String appSecret, String code) {
         // 授权类型(必填)
-        String grant_type = "authorization_code";
+        String grantType = "authorization_code";
         // url
         String url = "https://api.weixin.qq.com/sns/jscode2session?appid=" + appId
-                + "&secret=" + appSecret + "&js_code=" + code + "&grant_type=" + grant_type;
+                + "&secret=" + appSecret + "&js_code=" + code + "&grant_type=" + grantType;
         // 发送请求
         String result = HttpUtil.doGet(url);
         JSONObject resultJson = JSONObject.parseObject(result);
