@@ -2,10 +2,8 @@ package com.bc.mall.server.controller;
 
 import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.entity.*;
-import com.bc.mall.server.service.CommentService;
-import com.bc.mall.server.service.GoodsService;
-import com.bc.mall.server.service.ShopService;
-import com.bc.mall.server.service.UserService;
+import com.bc.mall.server.service.*;
+import com.bc.mall.server.utils.SkuUtil;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +32,9 @@ public class GoodsController {
 
     @Resource
     private GoodsService goodsService;
+
+    @Resource
+    private GoodsSkuService goodsSkuService;
 
     @Resource
     private ShopService shopService;
@@ -108,6 +109,12 @@ public class GoodsController {
             } else {
                 goods.setSellPrice(goodsPrice.getMinSellPrice() + "-" + goodsPrice.getMaxSellPrice());
             }
+            goods.setRemainStock(goodsPrice.getRemainStock());
+            goods.setDefSkuImage(goodsPrice.getImage());
+
+            // 获取商品规格
+            List<GoodsSku> goodsSkuList = goodsSkuService.getGoodsSkuListByGoodsId(paramMap);
+            goods.setGoodsSkuMapList(SkuUtil.sku2Map(goodsSkuList));
 
             // 获取商品评论
             List<Comment> commentList = commentService.getCommentListByGoodsId(paramMap);

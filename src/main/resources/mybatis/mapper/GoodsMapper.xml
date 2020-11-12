@@ -15,7 +15,7 @@
         <result column="activity" property="activity" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="LONGVARCHAR"/>
         <result column="sell_price" property="sellPrice" jdbcType="VARCHAR"/>
-        <result column="original_price" property="originalPrice" jdbcType="VARCHAR"/>
+        <result column="orig_price" property="origPrice" jdbcType="VARCHAR"/>
     </resultMap>
 
     <resultMap id="goodsAlbum" type="com.bc.mall.server.entity.GoodsAlbum">
@@ -28,15 +28,15 @@
     <resultMap id="goodsPrice" type="com.bc.mall.server.entity.GoodsSku">
         <result column="minSellPrice" property="minSellPrice" jdbcType="VARCHAR"/>
         <result column="maxSellPrice" property="maxSellPrice" jdbcType="VARCHAR"/>
-        <result column="minOriginalPrice" property="minOriginalPrice" jdbcType="VARCHAR"/>
-        <result column="maxOriginalPrice" property="maxOriginalPrice" jdbcType="VARCHAR"/>
+        <result column="remain_stock" property="remainStock" jdbcType="INTEGER"/>
+        <result column="image" property="image" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="getGoodsListByGoodsClass" parameterType="map" resultMap="goods">
         select
         g.*,
         min(sku.sell_price) as sell_price,
-        sku.original_price
+        sku.orig_price
         from
         t_goods g
         right join t_goods_sku sku on g.id = sku.goods_id
@@ -57,7 +57,7 @@
         select
         g.*,
         min(sku.sell_price) as sell_price,
-        sku.original_price
+        sku.orig_price
         from
         t_goods g
         right join t_goods_sku sku on g.id = sku.goods_id
@@ -91,10 +91,10 @@
 
     <select id="getGoodsPrice" parameterType="String" resultMap="goodsPrice">
         select
-        min(cast(sell_price as decimal(12,2))) as minSellPrice,
-        max(cast(sell_price as decimal(12,2))) as maxSellPrice,
-        min(cast(original_price as decimal(12,2))) as minOriginalPrice,
-        max(cast(original_price as decimal(12,2))) as maxOriginalPrice
+        min(sell_price) as minSellPrice,
+        max(sell_price) as maxSellPrice,
+        sum(remain_stock) as remain_stock,
+        image
         from t_goods_sku
         where goods_id = #{goodsId}
     </select>
@@ -103,7 +103,7 @@
         select
         g.*,
         min(sku.sell_price) as sell_price,
-        sku.original_price
+        sku.orig_price
         from
         t_goods g
         right join t_goods_sku sku on g.id = sku.goods_id
@@ -121,7 +121,7 @@
         select
         g.*,
         min(sku.sell_price) as sell_price,
-        sku.original_price
+        sku.orig_price
         from
         t_goods g
         right join t_goods_sku sku on g.id = sku.goods_id

@@ -123,4 +123,25 @@ public class Constant {
      * 允许购买
      */
     public static final String ALLOW_TO_BUY = "1";
+
+    // sku key
+    /**
+     * ID
+     */
+    public static final String SKU_KEY_ID = "skuId";
+
+    /**
+     * 库存
+     */
+    public static final String SKU_KEY_STOCK = "stock";
+
+    /**
+     * 价格
+     */
+    public static final String SKU_KEY_PRICE = "price";
+
+    /**
+     * 图片
+     */
+    public static final String SKU_KEY_IMAGE = "image";
 }

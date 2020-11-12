@@ -1,6 +1,7 @@
 package com.bc.mall.server.entity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 商品
@@ -36,7 +37,14 @@ public class Goods {
      * 销售价格
      */
     private String sellPrice;
-    private String originalPrice;
+    private String origPrice;
+
+    private Integer remainStock;
+
+    /**
+     * 默认规格图片(规格页面初始化加载的图片)
+     */
+    private String defSkuImage;
 
     /**
      * 商品详情(html标签)
@@ -49,6 +57,16 @@ public class Goods {
      * 商品评论
      */
     private List<Comment> commentList;
+
+    /**
+     * 商品规格列表
+     */
+    private List<GoodsSku> goodsSkuList;
+
+    /**
+     * 商品规格列表(map格式)
+     */
+    private List<Map<String, Object>> goodsSkuMapList;
 
     /**
      * 是否被收藏
@@ -153,12 +171,28 @@ public class Goods {
         this.sellPrice = sellPrice;
     }
 
-    public String getOriginalPrice() {
-        return originalPrice;
+    public String getOrigPrice() {
+        return origPrice;
     }
 
-    public void setOriginalPrice(String originalPrice) {
-        this.originalPrice = originalPrice;
+    public void setOrigPrice(String origPrice) {
+        this.origPrice = origPrice;
+    }
+
+    public Integer getRemainStock() {
+        return remainStock;
+    }
+
+    public void setRemainStock(Integer remainStock) {
+        this.remainStock = remainStock;
+    }
+
+    public String getDefSkuImage() {
+        return defSkuImage;
+    }
+
+    public void setDefSkuImage(String defSkuImage) {
+        this.defSkuImage = defSkuImage;
     }
 
     public String getContent() {
@@ -183,6 +217,22 @@ public class Goods {
 
     public void setCommentList(List<Comment> commentList) {
         this.commentList = commentList;
+    }
+
+    public List<GoodsSku> getGoodsSkuList() {
+        return goodsSkuList;
+    }
+
+    public void setGoodsSkuList(List<GoodsSku> goodsSkuList) {
+        this.goodsSkuList = goodsSkuList;
+    }
+
+    public List<Map<String, Object>> getGoodsSkuMapList() {
+        return goodsSkuMapList;
+    }
+
+    public void setGoodsSkuMapList(List<Map<String, Object>> goodsSkuMapList) {
+        this.goodsSkuMapList = goodsSkuMapList;
     }
 
     public String getIsCollected() {

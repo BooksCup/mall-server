@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.mall.server.mapper.GoodsSkuMapper">
+
+    <resultMap id="goodsSku" type="com.bc.mall.server.entity.GoodsSku">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="goods_id" property="goodsId" jdbcType="VARCHAR"/>
+        <result column="cost_price" property="costPrice" jdbcType="VARCHAR"/>
+        <result column="sell_price" property="sellPrice" jdbcType="VARCHAR"/>
+        <result column="orig_price" property="origPrice" jdbcType="VARCHAR"/>
+        <result column="image" property="image" jdbcType="VARCHAR"/>
+        <result column="total_stock" property="totalStock" jdbcType="VARCHAR"/>
+        <result column="remain_stock" property="remainStock" jdbcType="INTEGER"/>
+        <result column="unit" property="unit" jdbcType="INTEGER"/>
+        <result column="attr" property="attr" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getGoodsSkuListByGoodsId" parameterType="map" resultMap="goodsSku">
+        select
+        *
+        from t_goods_sku
+        where goods_id = #{goodsId}
+    </select>
+</mapper>
