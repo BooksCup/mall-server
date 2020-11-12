@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bc.mall.server.mapper.GoodsSkuMapper">
 
+    <resultMap id="defGoodsSku" type="com.bc.mall.server.entity.GoodsSku">
+        <result column="minSellPrice" property="minSellPrice" jdbcType="VARCHAR"/>
+        <result column="maxSellPrice" property="maxSellPrice" jdbcType="VARCHAR"/>
+        <result column="remain_stock" property="remainStock" jdbcType="INTEGER"/>
+        <result column="image" property="image" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <resultMap id="goodsSku" type="com.bc.mall.server.entity.GoodsSku">
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="goods_id" property="goodsId" jdbcType="VARCHAR"/>
@@ -14,6 +21,16 @@
         <result column="unit" property="unit" jdbcType="INTEGER"/>
         <result column="attr" property="attr" jdbcType="VARCHAR"/>
     </resultMap>
+
+    <select id="getGoodsDefSku" parameterType="String" resultMap="defGoodsSku">
+        select
+        min(sell_price) as minSellPrice,
+        max(sell_price) as maxSellPrice,
+        sum(remain_stock) as remain_stock,
+        image
+        from t_goods_sku
+        where goods_id = #{goodsId}
+    </select>
 
     <select id="getGoodsSkuListByGoodsId" parameterType="map" resultMap="goodsSku">
         select

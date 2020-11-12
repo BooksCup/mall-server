@@ -25,13 +25,6 @@
         <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <resultMap id="goodsPrice" type="com.bc.mall.server.entity.GoodsSku">
-        <result column="minSellPrice" property="minSellPrice" jdbcType="VARCHAR"/>
-        <result column="maxSellPrice" property="maxSellPrice" jdbcType="VARCHAR"/>
-        <result column="remain_stock" property="remainStock" jdbcType="INTEGER"/>
-        <result column="image" property="image" jdbcType="VARCHAR"/>
-    </resultMap>
-
     <select id="getGoodsListByGoodsClass" parameterType="map" resultMap="goods">
         select
         g.*,
@@ -86,16 +79,6 @@
         select
         *
         from t_goods_album
-        where goods_id = #{goodsId}
-    </select>
-
-    <select id="getGoodsPrice" parameterType="String" resultMap="goodsPrice">
-        select
-        min(sell_price) as minSellPrice,
-        max(sell_price) as maxSellPrice,
-        sum(remain_stock) as remain_stock,
-        image
-        from t_goods_sku
         where goods_id = #{goodsId}
     </select>
 

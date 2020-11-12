@@ -48,8 +48,6 @@ public interface GoodsService {
      */
     List<GoodsAlbum> getGoodsAlbumListByGoodsId(String goodsId);
 
-    GoodsSku getGoodsPrice(String goodsId);
-
     /**
      * 获取店铺下推荐商品列表
      *

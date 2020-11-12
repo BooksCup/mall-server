@@ -101,16 +101,16 @@ public class GoodsController {
             List<GoodsAlbum> goodsAlbumList = goodsService.getGoodsAlbumListByGoodsId(goodsId);
             goods.setGoodsAlbumList(goodsAlbumList);
 
-            // 获取商品价格
-            GoodsSku goodsPrice = goodsService.getGoodsPrice(goodsId);
-            if (null != goodsPrice.getMaxSellPrice() &&
-                    goodsPrice.getMaxSellPrice().equals(goodsPrice.getMinSellPrice())) {
-                goods.setSellPrice(goodsPrice.getMaxSellPrice());
+            // 获取商品默认规格数据(用于商品详情页规格模块的加载)
+            GoodsSku defGoodsSku = goodsSkuService.getGoodsDefSku(goodsId);
+            if (null != defGoodsSku.getMaxSellPrice() &&
+                    defGoodsSku.getMaxSellPrice().equals(defGoodsSku.getMinSellPrice())) {
+                goods.setSellPrice(defGoodsSku.getMaxSellPrice());
             } else {
-                goods.setSellPrice(goodsPrice.getMinSellPrice() + "-" + goodsPrice.getMaxSellPrice());
+                goods.setSellPrice(defGoodsSku.getMinSellPrice() + "-" + defGoodsSku.getMaxSellPrice());
             }
-            goods.setRemainStock(goodsPrice.getRemainStock());
-            goods.setDefSkuImage(goodsPrice.getImage());
+            goods.setRemainStock(defGoodsSku.getRemainStock());
+            goods.setDefSkuImage(defGoodsSku.getImage());
 
             // 获取商品规格
             List<GoodsSku> goodsSkuList = goodsSkuService.getGoodsSkuListByGoodsId(paramMap);

@@ -10,6 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * sku工具类
+ *
+ * @author zhou
+ */
 public class SkuUtil {
     public static List<Map<String, Object>> sku2Map(List<GoodsSku> goodsSkuList) {
         List<Map<String, Object>> goodsSkuMapList = new ArrayList<>();
@@ -29,22 +34,5 @@ public class SkuUtil {
             }
         }
         return goodsSkuMapList;
-    }
-
-    public static void main(String[] args) {
-//        List<GoodsSku> goodsSkuList = new ArrayList<>();
-//        GoodsSku goodsSku = new GoodsSku();
-//        goodsSku.setId("152");
-//        goodsSku.setRemainStock("10631");
-//        goodsSku.setSellPrice("100.00");
-//        goodsSku.setAttr("{\"颜色\":\"红色\",\"尺码\":\"XXL\"}");
-//        goodsSkuList.add(goodsSku);
-//        List<Map<String, Object>> goodsSkuMapList = sku2Map(goodsSkuList);
-//        System.out.println(goodsSkuMapList);
-
-        Map<String, Object> map2 = new HashMap<>();
-        map2.put("颜色", "红色");
-        map2.put("尺码", "XXL");
-        System.out.println(JSON.toJSONString(map2));
     }
 }

@@ -75,11 +75,6 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsMapper.getGoodsAlbumListByGoodsId(goodsId);
     }
 
-    @Override
-    public GoodsSku getGoodsPrice(String goodsId) {
-        return goodsMapper.getGoodsPrice(goodsId);
-    }
-
     /**
      * 获取店铺下推荐商品列表
      *
