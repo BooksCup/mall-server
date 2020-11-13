@@ -11,6 +11,7 @@ import java.util.Map;
  * @author zhou
  */
 public interface GoodsSkuMapper {
+
     /**
      * 获取商品默认规格(用于商品详情页规格模块的加载)
      *
@@ -26,4 +27,12 @@ public interface GoodsSkuMapper {
      * @return 商品sku列表
      */
     List<GoodsSku> getGoodsSkuListByGoodsId(Map<String, String> paramMap);
+
+    /**
+     * 根据skuId获取商品sku
+     *
+     * @param skuId skuId
+     * @return 商品sku
+     */
+    GoodsSku getGoodsSkuBySkuId(String skuId);
 }

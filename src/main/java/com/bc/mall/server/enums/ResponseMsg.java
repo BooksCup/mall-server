@@ -25,11 +25,15 @@ public enum ResponseMsg {
     SERVER_ERROR("SERVER_ERROR", "网络繁忙!"),
     PARAM_ILLEGAL("PARAM_ILLEGAL", "参数错误!"),
     NOT_LOGIN("NOT_LOGIN", "请登录!"),
+    BUY_NOW_SUCCESS("BUY_NOW_SUCCESS", "立即购买成功!"),
 
     GET_VERIFY_CODE_SUCCESS("GET_VERIFY_CODE_SUCCESS", "获取验证码成功"),
     GET_VERIFY_CODE_ERROR("GET_VERIFY_CODE_ERROR", "获取验证码失败"),
 
     CHECK_TOKEN_SUCCESS("CHECK_TOKEN_SUCCESS", "检查token成功"),
+
+    GOODS_OFF_SHELVE("GOODS_OFF_SHELVE","该商品已下架!"),
+    STOCK_NOT_ENOUGH("STOCK_NOT_ENOUGH", "库存不足"),
     ;
 
     ResponseMsg(String responseCode, String responseMessage) {

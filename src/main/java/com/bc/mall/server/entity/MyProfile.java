@@ -5,7 +5,7 @@ package com.bc.mall.server.entity;
  *
  * @author zhou
  */
-public class MyProfile extends BaseEntity {
+public class MyProfile extends BaseResponse {
     private PluginState pluginState;
 
     public MyProfile() {

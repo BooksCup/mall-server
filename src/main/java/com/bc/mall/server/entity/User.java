@@ -7,7 +7,7 @@ import com.bc.mall.server.utils.CommonUtil;
  *
  * @author zhou
  */
-public class User extends BaseEntity {
+public class User extends BaseResponse {
     private String id;
     private String storeId;
     private String userName;

@@ -5,15 +5,15 @@ package com.bc.mall.server.entity;
  *
  * @author zhou
  */
-public class BaseEntity {
+public class BaseResponse {
     private String responseCode;
     private String responseMessage;
 
-    public BaseEntity(){
+    public BaseResponse(){
 
     }
 
-    public BaseEntity(String responseCode, String responseMessage) {
+    public BaseResponse(String responseCode, String responseMessage) {
         this.responseCode = responseCode;
         this.responseMessage = responseMessage;
     }

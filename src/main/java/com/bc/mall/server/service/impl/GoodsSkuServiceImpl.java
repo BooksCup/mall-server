@@ -16,6 +16,7 @@ import java.util.Map;
  */
 @Service("goodsSkuService")
 public class GoodsSkuServiceImpl implements GoodsSkuService {
+
     @Resource
     private GoodsSkuMapper goodsSkuMapper;
 
@@ -39,5 +40,16 @@ public class GoodsSkuServiceImpl implements GoodsSkuService {
     @Override
     public List<GoodsSku> getGoodsSkuListByGoodsId(Map<String, String> paramMap) {
         return goodsSkuMapper.getGoodsSkuListByGoodsId(paramMap);
+    }
+
+    /**
+     * 根据skuId获取商品sku
+     *
+     * @param skuId skuId
+     * @return 商品sku
+     */
+    @Override
+    public GoodsSku getGoodsSkuBySkuId(String skuId) {
+        return goodsSkuMapper.getGoodsSkuBySkuId(skuId);
     }
 }

@@ -144,4 +144,20 @@ public class Constant {
      * 图片
      */
     public static final String SKU_KEY_IMAGE = "image";
+
+    // 商品状态
+    /**
+     * 待上架
+     */
+    public static final String GOODS_STATUS_WAIT_SHELVE = "1";
+
+    /**
+     * 上架
+     */
+    public static final String GOODS_STATUS_SHELVE = "2";
+
+    /**
+     * 下架
+     */
+    public static final String GOODS_STATUS_OFF_SHELVE = "3";
 }

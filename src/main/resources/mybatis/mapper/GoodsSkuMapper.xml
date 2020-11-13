@@ -38,4 +38,11 @@
         from t_goods_sku
         where goods_id = #{goodsId}
     </select>
+
+    <select id="getGoodsSkuBySkuId" parameterType="String" resultMap="goodsSku">
+        select
+        *
+        from t_goods_sku
+        where id = #{skuId}
+    </select>
 </mapper>
