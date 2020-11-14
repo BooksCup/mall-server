@@ -94,11 +94,4 @@ public interface UserService {
      */
     void updateUserByWechatAuth(User user);
 
-    /**
-     * 检查用户是否收藏某件商品
-     *
-     * @param paramMap 参数map
-     * @return true: 已收藏 false: 未收藏
-     */
-    boolean checkUserGoodsCollectionExists(Map<String, Object> paramMap);
 }

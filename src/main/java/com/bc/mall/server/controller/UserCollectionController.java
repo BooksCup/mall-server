@@ -4,7 +4,6 @@ import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.entity.*;
 import com.bc.mall.server.enums.ResponseMsg;
 import com.bc.mall.server.service.UserCollectionService;
-import com.bc.mall.server.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,9 +27,6 @@ public class UserCollectionController {
     private static final Logger logger = LoggerFactory.getLogger(UserCollectionController.class);
 
     @Resource
-    private UserService userService;
-
-    @Resource
     private UserCollectionService userCollectionService;
 
     /**
@@ -42,7 +38,7 @@ public class UserCollectionController {
      * @return ResponseEntity<UserCollection>
      */
     @ApiOperation(value = "收藏商品", notes = "收藏商品")
-    @GetMapping(value = "/collectGoods")
+    @PostMapping(value = "/collectGoods")
     public ResponseEntity<UserCollection> collectGoods(
             @RequestParam String storeId,
             @RequestParam String userId,
@@ -55,7 +51,7 @@ public class UserCollectionController {
             paramMap.put("storeId", storeId);
             paramMap.put("userId", userId);
             paramMap.put("goodsId", goodsId);
-            if (userService.checkUserGoodsCollectionExists(paramMap)) {
+            if (userCollectionService.checkUserGoodsCollectionExists(paramMap)) {
                 return new ResponseEntity<>(new UserCollection(
                         ResponseMsg.COLLECTION_EXISTS.getResponseCode(),
                         ResponseMsg.COLLECTION_EXISTS.getResponseMessage()),

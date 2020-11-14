@@ -45,6 +45,9 @@ public class GoodsController {
     @Resource
     private UserService userService;
 
+    @Resource
+    private UserCollectionService userCollectionService;
+
     /**
      * 获取猜你喜欢商品列表
      *
@@ -137,7 +140,7 @@ public class GoodsController {
                     paramMap.put("storeId", storeId);
                     paramMap.put("userId", userList.get(0).getId());
                     paramMap.put("goodsId", goodsId);
-                    if (userService.checkUserGoodsCollectionExists(paramMap)) {
+                    if (userCollectionService.checkUserGoodsCollectionExists(paramMap)) {
                         goods.setIsCollected(Constant.IS_COLLECTED_YES);
                     } else {
                         goods.setIsCollected(Constant.IS_COLLECTED_NO);

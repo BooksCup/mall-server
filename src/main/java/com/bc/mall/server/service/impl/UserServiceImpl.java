@@ -1,7 +1,6 @@
 package com.bc.mall.server.service.impl;
 
 import com.bc.mall.server.entity.User;
-import com.bc.mall.server.entity.UserCollection;
 import com.bc.mall.server.mapper.UserMapper;
 import com.bc.mall.server.service.UserService;
 import org.springframework.stereotype.Service;
@@ -150,18 +149,4 @@ public class UserServiceImpl implements UserService {
         userMapper.updateUserByWechatAuth(user);
     }
 
-    /**
-     * 检查用户是否收藏某件商品
-     *
-     * @param paramMap 参数map
-     * @return true: 已收藏 false: 未收藏
-     */
-    @Override
-    public boolean checkUserGoodsCollectionExists(Map<String, Object> paramMap) {
-        List<UserCollection> userCollectionList = userMapper.getUserGoodsCollectionListForCheck(paramMap);
-        if (!CollectionUtils.isEmpty(userCollectionList)) {
-            return true;
-        }
-        return false;
-    }
 }

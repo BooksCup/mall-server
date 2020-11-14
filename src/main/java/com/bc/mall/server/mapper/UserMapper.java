@@ -87,11 +87,5 @@ public interface UserMapper {
      */
     void updateUserByWechatAuth(User user);
 
-    /**
-     * 获取用户商品收藏列表(用于检查是否收藏某件商品)
-     *
-     * @param paramMap 参数map
-     * @return 用户商品收藏列表
-     */
-    List<UserCollection> getUserGoodsCollectionListForCheck(Map<String, Object> paramMap);
+
 }
