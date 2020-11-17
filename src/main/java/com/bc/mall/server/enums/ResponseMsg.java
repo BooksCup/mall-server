@@ -25,6 +25,7 @@ public enum ResponseMsg {
     SERVER_ERROR("SERVER_ERROR", "网络繁忙!"),
     PARAM_ILLEGAL("PARAM_ILLEGAL", "参数错误!"),
     NOT_LOGIN("NOT_LOGIN", "请登录!"),
+    ADD_TO_CART_SUCCESS("ADD_TO_CART_SUCCESS", "加入购物车成功!"),
     BUY_NOW_SUCCESS("BUY_NOW_SUCCESS", "立即购买成功!"),
 
     GET_VERIFY_CODE_SUCCESS("GET_VERIFY_CODE_SUCCESS", "获取验证码成功"),

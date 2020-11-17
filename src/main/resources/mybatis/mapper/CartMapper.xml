@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.mall.server.mapper.CartMapper">
+
+    <insert id="saveCart" parameterType="com.bc.mall.server.entity.Cart">
+        insert into t_cart
+        (
+        id,
+        store_id,
+        goods_id,
+        sku_id,
+        user_id,
+        goods_num,
+        create_time
+        )
+        values
+        (
+        #{id},
+        #{storeId},
+        #{goodsId},
+        #{skuId},
+        #{userId},
+        #{goodsNum},
+        now()
+        )
+    </insert>
+
+</mapper>
