@@ -66,7 +66,7 @@ public class CartController {
                 ", goodsSkuId: " + goodsSkuId + ", storeId: " + storeId + ", storeType: " + storeType + ", token: " + token);
         ResponseEntity<Cart> responseEntity;
         try {
-            Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
+            Map<String, Object> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
             paramMap.put("goodsId", goodsId);
             paramMap.put("storeId", storeId);
             Goods goods = goodsService.getGoodsByGoodsId(paramMap);
@@ -104,7 +104,20 @@ public class CartController {
             } else {
                 User user = userList.get(0);
                 Cart cart = new Cart(storeId, goodsId, goodsSkuId, user.getId(), goodsNum);
-                cartService.saveCart(cart);
+                paramMap.clear();
+                paramMap.put("storeId", storeId);
+                paramMap.put("goodsId", goodsId);
+                paramMap.put("userId", user.getId());
+                paramMap.put("skuId", goodsSkuId);
+                Cart checkCartExist = cartService.getCartByUserAndGoods(paramMap);
+                if (checkCartExist == null) {
+                    cartService.saveCart(cart);
+                } else {
+                    paramMap.clear();
+                    paramMap.put("id", checkCartExist.getId());
+                    paramMap.put("goodsNum", checkCartExist.getGoodsNum() + goodsNum);
+                    cartService.updateCartGoodsNum(paramMap);
+                }
             }
             responseEntity = new ResponseEntity<>(new Cart(ResponseMsg.ADD_TO_CART_SUCCESS.getResponseCode(),
                     ResponseMsg.ADD_TO_CART_SUCCESS.getResponseMessage()), HttpStatus.OK);
@@ -139,7 +152,7 @@ public class CartController {
                 ", goodsSkuId: " + goodsSkuId + ", storeId: " + storeId);
         ResponseEntity<BaseResponse> responseEntity;
         try {
-            Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
+            Map<String, Object> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
             paramMap.put("goodsId", goodsId);
             paramMap.put("storeId", storeId);
             Goods goods = goodsService.getGoodsByGoodsId(paramMap);

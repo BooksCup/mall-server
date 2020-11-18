@@ -26,7 +26,7 @@ public class PluginServiceImpl implements PluginService {
      * @return 插件列表
      */
     @Override
-    public List<Plugin> getPluginList(Map<String, String> paramMap) {
+    public List<Plugin> getPluginList(Map<String, Object> paramMap) {
         return pluginMapper.getPluginList(paramMap);
     }
 }

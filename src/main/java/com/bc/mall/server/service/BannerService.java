@@ -18,5 +18,5 @@ public interface BannerService {
      * @param paramMap 参数map
      * @return 轮播图列表
      */
-    List<Banner> getBannerList(Map<String, String> paramMap);
+    List<Banner> getBannerList(Map<String, Object> paramMap);
 }

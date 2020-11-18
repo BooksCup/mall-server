@@ -59,7 +59,7 @@ public class ShopController {
                 storeId + ", shopId: " + shopId + ", tab: " + tab);
         ResponseEntity<Shop> responseEntity;
         try {
-            Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
+            Map<String, Object> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
             paramMap.put("storeId", storeId);
             paramMap.put("shopId", shopId);
             Shop shop = shopService.getShopByShopId(paramMap);
@@ -118,7 +118,7 @@ public class ShopController {
         ResponseEntity<List<Goods>> responseEntity;
         List<Goods> goodsList = new ArrayList<>();
         try {
-            Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
+            Map<String, Object> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
             paramMap.put("storeId", storeId);
             paramMap.put("shopId", shopId);
 

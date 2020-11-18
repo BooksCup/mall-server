@@ -33,7 +33,7 @@ public interface UserService {
      * @param paramMap 参数map
      * @return 用户列表
      */
-    List<User> getUserListByToken(Map<String, String> paramMap);
+    List<User> getUserListByToken(Map<String, Object> paramMap);
 
     /**
      * 根据openid获取用户
@@ -100,5 +100,5 @@ public interface UserService {
      * @param paramMap 参数map
      * @return true: 已收藏 false: 未收藏
      */
-    boolean checkUserGoodsCollectionExists(Map<String, String> paramMap);
+    boolean checkUserGoodsCollectionExists(Map<String, Object> paramMap);
 }

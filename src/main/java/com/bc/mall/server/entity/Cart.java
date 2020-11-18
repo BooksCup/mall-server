@@ -16,6 +16,10 @@ public class Cart extends BaseResponse {
     private Integer goodsNum;
     private String createTime;
 
+    public Cart() {
+
+    }
+
     public Cart(String responseCode, String responseMessage) {
         super(responseCode, responseMessage);
     }

@@ -26,7 +26,7 @@ public interface GoodsSkuService {
      * @param paramMap 参数map
      * @return 商品sku列表
      */
-    List<GoodsSku> getGoodsSkuListByGoodsId(Map<String, String> paramMap);
+    List<GoodsSku> getGoodsSkuListByGoodsId(Map<String, Object> paramMap);
 
     /**
      * 根据skuId获取商品sku

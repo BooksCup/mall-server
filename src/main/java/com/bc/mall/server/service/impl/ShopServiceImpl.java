@@ -29,7 +29,7 @@ public class ShopServiceImpl implements ShopService {
      * @return 店铺
      */
     @Override
-    public Shop getShopByShopId(Map<String, String> paramMap) {
+    public Shop getShopByShopId(Map<String, Object> paramMap) {
         List<Shop> shopList = shopMapper.getShopListByShopId(paramMap);
         if (!CollectionUtils.isEmpty(shopList)) {
             return shopList.get(0);
@@ -66,7 +66,7 @@ public class ShopServiceImpl implements ShopService {
      * @return 线下门店列表
      */
     @Override
-    public List<EntityStore> getEntityStoreListByShopId(Map<String, String> paramMap){
+    public List<EntityStore> getEntityStoreListByShopId(Map<String, Object> paramMap){
         return shopMapper.getEntityStoreListByShopId(paramMap);
     }
 }

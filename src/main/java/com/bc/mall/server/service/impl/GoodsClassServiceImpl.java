@@ -27,7 +27,7 @@ public class GoodsClassServiceImpl implements GoodsClassService {
      * @return 商品类别列表
      */
     @Override
-    public List<GoodsClass> getGoodsClassList(Map<String, String> paramMap) {
+    public List<GoodsClass> getGoodsClassList(Map<String, Object> paramMap) {
         return goodsClassMapper.getGoodsClassList(paramMap);
     }
 }

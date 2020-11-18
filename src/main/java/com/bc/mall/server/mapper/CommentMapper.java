@@ -18,5 +18,5 @@ public interface CommentMapper {
      * @param paramMap 参数map
      * @return 评论列表
      */
-    List<Comment> getCommentListByGoodsId(Map<String, String> paramMap);
+    List<Comment> getCommentListByGoodsId(Map<String, Object> paramMap);
 }

@@ -34,7 +34,7 @@ public interface UserMapper {
      * @param paramMap 参数map
      * @return 用户列表
      */
-    List<User> getUserListByToken(Map<String, String> paramMap);
+    List<User> getUserListByToken(Map<String, Object> paramMap);
 
     /**
      * 根据openid获取用户列表
@@ -93,5 +93,5 @@ public interface UserMapper {
      * @param paramMap 参数map
      * @return 用户商品收藏列表
      */
-    List<UserCollection> getUserGoodsCollectionListForCheck(Map<String, String> paramMap);
+    List<UserCollection> getUserGoodsCollectionListForCheck(Map<String, Object> paramMap);
 }

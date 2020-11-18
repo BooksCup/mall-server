@@ -27,7 +27,7 @@ public class CommentServiceImpl implements CommentService {
      * @return 评论列表
      */
     @Override
-    public List<Comment> getCommentListByGoodsId(Map<String, String> paramMap) {
+    public List<Comment> getCommentListByGoodsId(Map<String, Object> paramMap) {
         return commentMapper.getCommentListByGoodsId(paramMap);
     }
 }

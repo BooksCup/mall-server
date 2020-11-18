@@ -17,5 +17,5 @@ public interface GoodsClassService {
      * @param paramMap 参数map
      * @return 商品类别列表
      */
-    List<GoodsClass> getGoodsClassList(Map<String, String> paramMap);
+    List<GoodsClass> getGoodsClassList(Map<String, Object> paramMap);
 }

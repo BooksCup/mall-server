@@ -2,7 +2,6 @@ package com.bc.mall.server.service.impl;
 
 import com.bc.mall.server.entity.Goods;
 import com.bc.mall.server.entity.GoodsAlbum;
-import com.bc.mall.server.entity.GoodsSku;
 import com.bc.mall.server.mapper.GoodsMapper;
 import com.bc.mall.server.service.GoodsService;
 import com.github.pagehelper.PageHelper;
@@ -31,7 +30,7 @@ public class GoodsServiceImpl implements GoodsService {
      * @return 商品列表
      */
     @Override
-    public List<Goods> getGoodsListByGoodsClass(Map<String, String> paramMap) {
+    public List<Goods> getGoodsListByGoodsClass(Map<String, Object> paramMap) {
         return goodsMapper.getGoodsListByGoodsClass(paramMap);
     }
 
@@ -44,7 +43,7 @@ public class GoodsServiceImpl implements GoodsService {
      * @return 猜你喜欢商品列表
      */
     @Override
-    public List<Goods> getLikeGoodsList(int pageNum, int pageSize, Map<String, String> paramMap) {
+    public List<Goods> getLikeGoodsList(int pageNum, int pageSize, Map<String, Object> paramMap) {
         PageHelper.startPage(pageNum, pageSize);
         return goodsMapper.getLikeGoodsList(paramMap);
     }
@@ -56,7 +55,7 @@ public class GoodsServiceImpl implements GoodsService {
      * @return 商品
      */
     @Override
-    public Goods getGoodsByGoodsId(Map<String, String> paramMap) {
+    public Goods getGoodsByGoodsId(Map<String, Object> paramMap) {
         List<Goods> goodsList = goodsMapper.getGoodsListByGoodsId(paramMap);
         if (!CollectionUtils.isEmpty(goodsList)) {
             return goodsList.get(0);
@@ -84,7 +83,7 @@ public class GoodsServiceImpl implements GoodsService {
      * @return 店铺下推荐商品列表
      */
     @Override
-    public List<Goods> getRecommendGoodsListByShopId(int pageNum, int pageSize, Map<String, String> paramMap) {
+    public List<Goods> getRecommendGoodsListByShopId(int pageNum, int pageSize, Map<String, Object> paramMap) {
         PageHelper.startPage(pageNum, pageSize);
         return goodsMapper.getRecommendGoodsListByShopId(paramMap);
     }
@@ -98,7 +97,7 @@ public class GoodsServiceImpl implements GoodsService {
      * @return 店铺下所有商品列表
      */
     @Override
-    public List<Goods> getAllGoodsListByShopId(int pageNum, int pageSize, Map<String, String> paramMap) {
+    public List<Goods> getAllGoodsListByShopId(int pageNum, int pageSize, Map<String, Object> paramMap) {
         PageHelper.startPage(pageNum, pageSize);
         return goodsMapper.getRecommendGoodsListByShopId(paramMap);
     }

@@ -18,5 +18,5 @@ public interface PluginMapper {
      * @param paramMap 参数map
      * @return 插件列表
      */
-    List<Plugin> getPluginList(Map<String, String> paramMap);
+    List<Plugin> getPluginList(Map<String, Object> paramMap);
 }

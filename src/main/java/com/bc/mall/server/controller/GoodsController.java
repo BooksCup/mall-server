@@ -63,7 +63,7 @@ public class GoodsController {
                 storeId + ", page: " + page + ", limit: " + limit);
         ResponseEntity<List<Goods>> responseEntity;
         try {
-            Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
+            Map<String, Object> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
             paramMap.put("storeId", storeId);
             List<Goods> likeGoodsList = goodsService.getLikeGoodsList(page, limit, paramMap);
             responseEntity = new ResponseEntity<>(likeGoodsList, HttpStatus.OK);
@@ -92,7 +92,7 @@ public class GoodsController {
                 storeId + ", goodsId: " + goodsId);
         ResponseEntity<Goods> responseEntity;
         try {
-            Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
+            Map<String, Object> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
             paramMap.put("storeId", storeId);
             paramMap.put("goodsId", goodsId);
             Goods goods = goodsService.getGoodsByGoodsId(paramMap);

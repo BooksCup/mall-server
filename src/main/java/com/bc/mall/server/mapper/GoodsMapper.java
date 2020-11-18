@@ -2,7 +2,6 @@ package com.bc.mall.server.mapper;
 
 import com.bc.mall.server.entity.Goods;
 import com.bc.mall.server.entity.GoodsAlbum;
-import com.bc.mall.server.entity.GoodsSku;
 
 import java.util.List;
 import java.util.Map;
@@ -20,7 +19,7 @@ public interface GoodsMapper {
      * @param paramMap 参数map
      * @return 商品列表
      */
-    List<Goods> getGoodsListByGoodsClass(Map<String, String> paramMap);
+    List<Goods> getGoodsListByGoodsClass(Map<String, Object> paramMap);
 
     /**
      * 获取猜你喜欢商品列表
@@ -28,7 +27,7 @@ public interface GoodsMapper {
      * @param paramMap 参数map
      * @return 猜你喜欢商品列表
      */
-    List<Goods> getLikeGoodsList(Map<String, String> paramMap);
+    List<Goods> getLikeGoodsList(Map<String, Object> paramMap);
 
     /**
      * 通过商品ID获取商品列表
@@ -36,7 +35,7 @@ public interface GoodsMapper {
      * @param paramMap 参数map
      * @return 商品列表
      */
-    List<Goods> getGoodsListByGoodsId(Map<String, String> paramMap);
+    List<Goods> getGoodsListByGoodsId(Map<String, Object> paramMap);
 
     /**
      * 通过商品ID获取商品图片列表
@@ -52,7 +51,7 @@ public interface GoodsMapper {
      * @param paramMap 参数map
      * @return 店铺下推荐商品列表
      */
-    List<Goods> getRecommendGoodsListByShopId(Map<String, String> paramMap);
+    List<Goods> getRecommendGoodsListByShopId(Map<String, Object> paramMap);
 
     /**
      * 获取店铺下所有商品列表
@@ -60,5 +59,5 @@ public interface GoodsMapper {
      * @param paramMap 参数map
      * @return 店铺下所有商品列表
      */
-    List<Goods> getAllGoodsListByShopId(Map<String, String> paramMap);
+    List<Goods> getAllGoodsListByShopId(Map<String, Object> paramMap);
 }

@@ -38,7 +38,7 @@ public class GoodsSkuServiceImpl implements GoodsSkuService {
      * @return 商品sku列表
      */
     @Override
-    public List<GoodsSku> getGoodsSkuListByGoodsId(Map<String, String> paramMap) {
+    public List<GoodsSku> getGoodsSkuListByGoodsId(Map<String, Object> paramMap) {
         return goodsSkuMapper.getGoodsSkuListByGoodsId(paramMap);
     }
 

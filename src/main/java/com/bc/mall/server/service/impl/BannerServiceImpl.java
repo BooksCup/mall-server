@@ -27,7 +27,7 @@ public class BannerServiceImpl implements BannerService {
      * @return 轮播图列表
      */
     @Override
-    public List<Banner> getBannerList(Map<String, String> paramMap){
+    public List<Banner> getBannerList(Map<String, Object> paramMap){
         return bannerMapper.getBannerList(paramMap);
     }
 

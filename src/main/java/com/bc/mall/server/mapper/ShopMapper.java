@@ -19,7 +19,7 @@ public interface ShopMapper {
      * @param paramMap 参数map
      * @return 店铺
      */
-    List<Shop> getShopListByShopId(Map<String, String> paramMap);
+    List<Shop> getShopListByShopId(Map<String, Object> paramMap);
 
     /**
      * 获取店铺在售商品数量
@@ -43,5 +43,5 @@ public interface ShopMapper {
      * @param paramMap 参数map
      * @return 线下门店列表
      */
-    List<EntityStore> getEntityStoreListByShopId(Map<String, String> paramMap);
+    List<EntityStore> getEntityStoreListByShopId(Map<String, Object> paramMap);
 }

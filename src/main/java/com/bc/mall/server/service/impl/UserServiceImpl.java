@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
      * @return 用户列表
      */
     @Override
-    public List<User> getUserListByToken(Map<String, String> paramMap) {
+    public List<User> getUserListByToken(Map<String, Object> paramMap) {
         return userMapper.getUserListByToken(paramMap);
     }
 
@@ -157,7 +157,7 @@ public class UserServiceImpl implements UserService {
      * @return true: 已收藏 false: 未收藏
      */
     @Override
-    public boolean checkUserGoodsCollectionExists(Map<String, String> paramMap) {
+    public boolean checkUserGoodsCollectionExists(Map<String, Object> paramMap) {
         List<UserCollection> userCollectionList = userMapper.getUserGoodsCollectionListForCheck(paramMap);
         if (!CollectionUtils.isEmpty(userCollectionList)) {
             return true;

@@ -46,7 +46,7 @@ public class GoodsClassController {
         ResponseEntity<List<GoodsClass>> responseEntity;
         try {
             // 获取一级目录
-            Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
+            Map<String, Object> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
             paramMap.put("storeId", storeId);
             paramMap.put("parentId", Constant.FIRST_CLASS_PARENT_ID);
             paramMap.put("deleteStatus", Constant.DELETE_STATUS_NOT);

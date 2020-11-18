@@ -20,7 +20,7 @@ public interface GoodsService {
      * @param paramMap 参数map
      * @return 商品列表
      */
-    List<Goods> getGoodsListByGoodsClass(Map<String, String> paramMap);
+    List<Goods> getGoodsListByGoodsClass(Map<String, Object> paramMap);
 
     /**
      * 获取猜你喜欢商品列表
@@ -30,7 +30,7 @@ public interface GoodsService {
      * @param paramMap 参数map
      * @return 猜你喜欢商品列表
      */
-    List<Goods> getLikeGoodsList(int pageNum, int pageSize, Map<String, String> paramMap);
+    List<Goods> getLikeGoodsList(int pageNum, int pageSize, Map<String, Object> paramMap);
 
     /**
      * 通过商品ID获取商品
@@ -38,7 +38,7 @@ public interface GoodsService {
      * @param paramMap 参数map
      * @return 商品
      */
-    Goods getGoodsByGoodsId(Map<String, String> paramMap);
+    Goods getGoodsByGoodsId(Map<String, Object> paramMap);
 
     /**
      * 通过商品ID获取商品图片列表
@@ -56,7 +56,7 @@ public interface GoodsService {
      * @param paramMap 参数map
      * @return 店铺下推荐商品列表
      */
-    List<Goods> getRecommendGoodsListByShopId(int pageNum, int pageSize, Map<String, String> paramMap);
+    List<Goods> getRecommendGoodsListByShopId(int pageNum, int pageSize, Map<String, Object> paramMap);
 
     /**
      * 获取店铺下所有商品列表
@@ -66,5 +66,5 @@ public interface GoodsService {
      * @param paramMap 参数map
      * @return 店铺下所有商品列表
      */
-    List<Goods> getAllGoodsListByShopId(int pageNum, int pageSize, Map<String, String> paramMap);
+    List<Goods> getAllGoodsListByShopId(int pageNum, int pageSize, Map<String, Object> paramMap);
 }

@@ -69,7 +69,7 @@ public class IndexController {
         ResponseEntity<HomeProfile> responseEntity;
         HomeProfile homeProfile = new HomeProfile();
         try {
-            Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
+            Map<String, Object> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
             paramMap.put("storeId", storeId);
             paramMap.put("storeType", storeType);
             List<Banner> bannerList = bannerService.getBannerList(paramMap);
@@ -141,7 +141,7 @@ public class IndexController {
      */
     private PluginState getPluginState(String storeId) {
         PluginState pluginState = new PluginState();
-        Map<String, String> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
+        Map<String, Object> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
         paramMap.put("storeId", storeId);
         paramMap.put("state", Constant.PLUGIN_ENABLED);
 
