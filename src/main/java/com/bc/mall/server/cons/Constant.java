@@ -160,4 +160,15 @@ public class Constant {
      * 下架
      */
     public static final String GOODS_STATUS_OFF_SHELVE = "3";
+
+    // 收藏类型
+    /**
+     * 商品
+     */
+    public static final String USER_COLLECTION_TYPE_GOODS = "0";
+
+    /**
+     * 店铺
+     */
+    public static final String USER_COLLECTION_TYPE_SHOP = "1";
 }

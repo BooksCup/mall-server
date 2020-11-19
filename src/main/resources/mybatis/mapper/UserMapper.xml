@@ -141,5 +141,6 @@
         from t_user_collection
         where user_id = #{userId}
         and goods_id = #{goodsId}
+        and store_id = #{storeId}
     </select>
 </mapper>

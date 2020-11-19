@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bc.mall.server.mapper.UserCollectionMapper">
+
+    <insert id="saveUserCollection" parameterType="com.bc.mall.server.entity.UserCollection">
+        insert into t_user_collection
+        (
+        id,
+        store_id,
+        user_id,
+        type,
+        shop_id,
+        goods_id,
+        create_time
+        )
+        values
+        (
+        #{id},
+        #{storeId},
+        #{userId},
+        #{type},
+        #{shopId},
+        #{goodsId},
+        now()
+        )
+    </insert>
+
+</mapper>

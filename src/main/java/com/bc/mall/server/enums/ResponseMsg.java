@@ -33,8 +33,10 @@ public enum ResponseMsg {
 
     CHECK_TOKEN_SUCCESS("CHECK_TOKEN_SUCCESS", "检查token成功"),
 
-    GOODS_OFF_SHELVE("GOODS_OFF_SHELVE","该商品已下架!"),
+    GOODS_OFF_SHELVE("GOODS_OFF_SHELVE", "该商品已下架!"),
     STOCK_NOT_ENOUGH("STOCK_NOT_ENOUGH", "库存不足"),
+
+    COLLECTION_EXISTS("COLLECTION_EXISTS", "已经收藏!"),
     ;
 
     ResponseMsg(String responseCode, String responseMessage) {

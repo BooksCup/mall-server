@@ -134,6 +134,7 @@ public class GoodsController {
                     goods.setIsCollected(Constant.IS_COLLECTED_NO);
                 } else {
                     paramMap.clear();
+                    paramMap.put("storeId", storeId);
                     paramMap.put("userId", userList.get(0).getId());
                     paramMap.put("goodsId", goodsId);
                     if (userService.checkUserGoodsCollectionExists(paramMap)) {
