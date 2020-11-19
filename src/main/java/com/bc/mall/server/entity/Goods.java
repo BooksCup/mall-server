@@ -69,6 +69,11 @@ public class Goods {
     private List<Map<String, Object>> goodsSkuMapList;
 
     /**
+     * 商品属性列表
+     */
+    private List<Attr> attrList;
+
+    /**
      * 是否被收藏
      */
     private String isCollected;
@@ -233,6 +238,14 @@ public class Goods {
 
     public void setGoodsSkuMapList(List<Map<String, Object>> goodsSkuMapList) {
         this.goodsSkuMapList = goodsSkuMapList;
+    }
+
+    public List<Attr> getAttrList() {
+        return attrList;
+    }
+
+    public void setAttrList(List<Attr> attrList) {
+        this.attrList = attrList;
     }
 
     public String getIsCollected() {
