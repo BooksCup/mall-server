@@ -46,4 +46,14 @@ public class UserCollectionServiceImpl implements UserCollectionService {
         userCollectionMapper.saveUserCollection(userCollection);
     }
 
+    /**
+     * 取消用户收藏
+     *
+     * @param paramMap 参数map
+     */
+    @Override
+    public void cancelCollectGoods(Map<String, Object> paramMap) {
+        userCollectionMapper.cancelCollectGoods(paramMap);
+    }
+
 }

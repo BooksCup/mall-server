@@ -35,7 +35,7 @@ public class SkuUtil {
     }
 
     public static List<Attr> sku2AttrList(List<GoodsSku> goodsSkuList) {
-        Map<String, List<String>> map = new HashMap<>();
+        Map<String, List<String>> map = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
 
         if (!CollectionUtils.isEmpty(goodsSkuList)) {
             for (GoodsSku goodsSku : goodsSkuList) {

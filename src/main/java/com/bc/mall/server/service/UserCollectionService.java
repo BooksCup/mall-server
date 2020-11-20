@@ -26,4 +26,11 @@ public interface UserCollectionService {
      */
     void saveUserCollection(UserCollection userCollection);
 
+    /**
+     * 取消用户收藏
+     *
+     * @param paramMap 参数map
+     */
+    void cancelCollectGoods(Map<String, Object> paramMap);
+
 }

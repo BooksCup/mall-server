@@ -37,6 +37,8 @@ public enum ResponseMsg {
     STOCK_NOT_ENOUGH("STOCK_NOT_ENOUGH", "库存不足"),
 
     COLLECTION_EXISTS("COLLECTION_EXISTS", "已经收藏!"),
+    CANCEL_COLLECT_SUCCESS("CANCEL_COLLECT_SUCCESS", "取消收藏成功!"),
+    COLLECT_SUCCESS("COLLECT_SUCCESS", "收藏成功!"),
     ;
 
     ResponseMsg(String responseCode, String responseMessage) {
