@@ -1,6 +1,7 @@
 package com.bc.mall.server.service.impl;
 
 import com.bc.mall.server.entity.Cart;
+import com.bc.mall.server.entity.Goods;
 import com.bc.mall.server.mapper.CartMapper;
 import com.bc.mall.server.service.CartService;
 import org.springframework.stereotype.Service;
@@ -56,4 +57,14 @@ public class CartServiceImpl implements CartService {
         cartMapper.updateCartGoodsNum(paramMap);
     }
 
+    /**
+     * 获取购物车中的商品列表
+     *
+     * @param paramMap 参数map
+     * @return 购物车中的商品列表
+     */
+    @Override
+    public List<Goods> getCartGoods(Map<String, Object> paramMap) {
+        return cartMapper.getCartGoods(paramMap);
+    }
 }

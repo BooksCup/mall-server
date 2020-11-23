@@ -17,10 +17,13 @@ public class Goods {
      * 店铺ID
      */
     private String shopId;
+    private String skuId;
+    private String skuImage;
     private String name;
     private String shortName;
     private String image;
     private Integer salesVolume;
+    private Integer goodsNum;
     private String status;
     private String isDistribution;
     /**
@@ -40,6 +43,8 @@ public class Goods {
     private String origPrice;
 
     private Integer remainStock;
+    private String unit;
+    private String attr;
 
     /**
      * 默认规格图片(规格页面初始化加载的图片)
@@ -104,6 +109,22 @@ public class Goods {
         this.shopId = shopId;
     }
 
+    public String getSkuId() {
+        return skuId;
+    }
+
+    public void setSkuId(String skuId) {
+        this.skuId = skuId;
+    }
+
+    public String getSkuImage() {
+        return skuImage;
+    }
+
+    public void setSkuImage(String skuImage) {
+        this.skuImage = skuImage;
+    }
+
     public String getName() {
         return name;
     }
@@ -134,6 +155,14 @@ public class Goods {
 
     public void setSalesVolume(Integer salesVolume) {
         this.salesVolume = salesVolume;
+    }
+
+    public Integer getGoodsNum() {
+        return goodsNum;
+    }
+
+    public void setGoodsNum(Integer goodsNum) {
+        this.goodsNum = goodsNum;
     }
 
     public String getStatus() {
@@ -190,6 +219,22 @@ public class Goods {
 
     public void setRemainStock(Integer remainStock) {
         this.remainStock = remainStock;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getAttr() {
+        return attr;
+    }
+
+    public void setAttr(String attr) {
+        this.attr = attr;
     }
 
     public String getDefSkuImage() {

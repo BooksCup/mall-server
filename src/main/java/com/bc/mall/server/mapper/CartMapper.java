@@ -1,6 +1,7 @@
 package com.bc.mall.server.mapper;
 
 import com.bc.mall.server.entity.Cart;
+import com.bc.mall.server.entity.Goods;
 
 import java.util.List;
 import java.util.Map;
@@ -33,4 +34,12 @@ public interface CartMapper {
      * @param paramMap 参数map
      */
     void updateCartGoodsNum(Map<String, Object> paramMap);
+
+    /**
+     * 获取购物车中的商品列表
+     *
+     * @param paramMap 参数map
+     * @return 购物车中的商品列表
+     */
+    List<Goods> getCartGoods(Map<String, Object> paramMap);
 }

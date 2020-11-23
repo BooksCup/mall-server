@@ -12,6 +12,19 @@
         <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="goods" type="com.bc.mall.server.entity.Goods">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="shop_id" property="shopId" jdbcType="VARCHAR"/>
+        <result column="sku_id" property="skuId" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="goods_num" property="goodsNum" jdbcType="INTEGER"/>
+        <result column="sell_price" property="sellPrice" jdbcType="VARCHAR"/>
+        <result column="sku_image" property="skuImage" jdbcType="VARCHAR"/>
+        <result column="remain_stock" property="remainStock" jdbcType="INTEGER"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+        <result column="attr" property="attr" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <insert id="saveCart" parameterType="com.bc.mall.server.entity.Cart">
         insert into t_cart
         (
@@ -51,5 +64,29 @@
         set goods_num = #{goodsNum}
         where id = #{id}
     </update>
+
+    <select id="getCartGoods" parameterType="map" resultMap="goods">
+        select
+        c.goods_num,
+        g.name,
+        g.shop_id,
+        sku.id AS sku_id,
+        sku.sell_price,
+        sku.image,
+        sku.remain_stock,
+        sku.unit,
+        sku.attr
+        from
+        t_cart as c
+        left join t_goods as g on c.goods_id = g.id
+        left join t_goods_sku as sku on c.sku_id = sku.id
+        left join t_shop as s on g.shop_id = s.id
+        where c.store_id = #{storeId}
+        and g.delete_status = '0'
+        and g.status = '2'
+        and c.user_id = #{userId}
+        and s.is_open = '1'
+        order by c.create_time desc
+    </select>
 
 </mapper>

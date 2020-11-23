@@ -22,6 +22,14 @@ public interface ShopMapper {
     List<Shop> getShopListByShopId(Map<String, Object> paramMap);
 
     /**
+     * 根据店铺ID列表查询店铺列表
+     *
+     * @param paramMap 参数map
+     * @return 店铺列表
+     */
+    List<Shop> getShopListByShopIdList(Map<String, Object> paramMap);
+
+    /**
      * 获取店铺在售商品数量
      *
      * @param shopId 店铺ID

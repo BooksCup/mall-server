@@ -2,21 +2,21 @@ package com.bc.mall.server.controller;
 
 import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.entity.*;
+import com.bc.mall.server.enums.ResponseMsg;
 import com.bc.mall.server.service.*;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 导航
@@ -58,6 +58,12 @@ public class IndexController {
 
     @Resource
     private GoodsService goodsService;
+
+    @Resource
+    private CartService cartService;
+
+    @Resource
+    private ShopService shopService;
 
     @ApiOperation(value = "获取首页信息", notes = "获取首页信息")
     @GetMapping(value = "/home")
@@ -129,6 +135,52 @@ public class IndexController {
             e.printStackTrace();
             logger.error("[getMyProfile] error: " + e.getMessage());
             responseEntity = new ResponseEntity<>(new MyProfile(pluginState), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return responseEntity;
+    }
+
+    /**
+     * 获取购物车中商品信息
+     *
+     * @param storeId 商城ID
+     * @param userId  用户ID
+     * @return 购物车中商品信息
+     */
+    @ApiOperation(value = "获取购物车中商品信息", notes = "获取购物车中商品信息")
+    @GetMapping(value = "/cart")
+    public ResponseEntity<CartProfile> getCartGoods(
+            @RequestParam String storeId,
+            @RequestParam String userId) {
+        logger.info("[getCartGoods] storeId: " + storeId + ", userId: " + userId);
+        ResponseEntity<CartProfile> responseEntity;
+        CartProfile cartProfile = new CartProfile();
+        Set<String> shopIdSet = new HashSet<>();
+        try {
+            Map<String, Object> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
+            paramMap.put("storeId", storeId);
+            paramMap.put("userId", userId);
+            List<Goods> goodsList = cartService.getCartGoods(paramMap);
+            cartProfile.setGoodsList(goodsList);
+            if (!CollectionUtils.isEmpty(goodsList)) {
+                for (Goods goods : goodsList) {
+                    shopIdSet.add(goods.getShopId());
+                }
+            }
+
+            paramMap.clear();
+            paramMap.put("storeId", storeId);
+            paramMap.put("shopIdSet", shopIdSet);
+            List<Shop> shopList = shopService.getShopListByShopIdList(paramMap);
+            cartProfile.setShopList(shopList);
+
+            responseEntity = new ResponseEntity<>(cartProfile, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("[getCartGoods] error: " + e.getMessage());
+            responseEntity = new ResponseEntity<>(new CartProfile(
+                    ResponseMsg.SERVER_ERROR.getResponseCode(),
+                    ResponseMsg.SERVER_ERROR.getResponseMessage()),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return responseEntity;
     }

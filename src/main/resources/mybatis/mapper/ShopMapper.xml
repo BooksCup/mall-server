@@ -33,6 +33,18 @@
         and id = #{shopId}
     </select>
 
+    <select id="getShopListByShopIdList" parameterType="map" resultMap="shop">
+        select
+        *
+        from t_shop
+        where store_id = #{storeId}
+        and id in
+        <foreach collection="shopIdSet" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+
     <select id="getShopOnSaleGoodsNum" parameterType="String" resultType="Integer">
         select
         count(*)

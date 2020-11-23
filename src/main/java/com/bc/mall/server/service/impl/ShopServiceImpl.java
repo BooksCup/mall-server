@@ -38,6 +38,17 @@ public class ShopServiceImpl implements ShopService {
     }
 
     /**
+     * 根据店铺ID列表查询店铺列表
+     *
+     * @param paramMap 参数map
+     * @return 店铺列表
+     */
+    @Override
+    public List<Shop> getShopListByShopIdList(Map<String, Object> paramMap) {
+        return shopMapper.getShopListByShopIdList(paramMap);
+    }
+
+    /**
      * 获取店铺在售商品数量
      *
      * @param shopId 店铺ID
@@ -66,7 +77,7 @@ public class ShopServiceImpl implements ShopService {
      * @return 线下门店列表
      */
     @Override
-    public List<EntityStore> getEntityStoreListByShopId(Map<String, Object> paramMap){
+    public List<EntityStore> getEntityStoreListByShopId(Map<String, Object> paramMap) {
         return shopMapper.getEntityStoreListByShopId(paramMap);
     }
 }
