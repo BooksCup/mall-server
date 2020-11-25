@@ -5,6 +5,7 @@ import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.entity.Attr;
 import com.bc.mall.server.entity.GoodsSku;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 
@@ -80,15 +81,33 @@ public class SkuUtil {
         return attrList;
     }
 
+    public static String getSkuNameV1(String attr) {
+        if (StringUtils.isEmpty(attr)) {
+            return "";
+        }
+        StringBuffer skuNameBuffer = new StringBuffer();
+        Map<String, Object> attrMap = JSON.parseObject(attr, Map.class);
+        for (Map.Entry<String, Object> entry : attrMap.entrySet()) {
+            skuNameBuffer.append(entry.getValue()).append(",");
+        }
+        if (skuNameBuffer.length() > 0) {
+            skuNameBuffer.deleteCharAt(skuNameBuffer.length() - 1);
+        }
+        return skuNameBuffer.toString();
+    }
+
     public static void main(String[] args) {
-        List<GoodsSku> goodsSkuList = new ArrayList<>();
-        GoodsSku goodsSku = new GoodsSku();
-        goodsSku.setAttr("{\"color\":\"红色\",\"size\":\"XXL\"}");
-        GoodsSku goodsSku2 = new GoodsSku();
-        goodsSku2.setAttr("{\"color\":\"黑色\",\"size\":\"XXL\"}");
-        goodsSkuList.add(goodsSku);
-        goodsSkuList.add(goodsSku2);
-        List<Attr> attrList = sku2AttrList(goodsSkuList);
-        System.out.println(JSON.toJSONString(attrList));
+//        List<GoodsSku> goodsSkuList = new ArrayList<>();
+//        GoodsSku goodsSku = new GoodsSku();
+//        goodsSku.setAttr("{\"color\":\"红色\",\"size\":\"XXL\"}");
+//        GoodsSku goodsSku2 = new GoodsSku();
+//        goodsSku2.setAttr("{\"color\":\"黑色\",\"size\":\"XXL\"}");
+//        goodsSkuList.add(goodsSku);
+//        goodsSkuList.add(goodsSku2);
+//        List<Attr> attrList = sku2AttrList(goodsSkuList);
+//        System.out.println(JSON.toJSONString(attrList));
+        String attr = "{\"color\":\"黑色\",\"size\":\"XXL\"}";
+        String skuName = getSkuNameV1(attr);
+        System.out.println(skuName);
     }
 }

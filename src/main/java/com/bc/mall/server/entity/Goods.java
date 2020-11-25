@@ -51,6 +51,8 @@ public class Goods {
      */
     private String defSkuImage;
 
+    private String skuName;
+
     /**
      * 商品详情(html标签)
      */
@@ -243,6 +245,14 @@ public class Goods {
 
     public void setDefSkuImage(String defSkuImage) {
         this.defSkuImage = defSkuImage;
+    }
+
+    public String getSkuName() {
+        return skuName;
+    }
+
+    public void setSkuName(String skuName) {
+        this.skuName = skuName;
     }
 
     public String getContent() {

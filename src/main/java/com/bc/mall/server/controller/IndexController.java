@@ -4,6 +4,7 @@ import com.bc.mall.server.cons.Constant;
 import com.bc.mall.server.entity.*;
 import com.bc.mall.server.enums.ResponseMsg;
 import com.bc.mall.server.service.*;
+import com.bc.mall.server.utils.SkuUtil;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -164,6 +165,7 @@ public class IndexController {
             if (!CollectionUtils.isEmpty(goodsList)) {
                 for (Goods goods : goodsList) {
                     shopIdSet.add(goods.getShopId());
+                    goods.setSkuName(SkuUtil.getSkuNameV1(goods.getAttr()));
                 }
             }
 
