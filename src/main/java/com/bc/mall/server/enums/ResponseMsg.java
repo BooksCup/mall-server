@@ -39,6 +39,9 @@ public enum ResponseMsg {
     COLLECTION_EXISTS("COLLECTION_EXISTS", "已经收藏!"),
     CANCEL_COLLECT_SUCCESS("CANCEL_COLLECT_SUCCESS", "取消收藏成功!"),
     COLLECT_SUCCESS("COLLECT_SUCCESS", "收藏成功!"),
+
+    UPDATE_CART_GOODS_NUM_SUCCESS("UPDATE_CART_GOODS_NUM_SUCCESS", "修改购物车中商品数量成功!"),
+    UPDATE_CART_GOODS_NUM_ERROR("UPDATE_CART_GOODS_NUM_ERROR", "修改购物车中商品数量失败!"),
     ;
 
     ResponseMsg(String responseCode, String responseMessage) {

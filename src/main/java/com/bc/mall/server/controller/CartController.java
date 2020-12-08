@@ -192,4 +192,36 @@ public class CartController {
         }
         return responseEntity;
     }
+
+    /**
+     * 修改购物车中商品数量
+     *
+     * @param cartId   店铺ID
+     * @param goodsNum 商品数量
+     * @return ResponseEntity
+     */
+    @ApiOperation(value = "修改购物车中商品数量", notes = "修改购物车中商品数量")
+    @PostMapping(value = "/{cartId}/goodsNum")
+    public ResponseEntity<BaseResponse> updateCartGoodsNum(
+            @PathVariable String cartId,
+            @RequestParam Integer goodsNum) {
+        ResponseEntity<BaseResponse> responseEntity;
+        logger.info("[updateCartGoodsNum] cartId: " + cartId + ", goodsNum: " + goodsNum);
+        try {
+            Map<String, Object> paramMap = new HashMap<>(Constant.DEFAULT_HASH_MAP_CAPACITY);
+            cartService.updateCartGoodsNum(paramMap);
+            responseEntity = new ResponseEntity<>(new BaseResponse(
+                    ResponseMsg.UPDATE_CART_GOODS_NUM_SUCCESS.getResponseCode(),
+                    ResponseMsg.UPDATE_CART_GOODS_NUM_SUCCESS.getResponseMessage()),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("[updateCartGoodsNum] error: " + e.getMessage());
+            responseEntity = new ResponseEntity<>(new BaseResponse(
+                    ResponseMsg.UPDATE_CART_GOODS_NUM_ERROR.getResponseCode(),
+                    ResponseMsg.UPDATE_CART_GOODS_NUM_ERROR.getResponseMessage()),
+                    HttpStatus.OK);
+        }
+        return responseEntity;
+    }
 }

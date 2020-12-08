@@ -18,6 +18,7 @@ public class Goods {
      */
     private String shopId;
     private String skuId;
+    private String cartId;
     private String skuImage;
     private String name;
     private String shortName;
@@ -117,6 +118,14 @@ public class Goods {
 
     public void setSkuId(String skuId) {
         this.skuId = skuId;
+    }
+
+    public String getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(String cartId) {
+        this.cartId = cartId;
     }
 
     public String getSkuImage() {
